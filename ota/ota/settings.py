@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+print "base_dir", BASE_DIR
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
@@ -38,6 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ota',
+    'hotels',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,14 +58,31 @@ ROOT_URLCONF = 'ota.urls'
 
 WSGI_APPLICATION = 'ota.wsgi.application'
 
+DB_NAME = 'mytravelsdb'
+DB_USER = 'root'
+DB_HOST = '127.0.0.1'
+DB_PORT = '3306'
+DB_PASS = 'svn123123'
+
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+##DATABASES = {
+##    'default': {
+##        'ENGINE': 'django.db.backends.sqlite3',
+##        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+##    }
+##}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,             # Not used with sqlite3.
+        'PASSWORD': DB_PASS,         # Not used with sqlite3.
+        'HOST': DB_HOST,             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': DB_PORT,                
     }
 }
 
@@ -84,3 +104,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),    
+]
+
+
+# template dir definition
+TEMPLATE_DIRS = (
+       os.path.join(BASE_DIR, "templates"),
+)
+
+
