@@ -113,11 +113,15 @@ if __name__== "__main__":
     do_landmark_fill( landmarkTok, cc_to_country )
     do_airport_fill( airportTok, cc_to_country ) 
     do_region_fill( regionTok, cc_to_country )    
-   
+
+    numHotels = 0    
     for hotel in hotelTok.gen_hotel_objs():
-        familyScore = familyInterestsMrkr.score(hotel)
-        if familyScore > 0:
-            print hotel.hotel_booking_id, hotel.name, hotel.hotel_url, hotel.city, "familyScore=", familyScore
+        familyScore = familyInterestsMrkr.score(hotel)        
+        if familyScore >= 100:
+            numHotels+=1
+            print hotel.hotel_booking_id, hotel.hotel_url, familyScore
+            #print hotel.hotel_booking_id, hotel.name, hotel.hotel_url, hotel.city, "familyScore=", familyScore
+    print numHotels
 
         
     
