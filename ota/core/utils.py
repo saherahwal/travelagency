@@ -5,6 +5,18 @@ TRAVEL_INTERESTS = [ 'family', 'adventure', 'beach & sun', 'casinos',
                      'history & culture', 'clubbing', 'romance',
                      'shopping', 'skiing', 'wellness', 'cruise' ]
 
+WELLNESS = "wellness"
+SHOPPING = "shopping"
+ROMANCE = "romance"
+CLUBBING = "clubbing"
+CASINOS = "casinos"
+ADVENTURE = "adventure"
+BEACH_AND_SUN = "beach_and_sun"
+FAMILY = "family"
+SKIING = "skiing"
+HISTORY_CULTURE = "history_and_culture"
+
+
 class TimeRange:
     
     def __init__( self, start_month, end_month ):
@@ -23,9 +35,7 @@ class Interest:
     def __init__(self, name, seasons):
         self.name = name
         self.seasons = seasons
-
-    
-
+   
 
 class CountryObj:
     
@@ -159,6 +169,27 @@ class AirportObj:
         return "Region:{" + self.airport_name + "}: iata=" + self.iata + \
                 "," + self.country_code
 
+class HotelScoreObj:
+    """ This class represents the scores of interests for a particular hotel """
+
+    def __init__(self, hotel_booking_id, scores_dict):
+
+        ## init fields
+        self.hotel_booking_id = hotel_booking_id
+        self.scores_dict = scores_dict
+
+    def getHotelBookingId( self ):
+        return self.hotel_booking_id
+
+    def __str__(self):
+        st = ""
+        st += "hotel_booking_id=" + str(hotel_booking_id) + ","
+
+        for k,v in self.scores_dict.iteritems():
+            st += k + ":" + v + ","
+
+        return st[:-1]
+
 class HotelObj:
 
     def __init__(self, hotel_booking_id, name, address, state_zip, city, 
@@ -195,7 +226,7 @@ class HotelObj:
         self.public_ranking=public_ranking
         
         self.hotel_url=hotel_url
-        self.photo_url=hotel_url
+        self.photo_url=photo_url
 
         self.desc_en=desc_en
         self.desc_fr=desc_fr

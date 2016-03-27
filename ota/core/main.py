@@ -1,12 +1,14 @@
+from django.db import models
 from os import listdir
 from os.path import isfile, join
 from Tokenizers import *
 from utils import *
 from marker import *
+from threadpool import *
+
 
 TAB = "\t"
 FILES_ROOT = "C:/Users/Saher/OneDrive/Documents/OnlineTravelAgent"
-
 
 def do_city_fill(cityTok, cc_to_country):
     print "starting city data tokenization -----"
@@ -72,6 +74,35 @@ def do_region_fill( regionTok, cc_to_country ):
         else:
             print "Country not found:", cc
 
+def write_score_files( hotelTokenizer, genMarker, scoresFolder ):
+    print "starting HotelScore data tokenuzation -----"
+
+    maxFileCapacity = 20000
+
+    indexStart = 0
+    scoresFile = scoresFolder + "/scoresfile_" + str(indexStart) + ".txt"
+    f = open( scoresFile, 'w')    
+    numHotels = 0
+    for hotel in hotelTokenizer.gen_hotel_objs():
+
+        # scores
+        scores = genMarker.score(hotel)
+
+        # scores on the line
+        csvScores = genMarker.__str__()
+        lineOfText =  hotel.hotel_booking_id + "," + csvScores + '\n'
+        
+        f.write( lineOfText )
+        numHotels += 1
+
+        if numHotels > maxFileCapacity:
+            indexStart += 1
+            scoresFile = scoresFolder + "/scoresfile_" + str(indexStart) + ".txt"
+            f.close()
+            numHotels = 0
+            f = open( scoresFile, 'w')
+        
+
 if __name__== "__main__":
 
     # init file paths / file lists
@@ -81,6 +112,7 @@ if __name__== "__main__":
     airport_path=FILES_ROOT + "/airportsData"
     landmarks_path=FILES_ROOT + "/landmarksData"
     regions_path=FILES_ROOT + "/regionsData"
+    scores_write_path = FILES_ROOT + "/scores"
     
     hotel_files = [join(hotels_path,f) for f in listdir(hotels_path) if isfile(join(hotels_path, f))]
     
@@ -103,55 +135,59 @@ if __name__== "__main__":
     regionTok = RegionTokenizer(delimiter, region_files, skip_first_line)
     airportTok = AirportTokenizer( delimiter, airport_files, skip_first_line)
 
-    #initialize markers
-    familyInterestsMrkr = FamilyInterestsMarker( None )
+    # make list of hotel tokenizers for parallelism
+    hotelTokList = [ HotelTokenizer(delimiter, [f], skip_first_line) for f in hotel_files ]
 
-    # globals neede for end results    
+    #initialize markers
+    wellnessInterestsMarker = WellnessInterestsMarker( None )
+    skiingInterestsMarker = SkiingInterestsMarker( None )
+    shoppingInterestsMarker = ShoppingInterestsMarker( None )
+    romanceInterestsMarker = RomanceInterestsMarker( None )
+    clubbingInterestsMarker = ClubbingInterestsMarker( None )
+    historyAndCultureInterestsMarker = HistoryAndCultureInterestsMarker( None )
+    casinoInterestsMarker = CasinoInterestsMarker( None )
+    beachAndSunInterestsMarker = BeachAndSunInterestsMarker( None )
+    familyInterestsMrkr = FamilyInterestsMarker( None )
+    adventureInterestMrkr = AdventureInterestsMarker( None )
+
+    #marker list
+    markerList = [wellnessInterestsMarker, skiingInterestsMarker, shoppingInterestsMarker,
+                  romanceInterestsMarker, clubbingInterestsMarker, historyAndCultureInterestsMarker,
+                  casinoInterestsMarker, beachAndSunInterestsMarker, familyInterestsMrkr, adventureInterestMrkr]
+
+    genMarker = GeneralMarker( markerList )
+
+    # globals needed for end results    
     cc_to_country = {}    
 
+    # fill city / airport / landmark / region in-memory data.
     do_city_fill( cityTok, cc_to_country )
     do_landmark_fill( landmarkTok, cc_to_country )
     do_airport_fill( airportTok, cc_to_country ) 
-    do_region_fill( regionTok, cc_to_country )    
+    do_region_fill( regionTok, cc_to_country )
 
-    numHotels = 0    
-    for hotel in hotelTok.gen_hotel_objs():
-        familyScore = familyInterestsMrkr.score(hotel)        
-        if familyScore >= 100:
-            numHotels+=1
-            print hotel.hotel_booking_id, hotel.hotel_url, familyScore
-            #print hotel.hotel_booking_id, hotel.name, hotel.hotel_url, hotel.city, "familyScore=", familyScore
-    print numHotels
+    # make list of hotel tokenizers for parallelism
+    hotelTokList = [ HotelTokenizer(delimiter, [f], skip_first_line) for f in hotel_files ]
 
-        
-    
-##    print "starting Hotels data tokenization -----"
-##    hotels_proc = 0
-##    hotels_not_added = 0
-##    for hotel in hotelTok.gen_hotel_objs():
-##
-##        # get country object from hash
-##        cc = hotel.country_cc1
-##        country = cc_to_country.get(cc)
-##       
-##        if country != None:
-##            was_added = country.add_hotel( hotel.city, hotel )
-##            hotels_proc+=1
-##
-##            if not was_added:
-##                hotels_not_added+=1                
-##        else:
-##            print "country:", cc , "Not found"
-##
-##    print "hotels processed =", hotels_proc
-##    print "hotels NOT added =", hotels_not_added
-            
-        
-                
-            
+    # write scores in file chunks
+    #write_score_files( hotelTok, genMarker, scores_write_path )      
 
     
+    # make list of threads to run (1 per file)
+    threads = []
+    idx = 0
+    for hTok in hotelTokList:
+        threads.append( HotelModuleDBWriteNativeThread( idx, hTok, genMarker ) )
+        idx += 1
 
-            
+    # start all the threads
+    for thread in threads:
+        thread.start()
+
+    # wait for all threads to complete
+    for thread in threads:
+        thread.join()
+
+ 
         
         

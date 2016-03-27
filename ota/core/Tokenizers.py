@@ -1,4 +1,4 @@
-from utils import LandmarkObj, CityObj, HotelObj, AirportObj, RegionObj
+from utils import LandmarkObj, CityObj, HotelObj, AirportObj, RegionObj, HotelScoreObj
 
 class DbConnection(object):
     """
@@ -10,7 +10,6 @@ class DbConnection(object):
         self.user = user
         self.pwd = pwd
         self.dbname = dbname
-
 
 class Tokenizer(object):
     """
@@ -83,6 +82,34 @@ class AirportTokenizer(Tokenizer):
                 airportObj = AirportObj( tk_line[0], tk_line[1], tk_line[2], tk_line[3], tk_line[4])
                 yield airportObj
 
+
+class HotelScoresTokenizer(Tokenizer):
+
+    def __init__(self, delimiter, files, skip_first_line):
+        super( HotelScoresTokenizer, self).__init__(delimiter, skip_first_line)
+        self.files = files    
+
+    def gen_hotelscores_objs(self):
+        for _file in self.files:
+            print "processing file", _file
+            for line in self.gen_lines(_file):
+                
+                # tokenize the line
+                tk_line = self.tokenize( line )
+
+                hotel_booking_id = tk_line[0]
+                scores_line = tk_line[1:]
+                scores_dict = {}
+                
+                for _score in scores_line:
+                    spColon = _score.split(":")
+                    scores_dict[spColon[0]] = spColon[1]
+
+                # construct hotel score obj and yield
+                hotelScoreObj = HotelScoreObj( tk_line[0], scores_dict )
+
+                yield hotelScoreObj                
+
 class HotelTokenizer(Tokenizer):
 
     def __init__(self, delimiter, files, skip_first_line):
@@ -109,9 +136,8 @@ class HotelTokenizer(Tokenizer):
                                      tk_line[25], tk_line[26], tk_line[27], tk_line[28], tk_line[29],
                                      tk_line[30], tk_line[31], tk_line[32], tk_line[33], tk_line[34],
                                      tk_line[35], tk_line[36], tk_line[37])                
-                yield hotelObj                                           
+                yield hotelObj                                          
                
-
 class RegionTokenizer(Tokenizer):
 
     def __init__(self, delimiter, files, skip_first_line):
