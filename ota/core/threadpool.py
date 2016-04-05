@@ -17,7 +17,7 @@ USER = 'root'
 PWD = 'svn123123'
 DB = 'mytravelsdb'
 HOTELS_TABLE = "hotels_hotel"
-
+HOTELS_SCORES_TABLE = "hotels_scores"
 
 SPECIAL_INVALID_RATE = -1
 
@@ -29,44 +29,65 @@ SPECIAL_INVALID_RATE = -1
 # 
 django.setup()
 
-
 class HotelScoresDBWriteThread(Thread):
 
     def __init__( self, threadId, hotelScoresTok ):
         Thread.__init__(self)
-        self.hotelTokenizerObj = hotelTokenizerObj        
+        self.hotelScoresTok = hotelScoresTok        
         self.threadId = threadId
 
     def run( self ):
         print "STARTED thread", self.threadId
 
+        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB)
+        cursor = con.cursor()
+        cursor.execute("START TRANSACTION;")
+        cursor.execute("BEGIN;")
+
+        # careful this number needs to be less than maximum number of hotels in score file!
+        # otherwise we never commit
+        hotelScoreCapacity = 1000
+        numHotelsScores = 0  
+
         # yield one score at a time
         for hotelScore in self.hotelScoresTok.gen_hotelscores_objs():
-
+           
             hotel_booking_id = hotelScore.getHotelBookingId()
+            scores = hotelScore.getScoresDict()
 
             # get hotel - in case already added
-            hotelsRes = Hotel.objects.filter( hotel_booking_id = hotel_booking_id )
+            selectQuery = "SELECT name,id FROM " + HOTELS_TABLE + " WHERE hotel_booking_id='%s'" % hotel_booking_id
 
-            if len(hotesRes) != 0:
-
-                try:
+            cursor.execute( selectQuery )
+            row = cursor.fetchone()            
+                        
+            if row != None:
                 
-                    scoresDbObj = Scores.objects.update_or_create( hotel = hotelsRes[0],
-                                                                   familyScore = scores[ FAMILY ],
-                                                                   adventureScore = scores[ ADVENTURE ],
-                                                                   beachSunScore = scores[ BEACH_AND_SUN ],
-                                                                   casinosScore = scores[ CASINOS ],
-                                                                   historyCultureScore = scores[ HISTORY_CULTURE ],
-                                                                   clubbingScore = scores[ CLUBBING ],
-                                                                   romanceScore = scores[ ROMANCE ],
-                                                                   shoppingScore = scores[ SHOPPING ],
-                                                                   skiingScore = scores[ SKIING ],
-                                                                   wellnessScore = scores[ WELLNESS ] )
+                hotel_id = row[1]
+                
+                queryAdd = "INSERT INTO " + DB + "." + HOTELS_SCORES_TABLE + "(created, modified, hotel_id, familyScore, adventureScore, beachSunScore," \
+                           " casinosScore, historyCultureScore, clubbingScore, romanceScore, shoppingScore, skiingScore, wellnessScore) VALUES ( NOW(), NOW(), '%s','%s','%s',"\
+                           " '%s','%s','%s','%s','%s','%s','%s','%s') " % ( hotel_id, scores[ FAMILY ], scores[ ADVENTURE ], scores[ BEACH_AND_SUN ],
+                                                                         scores[ CASINOS ], scores[ HISTORY_CULTURE ], scores[ CLUBBING ],
+                                                                         scores[ ROMANCE ], scores[ SHOPPING ], scores[ SKIING ], scores[ WELLNESS ])               
+                
+                try:          
+                    cursor.execute(queryAdd)
+                    numHotelsScores += 1                
+
+                    if numHotelsScores > hotelScoreCapacity:
+                        cursor.execute("COMMIT;")
+                        cursor.execute("START TRANSACTION;")
+                        cursor.execute("BEGIN;")
+                        numHotelsScores = 0
                     
-                except Exception as e:                    
-                    print 'Exception error is : %s' % e  
-            
+                except Exception as e:
+                    print queryAdd
+                    print 'Exception error is : %s' % e               
+                
+        cursor.execute("COMMIT;")
+        print "ENDED thread", self.threadId                                                                                
+                              
 
 class HotelModuleDBWriteNativeThread(Thread):
     

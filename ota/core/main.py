@@ -8,6 +8,7 @@ from threadpool import *
 
 
 TAB = "\t"
+COMMA =","
 FILES_ROOT = "C:/Users/Saher/OneDrive/Documents/OnlineTravelAgent"
 
 def do_city_fill(cityTok, cc_to_country):
@@ -113,16 +114,16 @@ if __name__== "__main__":
     landmarks_path=FILES_ROOT + "/landmarksData"
     regions_path=FILES_ROOT + "/regionsData"
     scores_write_path = FILES_ROOT + "/scores"
-    
-    hotel_files = [join(hotels_path,f) for f in listdir(hotels_path) if isfile(join(hotels_path, f))]
-    
-    airport_files = [join(airport_path,f) for f in listdir(airport_path) if isfile(join(airport_path, f))]
-    
-    city_files = [join(city_path,f) for f in listdir(city_path) if isfile(join(city_path, f))]
-    
-    landmark_files = [join(landmarks_path,f) for f in listdir(landmarks_path) if isfile(join(landmarks_path, f))]
-    
+
+    # files paths init
+    hotel_files = [join(hotels_path,f) for f in listdir(hotels_path) if isfile(join(hotels_path, f))]    
+    airport_files = [join(airport_path,f) for f in listdir(airport_path) if isfile(join(airport_path, f))]    
+    city_files = [join(city_path,f) for f in listdir(city_path) if isfile(join(city_path, f))]    
+    landmark_files = [join(landmarks_path,f) for f in listdir(landmarks_path) if isfile(join(landmarks_path, f))]    
     region_files = [join(regions_path,f) for f in listdir(regions_path) if isfile(join(regions_path, f))]
+    hotelscores_files = [join(scores_write_path,f) for f in listdir(scores_write_path) if isfile(join(scores_write_path, f))]
+
+    print "hotelscore files = ", hotelscores_files
 
     # delimiter is tab
     delimiter = TAB
@@ -133,10 +134,13 @@ if __name__== "__main__":
     cityTok = CityTokenizer(delimiter, city_files, skip_first_line)
     hotelTok = HotelTokenizer(delimiter, hotel_files, skip_first_line)
     regionTok = RegionTokenizer(delimiter, region_files, skip_first_line)
-    airportTok = AirportTokenizer( delimiter, airport_files, skip_first_line)
+    airportTok = AirportTokenizer( delimiter, airport_files, skip_first_line)    
 
     # make list of hotel tokenizers for parallelism
     hotelTokList = [ HotelTokenizer(delimiter, [f], skip_first_line) for f in hotel_files ]
+    hotelScoresTokList = [ HotelScoresTokenizer( COMMA, [f], False)  for f in hotelscores_files ]
+
+    print "hotelScoresTokList", hotelScoresTokList
 
     #initialize markers
     wellnessInterestsMarker = WellnessInterestsMarker( None )
@@ -164,30 +168,40 @@ if __name__== "__main__":
     do_city_fill( cityTok, cc_to_country )
     do_landmark_fill( landmarkTok, cc_to_country )
     do_airport_fill( airportTok, cc_to_country ) 
-    do_region_fill( regionTok, cc_to_country )
-
-    # make list of hotel tokenizers for parallelism
-    hotelTokList = [ HotelTokenizer(delimiter, [f], skip_first_line) for f in hotel_files ]
+    do_region_fill( regionTok, cc_to_country )    
 
     # write scores in file chunks
-    #write_score_files( hotelTok, genMarker, scores_write_path )      
-
+    #write_score_files( hotelTok, genMarker, scores_write_path )     
     
     # make list of threads to run (1 per file)
-    threads = []
-    idx = 0
-    for hTok in hotelTokList:
-        threads.append( HotelModuleDBWriteNativeThread( idx, hTok, genMarker ) )
-        idx += 1
+##    threads = []
+##    idx = 0
+##    for hTok in hotelTokList:
+##        threads.append( HotelModuleDBWriteNativeThread( idx, hTok, genMarker ) )
+##        idx += 1
+##
+##    # start all the threads
+##    for thread in threads:
+##        thread.start()
+##
+##    # wait for all threads to complete
+##    for thread in threads:
+##        thread.join()
 
-    # start all the threads
-    for thread in threads:
-        thread.start()
+##    scoreWriteThreads = []
+##    idx = 0
+##    for hScoreTok in hotelScoresTokList:
+##        scoreWriteThreads.append(  HotelScoresDBWriteThread(idx, hScoreTok ) )
+##        idx += 1
+##
+##    
+##    #start all threads in parallel
+##    for thread in scoreWriteThreads:
+##        thread.start()
+##
+##    # wait for all to complete before return
+##    for thread in scoreWriteThreads:
+##        thread.join()
 
-    # wait for all threads to complete
-    for thread in threads:
-        thread.join()
-
- 
         
         

@@ -181,9 +181,12 @@ class HotelScoreObj:
     def getHotelBookingId( self ):
         return self.hotel_booking_id
 
+    def getScoresDict( self ):
+        return self.scores_dict;
+
     def __str__(self):
         st = ""
-        st += "hotel_booking_id=" + str(hotel_booking_id) + ","
+        st += "hotel_booking_id=" + str(self.hotel_booking_id) + ","
 
         for k,v in self.scores_dict.iteritems():
             st += k + ":" + v + ","
