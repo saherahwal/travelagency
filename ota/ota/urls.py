@@ -14,6 +14,8 @@ urlpatterns = [
     url('^blog/$', blog),                     # blog
     url('^activities$', activities),          # activities
     url('^results$', results),
+
+    url('^address/', include('address.urls')),
    
 
     url(r'^admin/', include(admin.site.urls)),

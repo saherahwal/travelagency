@@ -80,7 +80,7 @@ $(document).ready(function () {
 	});
 	
 	//MAIN SEARCH 
-	$('.main-search input[name=radio]').change(function() {
+	/*$('.main-search input[name=radio]').change(function() {
 		var showForm = $(this).val();
 		$('.form').hide();
 		$("#"+showForm).show();
@@ -94,7 +94,7 @@ $(document).ready(function () {
 	$('.f-item .radio').click(function() {
 		$('.f-item').removeClass("active");
 		$(this).parent().addClass("active");
-	});	
+	});	*/
 	
 	// LIST AND GRID VIEW TOGGLE
 	$('.view-type li:first-child').addClass('active');

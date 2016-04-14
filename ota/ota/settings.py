@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ota',
     'hotels',
+    'address',
 )
 
 MIDDLEWARE_CLASSES = (

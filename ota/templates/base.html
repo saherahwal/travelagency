@@ -12,8 +12,11 @@
 	
 	<link rel="stylesheet" href="{{STATIC_URL}}css/style.css" type="text/css" media="screen,projection,print" />
 	<link rel="stylesheet" href="{{STATIC_URL}}css/prettyPhoto.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="{{STATIC_URL}}css/theme-blue.css" id="template-color" />
+	<link rel="stylesheet" href="{{STATIC_URL}}css/theme-blue.css" id="template-color" />	
 	<link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.ico" />
+
+    {% block morestyles %} {% endblock %}
+
 </head>
 
 <body>
@@ -184,10 +187,11 @@
 	
 	<!-- javascript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	
+	<!-- Placed at the end of the document so the pages load faster -->	
+
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{{STATIC_URL}}js/jquery-ui.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/modernizr.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/sequence.jquery-min.js"></script>
@@ -196,7 +200,8 @@
 	<script type="text/javascript" src="{{STATIC_URL}}js/sequence.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/selectnav.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/scripts.js"></script>
-	
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.cookie.js"></script>
+
 	<!-- for adding more specific scripts -->
 	{% block tailscripts %} {% endblock %}
 

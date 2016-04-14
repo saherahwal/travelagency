@@ -39,6 +39,10 @@ header	 {background:#fff;width:100%;position:absolute;top:0;left:0;z-index:220;}
 footer 	 {background:#fff;width:100%;padding:23px 0;-webkit-box-shadow:0 0 2px rgba(0,0,0,0.2);-moz-box-shadow:0 0 2px rgba(0,0,0,0.2);box-shadow:0 0 2px rgba(0,0,0,0.2);}
 .wrap	 {width: 100%;max-width: 1140px;margin:0 auto;text-align:left;position:relative;}
 
+/* AUTOCOMPLETE show in front */
+.ui-autocomplete {
+    z-index: 5000 !important;	
+}
 
 /*COMMON*/
 .txt-l    {text-align:left;} 
