@@ -10,7 +10,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url('^$', homepage),                      # home page
-    url('^hotels/$', hotels),                 # generic hotels page
+    url('^hotels/', include('hotels.urls')), # generic hotels page
     url('^blog/$', blog),                     # blog
     url('^activities$', activities),          # activities
     url('^results$', results),

@@ -43,50 +43,51 @@
 	
 	<!--search-->
 	<div class="main-search">
-		<form id="main-search" method="post" action="/hotels/search/">
+		<form id="main-search" method="post" action="/hotels/search/"> {% csrf_token %}
 
 			<!--column-->
 			<div class="column radios">
 				<h4><span>01</span> Interests? </h4>				
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="healthAndWellness" value="form1" />
-					<label for="healthAndWellness">Wellness</label>
+					<!-- <input type="checkbox" name="radio" id="healthAndWellness" value="form1" /> -->
+					{{ hotelSearchForm.wellness }}
+					<label for="{{hotelSearchForm.wellness.id_for_label}}">Wellness</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="shopping" value="form1" />
-					<label for="shopping">Shopping</label>
+					{{ hotelSearchForm.shopping }}
+					<label for="{{hotelSearchForm.shopping.id_for_label}}">Shopping</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="romance" value="form1" />
-					<label for="romance">Romance</label>
+					{{ hotelSearchForm.romance }}
+					<label for="{{hotelSearchForm.romance.id_for_label}}">Romance</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="clubbing" value="form1" />
-					<label for="clubbing">Night Life</label>
+					{{ hotelSearchForm.nightlife }}
+					<label for="{{hotelSearchForm.nightlife.id_for_label}}">Night Life</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="casinos" value="form1" />
-					<label for="casinos">Casinos</label>
+					{{ hotelSearchForm.casinos }}
+					<label for="{{hotelSearchForm.casinos.id_for_label}}">Casinos</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="adventure" value="form1" />
-					<label for="adventure">Adventure</label>
+					{{ hotelSearchForm.adventure }}
+					<label for="{{hotelSearchForm.adventure.id_for_label}}">Adventure</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="beachAndSun" value="form1" />
-					<label for="beachAndSun">Beach &amp; Sun</label>
+					{{ hotelSearchForm.beachAndSun }}
+					<label for="{{hotelSearchForm.beachAndSun.id_for_label}}">Beach &amp; Sun</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="family" value="form1" />
-					<label for="family">Family</label>
+					{{ hotelSearchForm.family }}
+					<label for="{{hotelSearchForm.family.id_for_label}}">Family</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="skiing" value="form1" />
-					<label for="skiing">Skiing</label>
+					{{ hotelSearchForm.skiing }}
+					<label for="{{hotelSearchForm.skiing.id_for_label}}">Skiing</label>
 				</div>
 				<div class="f-item">
-					<input type="checkbox" name="radio" id="historyAndCulture" value="form1" />
-					<label for="historyAndCulture">History &amp; Culture</label>
+					{{ hotelSearchForm.historyAndCulture }}
+					<label for="{{hotelSearchForm.historyAndCulture.id_for_label}}">History &amp; Culture</label>
 				</div>				
 			</div>
 			<!--//column-->
@@ -99,7 +100,8 @@
 						<h4><span>02</span> Where?</h4>
 						<div class="f-item">
 							<label for="destination1">Your destination</label>
-							<input type="text" placeholder="Continent, Country, or City" id="destination1" name="destination" />
+							<!-- <input type="text" placeholder="Continent, Country, or City" id="destination1" name="destination" /> -->
+							{{ hotelSearchForm.destination }}
 						</div>
 					</div>
 					<!--//column-->
@@ -108,12 +110,18 @@
 					<div class="column twins">
 						<h4><span>03</span> When?</h4>
 						<div class="f-item datepicker">
-							<label for="datepicker1">Check-in date</label>
-							<div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker1" name="datepicker1" /></div>
+							<label for="datepicker1">Check-in date</label>							
+							<div class="datepicker-wrap">
+								{{ hotelSearchForm.checkInDate }}
+								<!-- <input type="text" placeholder="" id="datepicker1" name="datepicker1" /> -->
+							</div> 
 						</div>
 						<div class="f-item datepicker">
 							<label for="datepicker2">Check-out date</label>
-							<div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker2" name="datepicker2" /></div>
+							<div class="datepicker-wrap">
+								{{ hotelSearchForm.checkOutDate }}
+								<!-- <input type="text" placeholder="" id="datepicker2" name="datepicker2" /> -->
+							</div>
 						</div>
 					</div>
 					<!--//column-->
@@ -123,15 +131,18 @@
 						<h4><span>04</span> Who?</h4>
 						<div class="f-item spinner">
 							<label for="spinner1">Rooms</label>
-							<input type="text" placeholder="" id="spinner1" name="spinner1" />
+							{{ hotelSearchForm.rooms }}
+							<!-- <input type="text" placeholder="" id="spinner1" name="spinner1" /> -->
 						</div>
 						<div class="f-item spinner">
 							<label for="spinner2">Adults</label>
-							<input type="text" placeholder="" id="spinner2" name="spinner1" />
+							{{ hotelSearchForm.adults }}
+							<!-- <input type="text" placeholder="" id="spinner2" name="spinner1" /> -->
 						</div>
 						<div class="f-item spinner">
 							<label for="spinner3">Children</label>
-							<input type="text" placeholder="" id="spinner3" name="spinner1" />
+							{{ hotelSearchForm.children }}
+							<!-- <input type="text" placeholder="" id="spinner3" name="spinner1" /> -->
 						</div>
 					</div>
 					<!--//column-->

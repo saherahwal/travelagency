@@ -1,7 +1,16 @@
 from django.shortcuts import render
+from hotels import forms as hotelForms
 
-def homepage(request):    
-    return render( request , "index.html", {})
+def homepage(request):
+
+    #
+    # non-binding
+    #
+    hotelSearchForm = hotelForms.HotelSearchForm()
+
+    return render(request,
+                  "index.html",
+                  {'hotelSearchForm': hotelSearchForm})
 
 def hotels(request):    
     return render( request , "hotels.html", {})

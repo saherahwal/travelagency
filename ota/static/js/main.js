@@ -71,7 +71,7 @@ $(document).ready(function(){
 						  
 						  cities = data;						  
 						  						  
-						  $("#destination1").autocomplete({
+						  $("#id_destination").autocomplete({
 							    maxResults: MAX_SEARCH_RESULTS,
 								src: countries.concat( continents ).concat(us_states).concat(cities),
 								source: function(request, response) {
