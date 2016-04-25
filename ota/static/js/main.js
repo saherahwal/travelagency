@@ -86,9 +86,24 @@ $(document).ready(function(){
 				  });
 		} 		
 		
-		
-		
+		//
+		// call get destinations
+		//
 		getDestinations();
+		
+		//
+		// disable destination field when surprimeMe is checked.
+		//
+		$("#id_surpriseme").on( "click", function () {			
+			var checked = $("#id_surpriseme").is(":checked");
+			
+			if (checked == true) {
+				$("#id_destination").attr('disabled', true);
+			} else {
+				$("#id_destination").attr('disabled', false);
+			}
+			
+		});
 			
 		
 		

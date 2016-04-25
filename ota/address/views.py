@@ -4,12 +4,8 @@ import json
 
 from address.models import Country
 from hotels.models import Hotel
+from address.globals import *
 
-
-#
-# global country_code to country_name cache
-#
-cc_to_name = {}
 
 # views below
 
@@ -24,10 +20,11 @@ def countries(request):
         results.append(country.country_name)
         code = country.country_code.lower()
         
-        # fill up the global cc --> name cache
+        # fill up the global cc --> name cache and the reverse name --> cc
         if code not in cc_to_name:
             print "adding", code, "to global cache"
             cc_to_name[code] = country.country_name
+            name_to_cc[country.country_name] = code
 
     jsonData = json.dumps(results)
     return HttpResponse(jsonData ,content_type="application/json")

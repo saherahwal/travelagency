@@ -43,7 +43,7 @@
 	
 	<!--search-->
 	<div class="main-search">
-		<form id="main-search" method="post" action="/hotels/search/"> {% csrf_token %}
+		<form id="main-search" method="GET" action="/hotels/search/"> 
 
 			<!--column-->
 			<div class="column radios">
@@ -88,7 +88,16 @@
 				<div class="f-item">
 					{{ hotelSearchForm.historyAndCulture }}
 					<label for="{{hotelSearchForm.historyAndCulture.id_for_label}}">History &amp; Culture</label>
-				</div>				
+				</div>	
+				{% if interestsErrors %}
+					<div class="alert alert-danger err">									
+						<ul>
+							{% for error in interestsErrors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+					</div>  
+				{% endif %}					
 			</div>
 			<!--//column-->
 			
@@ -99,9 +108,24 @@
 					<div class="column">
 						<h4><span>02</span> Where?</h4>
 						<div class="f-item">
-							<label for="destination1">Your destination</label>
+							<label for="{{hotelSearchForm.destination.id_for_label}}">Your destination</label>
 							<!-- <input type="text" placeholder="Continent, Country, or City" id="destination1" name="destination" /> -->
 							{{ hotelSearchForm.destination }}
+							{% if destErrors %}
+								<div class="alert alert-danger err">									
+									<ul>
+										{% for error in destErrors %}
+											<li>{{ error }}</li>
+										{% endfor %}
+									</ul>
+								</div>  
+							{% endif %}								
+						</div>
+						<div class="column radios">
+							<div class="f-item">
+								{{ hotelSearchForm.surpriseme }}
+								<label for="{{hotelSearchForm.surpriseme.id_for_label}}">Surprise Me!!</label>
+							</div>
 						</div>
 					</div>
 					<!--//column-->
@@ -575,21 +599,15 @@
 	<!--//main-->
 {% endblock %}
 
-{% block tailscripts %}
-	
+{% block tailscripts %}	
 	<script type="text/javascript">	
 		$(document).ready(function(){
 			$(".form").hide();
 			$(".form:first").show();
 			$(".f-item:first").addClass("active");
-			$(".f-item:first span").addClass("checked");
+			//$(".f-item:first span").addClass("checked");
 		});
 	</script>
 	<script>selectnav('nav'); </script>
-
-	<script type="text/javascript" src="{{STATIC_URL}}js/main.js"></script>
-	
+	<script type="text/javascript" src="{{STATIC_URL}}js/main.js"></script>	
 {% endblock %}
-
-</body>
-</html>

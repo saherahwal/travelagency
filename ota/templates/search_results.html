@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+<title> Online Travel Agency - Results</title>
+{% endblock %}
+	
+{% block body %}
+	<!--main-->
+	<div class="main" role="main">		
+		<div class="wrap clearfix">
+			<!--main content-->
+			<div class="content clearfix">
+				<!--breadcrumbs-->
+				<nav role="navigation" class="breadcrumbs clearfix">
+					<!--crumbs-->
+					<ul class="crumbs">											
+						<li><p id="crumbs_p_dest">{{query_dest_trimmed}}</p></li>
+						{% if wellness %}
+							<li> <p id="crumbs_p_Wellness">Wellness</p> </li>
+						{% endif %}
+						{% if shopping %}
+							<li> <p id="crumbs_p_Wellness">Shopping</p> </li>
+						{% endif %}						
+						{% if romance %}
+							<li> <p id="crumbs_p_Wellness">Romance</p> </li>
+						{% endif %}
+						{% if clubbing %}
+							<li> <p id="crumbs_p_Wellness">Night Life</p> </li>
+						{% endif %}
+						{% if casinos %}
+							<li> <p id="crumbs_p_Wellness">Casinos</p> </li>
+						{% endif %}
+						{% if adventure %}
+							<li> <p id="crumbs_p_Wellness">Adventure</p> </li>
+						{% endif %}
+						{% if beach_and_sun %}
+							<li> <p id="crumbs_p_Wellness">Beach &amp; Sun</p> </li>
+						{% endif %}
+						{% if family %}
+							<li> <p id="crumbs_p_Wellness">Family</p> </li>
+						{% endif %}
+						{% if skiing %}
+							<li> <p id="crumbs_p_Wellness">Skiiing</p> </li>
+						{% endif %}
+						{% if history_and_culture %}
+							<li> <p id="crumbs_p_Wellness">History &amp; Culture</p> </li>
+						{% endif %}
+						<!-- <li><a href="#" title="United Kingdom">United Kingdom</a></li>
+						<li><a href="#" title="London">London</a></li>
+						<li>Search results</li> -->                                       
+					</ul>
+					<!--//crumbs-->
+					
+					<!--top right navigation-->
+					<ul class="top-right-nav">
+						<li><a href="#" title="Back to results">Back to results</a></li>
+						<li><a href="#" title="Change search">Change search</a></li>
+					</ul>
+					<!--//top right navigation-->
+				</nav>
+				<!--//breadcrumbs-->
+			
+				<!--sidebar-->
+				<aside class="left-sidebar">
+					<article class="refine-search-results">
+						<h2>Refine search results</h2>
+						<dl>
+							<!--Price (per night)-->
+							<dt>Price (per night)</dt>
+							<dd>
+								<div class="checkbox">
+									<input type="checkbox" id="ch1" name="price" />
+									<label for="ch1">0 - 49 $</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch2" name="price" />
+									<label for="ch2">50 - 99 $</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch3" name="price" />
+									<label for="ch3">100 -149 $</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch4" name="price" />
+									<label for="ch4">150 - 199 $</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch5" name="price" />
+									<label for="ch5">200 $ +</label>
+								</div>
+							</dd>
+							<!--//Price (per night)-->						
+														
+							<!--Star rating-->
+							<dt>Star rating</dt>
+							<dd>
+								<span class="stars-info">3 or more</span>
+								<div id="star" data-rating="3"></div>
+							</dd>
+							<!--//Star rating-->							
+																																			
+							<!--Hotel theme-->
+							<dt>Hotel theme</dt>
+							<dd>
+								<div class="checkbox">
+									<input type="checkbox" id="ch50" name="theme" />
+									<label for="ch50">Family Fun</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch51" name="theme" />
+									<label for="ch51">Adventure</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch52" name="theme" />
+									<label for="ch52">Beach &amp; Sun</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch53" name="theme" />
+									<label for="ch53">Casinos</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch54" name="theme" />
+									<label for="ch54">History &amp; Culture</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch55" name="theme" />
+									<label for="ch55">Clubbing</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch56" name="theme" />
+									<label for="ch56">Romance</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch57" name="theme" />
+									<label for="ch57">Shopping</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch58" name="theme" />
+									<label for="ch58">Skiing</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch59" name="theme" />
+									<label for="ch59">Wellness</label>
+								</div>
+								<div class="checkbox">
+									<input type="checkbox" id="ch60" name="theme" />
+									<label for="ch60">Eco &amp; Nature</label>
+								</div>
+							</dd>
+							<!--//Hotel theme-->							
+						</dl>
+					</article>
+				</aside>
+				<!--//sidebar-->
+			
+				<!--three-fourth content-->
+					<section class="three-fourth">
+						<div class="sort-by">
+							<h3>Sort by</h3>
+							<ul class="sort">
+								<li>Popularity <a href="#" title="ascending" class="ascending">ascending</a><a href="#" title="descending" class="descending">descending</a></li>
+								<li>Price <a href="#" title="ascending" class="ascending">ascending</a><a href="#" title="descending" class="descending">descending</a></li>
+								<li>Stars <a href="#" title="ascending" class="ascending">ascending</a><a href="#" title="descending" class="descending">descending</a></li>
+								<li>Rating <a href="#" title="ascending" class="ascending">ascending</a><a href="#" title="descending" class="descending">descending</a></li>
+							</ul>
+							
+							<ul class="view-type">
+								<li class="grid-view"><a href="#" title="grid view">grid view</a></li>
+								<li class="list-view"><a href="#" title="list view">list view</a></li>
+								<li class="location-view"><a href="#" title="location view">location view</a></li>
+							</ul>
+						</div>
+
+						<div class="searchDataForPagination" style="display:none;">
+							<p id="saved_destination">{{destination}}</p>
+							<p id="saved_interestmap">{{interest_dict}}</p>
+							<p id="saved_surpriseme">{{surpriseme}}</p>
+						</div>
+						
+						<div class="deals clearfix">
+
+							{% for hotel in hotels %}
+								<!--deal-->
+								<article class="one-fourth">
+									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}}" title=""><img src="{{hotel.hotel.photo_url}}" alt="" width="270" height="152" /></a></figure>
+									<div class="details">
+										<h1>{{hotel.hotel.name}}
+											<span class="stars">
+											    {% with stars=hotel.hotel.hotel_class|floatformat:"-1" %}
+												{% for i in dummy_star_rating|slice:stars %}
+													<img id = "{{i}}" src="{{STATIC_URL}}images/ico/star.png" alt="" />
+												{% endfor %}
+												{% endwith %}												
+											</span>
+										</h1>
+										<span class="address">{{hotel.hotel.city}}  •  <a href="#">Show on map</a></span>
+										<span class="rating">{{hotel.total}}</span>
+										<!-- <span class="rating"> 8 /10</span>										
+										<span class="price">Price per room per night from  <em>$ 50</em> </span> -->
+										<div class="description">
+											<p>{{hotel.hotel.desc_en}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}}"> More info</a></p>
+										</div>
+										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}}" title="Book now" class="gradient-button">Book now</a>
+									</div>
+								</article>
+								<!--//deal-->
+							{% endfor %}
+							
+							<!--bottom navigation-->
+							<div class="bottom-nav">
+								<!--back up button-->
+								<a href="#" class="scroll-to-top" title="Back up">Back up</a> 
+								<!--//back up button-->
+								
+								<!--pager-->
+								<div class="pager">
+									<span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">First page</a></span>
+									<!-- <span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">&lt;</a></span> -->
+									{% if hotels.has_previous %}
+							            <span><a href="/hotels/search/?page={{ hotels.previous_page_number }}&{{saved_query}}&destination={{destination}}">&lt;</a></span>
+							        {% endif %}
+
+									{% for i in pageRange %}
+										<span><a href="/hotels/search/?page={{i}}&{{saved_query}}&destination={{destination}}">{{i}}</a></span>
+									{% endfor %}
+
+									{% if hotels.has_next %}
+							            <span><a href="/hotels/search/?page={{ hotels.next_page_number }}&{{saved_query}}&destination={{destination}}">&gt;</a></span>
+							        {% endif %}
+									
+									<!-- <span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">&gt;</a></span>-->
+									<span><a href="/hotels/search/?page={{hotels.paginator.num_pages}}&{{saved_query}}&destination={{destination}}">Last Page</a></span>								
+
+
+								</div>
+								<!--//pager-->
+							</div>
+							<!--//bottom navigation-->
+						</div>
+					</section>
+				<!--//three-fourth content-->
+			</div>
+			<!--//main content-->
+		</div>
+	</div>
+	<!--//main-->
+	{% endblock %}
+	
+	
+	{% block tailscripts %}
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('dt').each(function() {
+			var tis = $(this), state = false, answer = tis.next('dd').hide().css('height','auto').slideUp();
+			tis.click(function() {
+				state = !state;
+				answer.slideToggle(state);
+				tis.toggleClass('active',state);
+			});
+		});
+		
+		$('.view-type li:first-child').addClass('active');
+		
+		$('#star').raty({
+			score    : 3,
+			starOff : '{{STATIC_URL}}images/ico/star-rating-off.png',
+			starOn  : '{{STATIC_URL}}images/ico/star-rating-on.png',
+			click: function(score, evt) {
+			alert('ID: ' + $(this).attr('id') + '\nscore: ' + score + '\nevent: ' + evt);
+		  }
+		});
+	});
+	
+	$(window).load(function () {
+		var maxHeight = 0;
+			
+		$(".three-fourth .one-fourth").each(function(){
+			if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+		});
+		$(".three-fourth .one-fourth").height(maxHeight);	
+	});	
+	</script>
+	<script>selectnav('nav'); </script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/search_results.js"></script>	
+	{% endblock %}

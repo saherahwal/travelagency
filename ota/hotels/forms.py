@@ -18,7 +18,7 @@ class HotelSearchForm(forms.Form):
     historyAndCulture = forms.BooleanField( required = False )
 
     # destination
-    destination = forms.CharField(required = True,
+    destination = forms.CharField(required = False,
                            max_length=MAX_DESTINATION_LENGTH,
                            widget=forms.TextInput(attrs={'placeholder': 'Continent, Country, or City'}))
     surpriseme = forms.BooleanField( required = False )
@@ -28,6 +28,6 @@ class HotelSearchForm(forms.Form):
     checkOutDate = forms.DateField( required = False )
 
     # rooms / adults / children
-    rooms = forms.IntegerField( min_value = 0 )
-    adults = forms.IntegerField( min_value = 0 )
-    children = forms.IntegerField( min_value = 0 )
+    rooms = forms.IntegerField( min_value = 0, required = False )
+    adults = forms.IntegerField( min_value = 0, required = False )
+    children = forms.IntegerField( min_value = 0, required = False )

@@ -12,6 +12,5 @@ urlpatterns = [
   
     url('^allcountries/$', countries),
     url('^allcities/$', cities),
-
      
 ]

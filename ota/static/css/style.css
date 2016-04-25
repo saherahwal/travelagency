@@ -44,6 +44,17 @@ footer 	 {background:#fff;width:100%;padding:23px 0;-webkit-box-shadow:0 0 2px r
     z-index: 5000 !important;	
 }
 
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
 /*COMMON*/
 .txt-l    {text-align:left;} 
 .txt-r    {text-align:right;} 
@@ -138,6 +149,11 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .breadcrumbs 			{width:100%;background:url(../images/bgr/separator.jpg) 0 100% repeat-x;padding:0 0 10px;margin:0 0 20px;}
 .breadcrumbs li 			{float:left;display:block;font-size:1.2em;}
 .breadcrumbs li a 			{background:url(../images/bgr/vertical-separator.png) 100% 0 no-repeat;padding:0 14px 0 0;margin:0 14px 0 0;-webkit-transition: all 0.1s ease-in 0.1s; -moz-transition: all 0.1s ease-in 0.1s; -o-transition: all 0.1s ease-in 0.1s; -ms-transition: all 0.1s ease-in 0.1s; transition: all 0.1s ease-in 0.1s;}
+.breadcrumbs li p			{background:url(../images/bgr/vertical-separator.png) 100% 0 no-repeat;padding:0 14px 0 0;margin:0 14px 0 0;-webkit-transition: all 0.1s ease-in 0.1s; -moz-transition: all 0.1s ease-in 0.1s; -o-transition: all 0.1s ease-in 0.1s; -ms-transition: all 0.1s ease-in 0.1s; transition: all 0.1s ease-in 0.1s; font-size:1.0em;
+color: #3d9ea8; font-weight: bold}
+
+#crumbs_p_dest { color: #622cb8; }
+
 .breadcrumbs li a:hover 	{color:#3F3F3F;}
 
 .top-right-nav			{float:right;}
