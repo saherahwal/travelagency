@@ -34,51 +34,6 @@ def search(request):
         #
         hotelSearchForm = hotelForms.HotelSearchForm( request.GET )
 
-##        _destination = request.GET.get('saved_destination')
-##
-##        if _destination != None:           
-##
-##            #
-##            # This case where we paginate after the search
-##            #
-##
-##            _destination = request.GET.get('saved_destination')
-##            _interestmap = request.GET.get('saved_interestmap')
-##            _surpriseme = request.GET.get('saved_surpriseme')
-##
-##            interest_dict = json.load( _interestmap )
-##
-##            destination = _destination
-##            surpriseme = False
-##            if _surpriseme == "True":
-##                surpriseme = True
-##
-##            #
-##            # Search now
-##            #
-##            hotels_list = hotel_search( destination, interest_dict, surpriseme )
-##            paginator = Paginator(hotels_list, 18) # Show 18 hotels per page
-##
-##            page = request.GET.get('page')
-##
-##            try:
-##                hotels = paginator.page(page)
-##            except PageNotAnInteger:
-##                # If page is not an integer, deliver first page.
-##                hotels = paginator.page(1)
-##            except EmptyPage:
-##                # If page is out of range, deliver last page of results.
-##                hotels = paginator.page(paginator.num_pages)
-##
-##            return render(request,
-##                      "search_results.html",
-##                      {'hotels': hotels,
-##                       'hotelSearchForm': hotelSearchForm,
-##                       'destination': destination,
-##                       'interest_dict' : json.dumps(interest_dict),
-##                       'surpriseme': surpriseme,
-##                       'dummy_star_rating': dummy_star_rating})                
-
         #
         # check form validity of Form (this is the initial search
         #
@@ -103,6 +58,11 @@ def search(request):
             rooms = hotelSearchForm.cleaned_data['rooms']
             adults = hotelSearchForm.cleaned_data['adults']
             children = hotelSearchForm.cleaned_data['children']
+
+            #
+            # stars search ( hotel class - at least )
+            #
+            stars = request.GET.get('stars')
 
             #
             # Generate saved query for pagination
@@ -174,8 +134,7 @@ def search(request):
                     break
 
             if not anyInterestChecked:
-                interestsErrors.append( "Please check at least one interest." )
-            
+                interestsErrors.append( "Please check at least one interest." )            
 
             if len(destErrors) != 0:
 
@@ -194,7 +153,11 @@ def search(request):
             #
             # Search now
             #
-            (hotels_list, query_dest_trimmed) = hotel_search( destination, interest_dict, surpriseme )
+            (hotels_list, query_dest_trimmed) = hotel_search( destination,
+                                                              interest_dict,
+                                                              surpriseme,
+                                                              stars )
+            
             paginator = Paginator(hotels_list, 18) # Show 18 hotels per page
 
             page = request.GET.get('page')
@@ -230,6 +193,12 @@ def search(request):
             else:
                 endPage = min( hotels.paginator.num_pages, MAX_PAGES_PER_PAGE )
                 pageRange = range(1, endPage)
+
+            pageCurrent = None
+            try:
+                pageCurrent = int(page)
+            except:
+                pageCurrent = None
             
             return render(request,
                       "search_results.html",
@@ -243,6 +212,8 @@ def search(request):
                        'pageRange': pageRange,
                        'aid': BOOKING_AID,
                        'query_dest_trimmed': query_dest_trimmed,
+                       'page': pageCurrent,
+                       'stars': stars,
                        WELLNESS: wellness,
                        SHOPPING: shopping,
                        ROMANCE : romance,

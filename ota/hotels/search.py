@@ -21,11 +21,12 @@ score_column_names = { WELLNESS: "wellnessScore",
                        HISTORY_CULTURE: "historyCultureScore" }
 
 
-def hotel_search( query, interests_bitmap, surprise_me ):
+def hotel_search( query, interests_bitmap, surprise_me, stars ):
     """
         query: destination query
         interests_bitmap: map of interests chosen ( e.g {wellness: True, shopping: False , ...etc })
         surprise_me: boolean, if true, we choose location (ignore query)
+        stars: at least that number of stars of hotel
 
         query can be one of the following: (need to parse)            
             1. Continent
@@ -160,13 +161,17 @@ def hotel_search( query, interests_bitmap, surprise_me ):
                     # Search with paranthesis inclusion and city term
                     #
                     scoreResults = Scores.objects.filter( hotel__city__contains = first_term,
-                                                          hotel__city_preferred__contains = par_rem )
+                                                          hotel__city_preferred__contains = par_min )
 
     #
     # extra total column for score ordering ( order by DESC )
     #
     total_str = construct_totalscore_columns( interests_bitmap )
     finalRes = scoreResults.extra( select = { 'total': total_str }, order_by=('-total',))
+
+    # filter stars if not None
+    if stars != None:
+        finalRes = finalRes.filter( hotel__hotel_class__gte = stars )
 
     return (finalRes, trimmed_query)
 

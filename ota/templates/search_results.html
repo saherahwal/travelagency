@@ -65,37 +65,16 @@
 				<aside class="left-sidebar">
 					<article class="refine-search-results">
 						<h2>Refine search results</h2>
-						<dl>
-							<!--Price (per night)-->
-							<dt>Price (per night)</dt>
-							<dd>
-								<div class="checkbox">
-									<input type="checkbox" id="ch1" name="price" />
-									<label for="ch1">0 - 49 $</label>
-								</div>
-								<div class="checkbox">
-									<input type="checkbox" id="ch2" name="price" />
-									<label for="ch2">50 - 99 $</label>
-								</div>
-								<div class="checkbox">
-									<input type="checkbox" id="ch3" name="price" />
-									<label for="ch3">100 -149 $</label>
-								</div>
-								<div class="checkbox">
-									<input type="checkbox" id="ch4" name="price" />
-									<label for="ch4">150 - 199 $</label>
-								</div>
-								<div class="checkbox">
-									<input type="checkbox" id="ch5" name="price" />
-									<label for="ch5">200 $ +</label>
-								</div>
-							</dd>
-							<!--//Price (per night)-->						
-														
+						<dl>								
 							<!--Star rating-->
 							<dt>Star rating</dt>
 							<dd>
+							{% if stars %}
+								<span class="stars-info">{{stars}} or more</span>
+							{% endif %}
+							{% if not stars %}
 								<span class="stars-info">3 or more</span>
+							{% endif %}								
 								<div id="star" data-rating="3"></div>
 							</dd>
 							<!--//Star rating-->							
@@ -104,49 +83,49 @@
 							<dt>Hotel theme</dt>
 							<dd>
 								<div class="checkbox">
-									<input type="checkbox" id="ch50" name="theme" />
+									<input type="checkbox" id="ch50" name="theme" {% if family %} checked {% endif %}/>
 									<label for="ch50">Family Fun</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch51" name="theme" />
+									<input type="checkbox" id="ch51" name="theme" {% if adventure %} checked {% endif %}/>
 									<label for="ch51">Adventure</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch52" name="theme" />
+									<input type="checkbox" id="ch52" name="theme" {% if beach_and_sun %} checked {% endif %} />
 									<label for="ch52">Beach &amp; Sun</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch53" name="theme" />
+									<input type="checkbox" id="ch53" name="theme" {% if casinos  %} checked {% endif %}/>
 									<label for="ch53">Casinos</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch54" name="theme" />
+									<input type="checkbox" id="ch54" name="theme" {% if history_and_culture  %} checked {% endif %}/>
 									<label for="ch54">History &amp; Culture</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch55" name="theme" />
-									<label for="ch55">Clubbing</label>
+									<input type="checkbox" id="ch55" name="theme" {% if clubbing  %} checked {% endif %} />
+									<label for="ch55">Night Life</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch56" name="theme" />
+									<input type="checkbox" id="ch56" name="theme" {% if romance  %} checked {% endif %}  />
 									<label for="ch56">Romance</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch57" name="theme" />
+									<input type="checkbox" id="ch57" name="theme" {% if shopping  %} checked {% endif %}  />
 									<label for="ch57">Shopping</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch58" name="theme" />
+									<input type="checkbox" id="ch58" name="theme" {% if skiing  %} checked {% endif %} />
 									<label for="ch58">Skiing</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch59" name="theme" />
+									<input type="checkbox" id="ch59" name="theme" {% if wellness  %} checked {% endif %} />
 									<label for="ch59">Wellness</label>
 								</div>
-								<div class="checkbox">
+								<!-- <div class="checkbox">
 									<input type="checkbox" id="ch60" name="theme" />
 									<label for="ch60">Eco &amp; Nature</label>
-								</div>
+								</div> -->
 							</dd>
 							<!--//Hotel theme-->							
 						</dl>
@@ -215,22 +194,22 @@
 								
 								<!--pager-->
 								<div class="pager">
-									<span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">First page</a></span>
+									<span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}&stars={{stars}}">First page</a></span>
 									<!-- <span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">&lt;</a></span> -->
 									{% if hotels.has_previous %}
-							            <span><a href="/hotels/search/?page={{ hotels.previous_page_number }}&{{saved_query}}&destination={{destination}}">&lt;</a></span>
+							            <span><a href="/hotels/search/?page={{ hotels.previous_page_number }}&{{saved_query}}&destination={{destination}}&stars={{stars}}">&lt;</a></span>
 							        {% endif %}
 
 									{% for i in pageRange %}
-										<span><a href="/hotels/search/?page={{i}}&{{saved_query}}&destination={{destination}}">{{i}}</a></span>
+										<span><a href="/hotels/search/?page={{i}}&{{saved_query}}&destination={{destination}}&stars={{stars}}">{{i}}</a></span>
 									{% endfor %}
 
 									{% if hotels.has_next %}
-							            <span><a href="/hotels/search/?page={{ hotels.next_page_number }}&{{saved_query}}&destination={{destination}}">&gt;</a></span>
+							            <span><a href="/hotels/search/?page={{ hotels.next_page_number }}&{{saved_query}}&destination={{destination}}&stars={{stars}}">&gt;</a></span>
 							        {% endif %}
 									
 									<!-- <span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">&gt;</a></span>-->
-									<span><a href="/hotels/search/?page={{hotels.paginator.num_pages}}&{{saved_query}}&destination={{destination}}">Last Page</a></span>								
+									<span><a href="/hotels/search/?page={{hotels.paginator.num_pages}}&{{saved_query}}&destination={{destination}}&stars={{stars}}">Last Page</a></span>								
 
 
 								</div>
@@ -260,14 +239,21 @@
 			});
 		});
 		
-		$('.view-type li:first-child').addClass('active');
+		$('.view-type li:first-child').addClass('active');		
 		
 		$('#star').raty({
+			{% if stars %}
+			score    : {{stars}},
+			{% endif %}
+			{% if not stars %}
 			score    : 3,
+			{% endif %}
 			starOff : '{{STATIC_URL}}images/ico/star-rating-off.png',
 			starOn  : '{{STATIC_URL}}images/ico/star-rating-on.png',
 			click: function(score, evt) {
-			alert('ID: ' + $(this).attr('id') + '\nscore: ' + score + '\nevent: ' + evt);
+			//alert('ID: ' + $(this).attr('id') + '\nscore: ' + score + '\nevent: ' + evt);
+
+				window.location = "/hotels/search/?page={{i}}&{{saved_query}}&destination={{destination}}&stars=" + score;
 		  }
 		});
 	});
