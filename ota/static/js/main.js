@@ -101,10 +101,6 @@ $(document).ready(function(){
 				$("#id_destination").attr('disabled', true);
 			} else {
 				$("#id_destination").attr('disabled', false);
-			}
-			
-		});
-			
-		
-		
+			}			
+		});				
 });

@@ -81,46 +81,46 @@
 																																			
 							<!--Hotel theme-->
 							<dt>Hotel theme</dt>
-							<dd>
+							<dd id="hotel_theme_dd">
 								<div class="checkbox">
-									<input type="checkbox" id="ch50" name="theme" {% if family %} checked {% endif %}/>
-									<label for="ch50">Family Fun</label>
+									<input type="checkbox" id="id_familytheme" name="theme" {% if family %} checked {% endif %}/>
+									<label for="id_familytheme">Family Fun</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch51" name="theme" {% if adventure %} checked {% endif %}/>
-									<label for="ch51">Adventure</label>
+									<input type="checkbox" id="id_adventuretheme" name="theme" {% if adventure %} checked {% endif %}/>
+									<label for="id_adventuretheme">Adventure</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch52" name="theme" {% if beach_and_sun %} checked {% endif %} />
-									<label for="ch52">Beach &amp; Sun</label>
+									<input type="checkbox" id="id_beachtheme" name="theme" {% if beach_and_sun %} checked {% endif %} />
+									<label for="id_beachtheme">Beach &amp; Sun</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch53" name="theme" {% if casinos  %} checked {% endif %}/>
-									<label for="ch53">Casinos</label>
+									<input type="checkbox" id="id_casinostheme" name="theme" {% if casinos  %} checked {% endif %}/>
+									<label for="id_casinostheme">Casinos</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch54" name="theme" {% if history_and_culture  %} checked {% endif %}/>
-									<label for="ch54">History &amp; Culture</label>
+									<input type="checkbox" id="id_historytheme" name="theme" {% if history_and_culture  %} checked {% endif %}/>
+									<label for="id_casinostheme">History &amp; Culture</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch55" name="theme" {% if clubbing  %} checked {% endif %} />
-									<label for="ch55">Night Life</label>
+									<input type="checkbox" id="id_clubbingtheme" name="theme" {% if clubbing  %} checked {% endif %} />
+									<label for="id_clubbingtheme">Night Life</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch56" name="theme" {% if romance  %} checked {% endif %}  />
-									<label for="ch56">Romance</label>
+									<input type="checkbox" id="id_romancetheme" name="theme" {% if romance  %} checked {% endif %}  />
+									<label for="id_romancetheme">Romance</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch57" name="theme" {% if shopping  %} checked {% endif %}  />
-									<label for="ch57">Shopping</label>
+									<input type="checkbox" id="id_shoppingtheme" name="theme" {% if shopping  %} checked {% endif %}  />
+									<label for="id_shoppingtheme">Shopping</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch58" name="theme" {% if skiing  %} checked {% endif %} />
-									<label for="ch58">Skiing</label>
+									<input type="checkbox" id="id_skiingtheme" name="theme" {% if skiing  %} checked {% endif %} />
+									<label for="id_skiingtheme">Skiing</label>
 								</div>
 								<div class="checkbox">
-									<input type="checkbox" id="ch59" name="theme" {% if wellness  %} checked {% endif %} />
-									<label for="ch59">Wellness</label>
+									<input type="checkbox" id="id_wellnesstheme" name="theme" {% if wellness  %} checked {% endif %} />
+									<label for="id_wellnesstheme">Wellness</label>
 								</div>
 								<!-- <div class="checkbox">
 									<input type="checkbox" id="ch60" name="theme" />
@@ -256,6 +256,96 @@
 				window.location = "/hotels/search/?page={{i}}&{{saved_query}}&destination={{destination}}&stars=" + score;
 		  }
 		});
+
+		hotel_themes = $("#hotel_theme_dd input");
+
+		//
+		// get theme filter based on checked
+		// themes
+		//
+		var getThemeFilter = function() {
+
+			var query_str = "";
+
+			$.each( hotel_themes, function(index, value) {
+
+				var checked = $("#"+value.id).is(":checked");
+
+				if (checked && value.id === "id_familytheme") {
+					query_str += "family=on&"
+				}
+
+				if (checked && value.id === "id_casinostheme") {
+					query_str += "casinos=on&"
+				}
+
+				if (checked && value.id === "id_shoppingtheme") {
+					query_str += "shopping=on&"
+				}
+
+				if (checked && value.id === "id_wellnesstheme") {
+					query_str += "wellness=on&"
+				}
+
+				if (checked && value.id === "id_skiingtheme") {
+					query_str += "skiing=on&"
+				}
+
+				if (checked && value.id === "id_romancetheme") {
+					query_str += "romance=on&"
+				}
+
+				if (checked && value.id === "id_beachtheme") {
+					query_str += "beachAndSun=on&"
+				}
+
+				if (checked && value.id === "id_clubbingtheme") {
+					query_str += "nightlife=on&"
+				}
+
+				if (checked && value.id === "id_historytheme") {
+					query_str += "historyAndCulture=on&"
+				}
+
+				if (checked && value.id === "id_adventuretheme") {
+					query_str += "adventure=on&"
+				}
+
+			});
+
+			return query_str;
+		}
+
+		$.each( hotel_themes, function(index, value) {
+			
+			var input = value;			
+
+			$("#"+input.id).on( "click", function() {
+
+				themes_query = getThemeFilter();
+			
+				redirect_query = "/hotels/search/?" + themes_query + "&destination={{destination}}";
+				
+				{% if stars %}
+				redirect_query += "&stars={{stars}}";
+				{% endif %}
+
+				{% if page %}
+				redirect_query += "&page={{page}}";
+				{% endif %}
+
+				console.log( redirect_query );
+				window.location = redirect_query;
+
+			});
+
+		});
+
+		//for( var i = 0; i < hotel_themes.length; ++i ){
+
+		//}
+
+
 	});
 	
 	$(window).load(function () {
