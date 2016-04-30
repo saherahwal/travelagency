@@ -77,6 +77,37 @@ class Scores(TimeStampedModel):
     romanceScore = models.IntegerField()
     shoppingScore = models.IntegerField()
     skiingScore = models.IntegerField()
-    wellnessScore = models.IntegerField()    
+    wellnessScore = models.IntegerField()
+
+class SearchRequest( TimeStampedModel ):
+    """
+        Records of searches done by the users for analysis and understanding
+    """
+    # query search request
+    continent_id = models.SmallIntegerField()
+    country_code =  models.CharField(max_length = 4)
+    city = models.CharField(max_length=93)
     
+    # interests chosen
+    familyInterest = models.BooleanField()
+    adventureInterest = models.BooleanField()
+    beachSunInterest = models.BooleanField()
+    casinosInterest = models.BooleanField()
+    historyCultureInterest = models.BooleanField()
+    clubbingInterest = models.BooleanField()
+    romanceInterest = models.BooleanField()
+    shoppingInterest = models.BooleanField()
+    skiingInterest = models.BooleanField()
+    wellnessInterest = models.BooleanField()
+
+    # surprise_me
+    surpriseme = models.BooleanField()
+
+class BookNowRequest( TimeStampedModel ):
+    """
+        Records of user clicks on Book now leading to Booking.com
+        NOTE: doesn't mean the user actually booked.
+    """    
+    hotel = models.ForeignKey(Hotel, related_name="book_hotel")
+    searchRequest = models.ForeignKey( SearchRequest, related_name="search_req" )    
     
