@@ -1,10 +1,6 @@
 #
 # hard-coded interests 
 #
-TRAVEL_INTERESTS = [ 'family', 'adventure', 'beach & sun', 'casinos',
-                     'history & culture', 'clubbing', 'romance',
-                     'shopping', 'skiing', 'wellness', 'cruise' ]
-
 WELLNESS = "wellness"
 SHOPPING = "shopping"
 ROMANCE = "romance"
@@ -16,6 +12,11 @@ FAMILY = "family"
 SKIING = "skiing"
 HISTORY_CULTURE = "history_and_culture"
 
+#
+# Keep list updated with travel interests added
+#
+TRAVEL_INTERESTS = [ WELLNESS, SHOPPING, ROMANCE, CLUBBING, CASINOS, ADVENTURE,
+                     BEACH_AND_SUN, FAMILY, SKIING, HISTORY_CULTURE ]
 
 class TimeRange:
     

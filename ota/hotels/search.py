@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from hotels.models import *
 from address.globals import *
 from core.utils import *
+from hotels.requestManager import *
 
 MAX_SURPRISE_RES = 100
 
@@ -19,6 +20,12 @@ score_column_names = { WELLNESS: "wellnessScore",
                        FAMILY : "familyScore",
                        SKIING : "skiingScore",
                        HISTORY_CULTURE: "historyCultureScore" }
+
+#
+# Create global Queue manager
+#
+queueMgr = QueueRequestsManager()
+print "Created the queue manager"
 
 
 def hotel_search( query, interests_bitmap, surprise_me, stars ):
@@ -39,6 +46,22 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
         In case of surprise me the trimeed query is the one chosen by algorithm
     """
 
+    #
+    # define/init all needed variables
+    # for Enqueuing requests for writes
+    #
+    cont_id = None
+    country_code = None
+    city = None
+    interest_map = interests_bitmap
+    surpriseme = surprise_me
+
+    # scores
+    scoreResults = None
+
+    #
+    # Trim the query before figuring out its' category (city, continent, country...etc)
+    #
     trimmed_query = None
     if surprise_me:
         #
@@ -49,11 +72,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
         #
         # trim query from leading/trailing spaces
         #
-        trimmed_query = query.strip()       
-   
-
-    # scores
-    scoreResults = None
+        trimmed_query = query.strip()    
     
     #
     # check query status ( continent / country / city ... etc )
@@ -73,6 +92,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
         #
         country_cc = name_to_cc[ trimmed_query ]
         scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc )
+        country_code = country_cc
 
     elif trimmed_query in us_states_set:
 
@@ -82,6 +102,11 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
         state = trimmed_query
         scoreResults = Scores.objects.filter( hotel__country_cc1='us',
                                               hotel__city__contains = '(' + state + ')' )
+
+        #
+        # for now, use city field for state in request queue
+        #
+        city = state
     else:
 
         #
@@ -123,6 +148,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
             # For this case: just search for city only
             #
             scoreResults = Scores.objects.filter( hotel__city__contains = parse_comma_trim[0] )
+            city = parse_comma_trim[0]            
              
         else:
             
@@ -132,24 +158,27 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
             first_term = parse_comma_trim[0]
             last_term = parse_comma_trim[-1]
 
+            city = first_term
+
             #
             # check if second term is country
             #
             if last_term in name_to_cc:
                 country_cc = name_to_cc[last_term]
+                country_code = country_cc                
 
                 if par_min == None:
                     scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc,
-                                                          hotel__city__contains = first_term )
+                                                          hotel__city__contains = first_term )                    
                 else:
                     scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc,
                                                           hotel__city__contains = par_min,
-                                                          hotel__city_preferred__contains = first_term )                                                           
+                                                          hotel__city_preferred__contains = first_term )                    
             else:
 
-                print "could not find", last_term, "in countries"
+                print "Could not find", last_term, "in countries"
 
-                if par_min == None:
+                if par_min == None:                    
 
                     #
                     # For this case: just search for city only
@@ -172,6 +201,11 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
     # filter stars if not None
     if stars != None:
         finalRes = finalRes.filter( hotel__hotel_class__gte = stars )
+
+    #
+    # Enqueue search requests
+    #
+    QueueRequestsManager.EnqueueSearchRequest( cont_id, country_code, city, interest_map, surprise_me )
 
     return (finalRes, trimmed_query)
 
@@ -214,30 +248,3 @@ def surpriseme_query( interests_map ):
     cc = random_res_picked.hotel.country_cc1
 
     return cc_to_name[cc]
-    
-    
-##    bool_list = [ True, False ]
-##
-##    pick_cont = random.choice( bool_list )
-##
-##    #
-##    # Pick Continent randomly
-##    #
-##    if pick_cont:
-##        cont = random.choice( continents_to_id.keys() )
-##        return cont
-##    else:
-##
-##        pick_country_state = random.choice( bool_list )
-##
-##        #
-##        # pick random country or state
-##        #
-##        if pick_country_state:
-##            country = random.choice( name_to_cc.keys() )
-##            return country
-##
-##        else:
-##            state = random.choice( us_states )
-##            return state
-    

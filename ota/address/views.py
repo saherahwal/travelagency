@@ -21,10 +21,11 @@ def countries(request):
         code = country.country_code.lower()
         
         # fill up the global cc --> name cache and the reverse name --> cc
-        if code not in cc_to_name:
-            print "adding", code, "to global cache"
+        if code not in cc_to_name:            
             cc_to_name[code] = country.country_name
             name_to_cc[country.country_name] = code
+
+    print "global country cache added with", len(cc_to_name), "countries"
 
     jsonData = json.dumps(results)
     return HttpResponse(jsonData ,content_type="application/json")

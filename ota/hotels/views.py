@@ -72,8 +72,8 @@ def search(request):
                 saved_query += "wellness=on&"
             if romance:
                 saved_query += "romance=on&"
-            if wellness:
-                saved_query += "wellness=on&"
+            if shopping:
+                saved_query += "shopping=on&"
             if casinos:
                 saved_query += "casinos=on&"
             if beachAndSun:
@@ -194,11 +194,17 @@ def search(request):
                 endPage = min( hotels.paginator.num_pages, MAX_PAGES_PER_PAGE )
                 pageRange = range(1, endPage)
 
+            #
+            # initialize fields not specified in request
+            #
             pageCurrent = None
             try:
                 pageCurrent = int(page)
             except:
-                pageCurrent = None
+                pageCurrent = 1
+
+            if stars == None:
+                stars = 0
             
             return render(request,
                       "search_results.html",

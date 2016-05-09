@@ -54,7 +54,7 @@
 					
 					<!--top right navigation-->
 					<ul class="top-right-nav">
-						<li><a href="#" title="Back to results">Back to results</a></li>
+						<!-- <li><a href="#" title="Back to results">Back to results</a></li> -->
 						<li><a href="#" title="Change search">Change search</a></li>
 					</ul>
 					<!--//top right navigation-->
@@ -73,9 +73,9 @@
 								<span class="stars-info">{{stars}} or more</span>
 							{% endif %}
 							{% if not stars %}
-								<span class="stars-info">3 or more</span>
+								<span class="stars-info">1 or more</span>
 							{% endif %}								
-								<div id="star" data-rating="3"></div>
+								<div id="star" data-rating="1"></div>
 							</dd>
 							<!--//Star rating-->							
 																																			
@@ -192,7 +192,7 @@
 								<a href="#" class="scroll-to-top" title="Back up">Back up</a> 
 								<!--//back up button-->
 								
-								<!--pager-->
+								<!--pager-->								
 								<div class="pager">
 									<span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}&stars={{stars}}">First page</a></span>
 									<!-- <span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">&lt;</a></span> -->
@@ -209,10 +209,9 @@
 							        {% endif %}
 									
 									<!-- <span><a href="/hotels/search/?page=1&{{saved_query}}&destination={{destination}}">&gt;</a></span>-->
-									<span><a href="/hotels/search/?page={{hotels.paginator.num_pages}}&{{saved_query}}&destination={{destination}}&stars={{stars}}">Last Page</a></span>								
-
-
-								</div>
+									<span><a href="/hotels/search/?page={{hotels.paginator.num_pages}}&{{saved_query}}&destination={{destination}}&stars={{stars}}">Last Page</a></span>						
+								</div>								
+								
 								<!--//pager-->
 							</div>
 							<!--//bottom navigation-->
@@ -246,14 +245,14 @@
 			score    : {{stars}},
 			{% endif %}
 			{% if not stars %}
-			score    : 3,
+			score    : 1,
 			{% endif %}
 			starOff : '{{STATIC_URL}}images/ico/star-rating-off.png',
 			starOn  : '{{STATIC_URL}}images/ico/star-rating-on.png',
 			click: function(score, evt) {
 			//alert('ID: ' + $(this).attr('id') + '\nscore: ' + score + '\nevent: ' + evt);
 
-				window.location = "/hotels/search/?page={{i}}&{{saved_query}}&destination={{destination}}&stars=" + score;
+				window.location = "/hotels/search/?page={{page}}&{{saved_query}}&destination={{destination}}&stars=" + score;
 		  }
 		});
 
@@ -332,6 +331,10 @@
 
 				{% if page %}
 				redirect_query += "&page={{page}}";
+				{% endif %}
+
+				{% if surpriseme %}
+				redirect_query += "&surpriseme=on";
 				{% endif %}
 
 				console.log( redirect_query );

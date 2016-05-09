@@ -84,7 +84,7 @@ class SearchRequest( TimeStampedModel ):
         Records of searches done by the users for analysis and understanding
     """
     # query search request
-    continent_id = models.SmallIntegerField()
+    continent_id = models.SmallIntegerField( null = True )
     country_code =  models.CharField(max_length = 4)
     city = models.CharField(max_length=93)
     
