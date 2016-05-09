@@ -21,6 +21,17 @@ def search(request):
     #
     destErrors = []
     interestsErrors = []
+    dateErrors = []
+
+    #
+    # data sent back for passing info
+    # to booking.com
+    #
+    checkin_date = ""
+    checkout_date = ""
+    no_rooms = 1
+    req_adults = 1
+    req_children = 0
 
     #
     # dummy start/rating list
@@ -60,6 +71,13 @@ def search(request):
             children = hotelSearchForm.cleaned_data['children']
 
             #
+            # Difference between CheckIn and CheckOut date
+            #
+            delta_time = checkOutDate - checkInDate
+            if  delta_time.days < 0:
+                dateErrors.append( "CheckOut date can't be before CheckIn date!" )
+
+            #
             # stars search ( hotel class - at least )
             #
             stars = request.GET.get('stars')
@@ -91,18 +109,24 @@ def search(request):
             if surpriseme:
                 saved_query += "surpriseme=on&"
             if checkInDate:
-                saved_query += "checkInDate=" + checkInDate + "&"
+                saved_query += "checkInDate=" + str(checkInDate) + "&"
+                checkin_date = str(checkInDate)
             if checkOutDate:
-                saved_query += "checkOutDate=" + checkOutDate + "&"
+                saved_query += "checkOutDate=" + str(checkOutDate) + "&"
+                checkout_date = str(checkOutDate)
             if rooms:
-                saved_query += "rooms=" + rooms + "&"
+                saved_query += "rooms=" + str(rooms) + "&"
+                no_rooms = str(rooms)
             if adults:
-                saved_query += "adults=" + adults + "&"
+                saved_query += "adults=" + str(adults) + "&"
+                req_adults = str(adults)
             if children:
-                saved_query += "children=" + children + "&"           
+                saved_query += "children=" + str(children) + "&"
+                req_children =  str(children)
 
-            saved_query = saved_query[:-1] # remove trailing &            
+            saved_query = saved_query[:-1] # remove trailing &
 
+            
             #
             # init interests dictionary
             #
@@ -149,6 +173,13 @@ def search(request):
                       "index.html",
                       {'hotelSearchForm': hotelSearchForm,
                        'interestsErrors': interestsErrors})
+
+            if len(dateErrors) != 0:
+                
+                 return render(request,
+                      "index.html",
+                      {'hotelSearchForm': hotelSearchForm,
+                       'dateErrors': dateErrors})
             
             #
             # Search now
@@ -213,6 +244,11 @@ def search(request):
                        'destination': destination,
                        'interest_dict' : json.dumps(interest_dict),
                        'surpriseme': surpriseme,
+                       'checkin': checkin_date,
+                       'checkout': checkout_date,
+                       'req_adults': req_adults,
+                       'req_children': req_children,
+                       'no_rooms': no_rooms,
                        'dummy_star_rating': dummy_star_rating,
                        'saved_query': saved_query,
                        'pageRange': pageRange,

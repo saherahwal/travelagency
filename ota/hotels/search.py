@@ -93,7 +93,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
         country_cc = name_to_cc[ trimmed_query ]
         scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc )
         country_code = country_cc
-
+        
     elif trimmed_query in us_states_set:
 
         #
@@ -228,8 +228,7 @@ def construct_totalscore_columns( interests_map ):
                 s_total = score_column_names[elt]
             else:
                 s_total = s_total + " + " +  score_column_names[elt]
-
-    print "s_total", s_total
+    
     return s_total
 
 def surpriseme_query( interests_map ):

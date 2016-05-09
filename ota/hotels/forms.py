@@ -24,8 +24,8 @@ class HotelSearchForm(forms.Form):
     surpriseme = forms.BooleanField( required = False )
 
     # check-in / check-out dates
-    checkInDate = forms.DateField( required = False )
-    checkOutDate = forms.DateField( required = False )
+    checkInDate = forms.DateField( required = True )
+    checkOutDate = forms.DateField( required = True )
 
     # rooms / adults / children
     rooms = forms.IntegerField( min_value = 0, required = False )

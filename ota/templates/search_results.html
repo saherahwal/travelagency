@@ -162,7 +162,7 @@
 							{% for hotel in hotels %}
 								<!--deal-->
 								<article class="one-fourth">
-									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}}" title=""><img src="{{hotel.hotel.photo_url}}" alt="" width="270" height="152" /></a></figure>
+									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title=""><img src="{{hotel.hotel.photo_url}}" alt="" width="270" height="152" /></a></figure>
 									<div class="details">
 										<h1>{{hotel.hotel.name}}
 											<span class="stars">
@@ -178,9 +178,9 @@
 										<!-- <span class="rating"> 8 /10</span>										
 										<span class="price">Price per room per night from  <em>$ 50</em> </span> -->
 										<div class="description">
-											<p>{{hotel.hotel.desc_en}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}}"> More info</a></p>
+											<p>{{hotel.hotel.desc_en}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}"> More info</a></p>
 										</div>
-										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}}" title="Book now" class="gradient-button">Book now</a>
+										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="Book now" class="gradient-button">Book now</a>
 									</div>
 								</article>
 								<!--//deal-->
@@ -323,7 +323,7 @@
 
 				themes_query = getThemeFilter();
 			
-				redirect_query = "/hotels/search/?" + themes_query + "&destination={{destination}}";
+				redirect_query = "/hotels/search/?" + themes_query + "&destination={{destination}}&checkInDate={{checkin}}&checkOutDate={{checkout}}";
 				
 				{% if stars %}
 				redirect_query += "&stars={{stars}}";

@@ -133,8 +133,26 @@
 					<!--column-->
 					<div class="column twins">
 						<h4><span>03</span> When?</h4>
-						<div class="f-item datepicker">
-							<label for="datepicker1">Check-in date</label>							
+						{% if dateErrors %}
+						<div class="alert alert-danger err">									
+							<ul>
+								{% for error in dateErrors %}
+									<li>{{ error }}</li>
+								{% endfor %}									
+							</ul>
+						</div>
+						{% endif %}
+						<div class="f-item datepicker">							
+							<label for="datepicker1">Check-in date</label>	
+							{% if hotelSearchForm.errors %}
+							<div class="alert alert-danger err">									
+								<ul>
+									{% for error in hotelSearchForm.checkInDate.errors %}
+										<li>{{ error }}</li>
+									{% endfor %}									
+								</ul>
+							</div>  
+							{% endif %}							
 							<div class="datepicker-wrap">
 								{{ hotelSearchForm.checkInDate }}
 								<!-- <input type="text" placeholder="" id="datepicker1" name="datepicker1" /> -->
@@ -142,6 +160,15 @@
 						</div>
 						<div class="f-item datepicker">
 							<label for="datepicker2">Check-out date</label>
+							{% if hotelSearchForm.errors %}
+							<div class="alert alert-danger err">									
+								<ul>
+									{% for error in hotelSearchForm.checkOutDate.errors %}
+										<li>{{ error }}</li>
+									{% endfor %}									
+								</ul>
+							</div>  
+							{% endif %}
 							<div class="datepicker-wrap">
 								{{ hotelSearchForm.checkOutDate }}
 								<!-- <input type="text" placeholder="" id="datepicker2" name="datepicker2" /> -->
