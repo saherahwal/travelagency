@@ -1,5 +1,6 @@
 from django.db import models
 from common.models import TimeStampedModel
+from uuidfield import UUIDField
 
 class Hotel(TimeStampedModel):
     
@@ -83,6 +84,9 @@ class SearchRequest( TimeStampedModel ):
     """
         Records of searches done by the users for analysis and understanding
     """
+    # coorelation ID ( to coorelate booking now requests with searches )
+    coorelation_id = UUIDField()
+    
     # query search request
     continent_id = models.SmallIntegerField( null = True )
     country_code =  models.CharField(max_length = 4)
@@ -109,5 +113,6 @@ class BookNowRequest( TimeStampedModel ):
         NOTE: doesn't mean the user actually booked.
     """    
     hotel = models.ForeignKey(Hotel, related_name="book_hotel")
-    searchRequest = models.ForeignKey( SearchRequest, related_name="search_req" )    
-    
+
+    # coorelation ID ( to coorelate booking now requests with searches )
+    coorelation_id = UUIDField()
