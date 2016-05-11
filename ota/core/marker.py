@@ -142,19 +142,19 @@ class ShoppingInterestsMarker(BaseAbstractMarker):
 class RomanceInterestsMarker(BaseAbstractMarker):
 
     name = ROMANCE
-    length1_dict = { 'couples' : 90, 'romantic' : 140, 'romance' : 120, 'honeymooners' : 150 }
+    length1_dict = { 'couples' : 90, 'romantic' : 140, 'romance' : 130, 'honeymooners' : 160, 'spa': 85, 'scenic': 90, 'sunset': 90 }
     length2_dict = { 'scenic park' : 50, 'sea views' : 50, 'sea view' : 50 }
 
 class ClubbingInterestsMarker(BaseAbstractMarker):
 
     name = CLUBBING
-    length1_dict = { 'nightlife' : 120, 'restaurants' : 70, 'bars' : 100 }
+    length1_dict = { 'nightlife' : 120, 'restaurants' : 90, 'bars' : 100, 'music': 80, 'shops': 75 }
     length2_dict = { 'live music' : 100, 'night life' : 120, 'dance club':70, 'dance clubs': 120 }
 
 class HistoryAndCultureInterestsMarker(BaseAbstractMarker):
 
     name = HISTORY_CULTURE
-    length1_dict = { 'museum' : 100, 'history' : 120 }
+    length1_dict = { 'museum' : 100, 'history' : 120, 'museums' : 145 }
 
 class CasinoInterestsMarker(BaseAbstractMarker):
 
