@@ -15,7 +15,8 @@ print "Created BookNow Reqeust Queue"
 
 class SearchRequestWrapper:
 
-    def __init__( self, continent_id, country_code, city, interest_map, surpriseme ):
+    def __init__( self, coorelation_id, continent_id, country_code, city, interest_map, surpriseme ):
+        self.coorelation_id = coorelation_id
         self.continent_id = continent_id
         self.country_code = country_code
         self.city = city
@@ -33,6 +34,9 @@ class SearchRequestWrapper:
 
     def getSurpriseMe(self):
         return self.surpriseme
+
+    def getCoorelationId( self ):
+        return self.coorelation_id
 
     def getInterest( self, interest ):
         value = self.interest_map.get(interest)
@@ -79,8 +83,8 @@ class QueueRequestsManager(object):
     #
 
     @staticmethod
-    def EnqueueSearchRequest( continent_id, country_code, city, interest_map, surprise_me ):
-        item = SearchRequestWrapper( continent_id, country_code, city, interest_map, surprise_me )
+    def EnqueueSearchRequest( coorelation_id, continent_id, country_code, city, interest_map, surprise_me ):
+        item = SearchRequestWrapper( coorelation_id, continent_id, country_code, city, interest_map, surprise_me )
         searchRequestsQueue.put( item )
 
     @staticmethod
@@ -111,6 +115,7 @@ class SearchRequestsConsumer(Thread):
             #
             # Fetch data
             #
+            coorelation_id = searchRequest_item.getCoorelationId()
             continent_id = searchRequest_item.getContinentId()
             country_code = searchRequest_item.getCountryCode()
             city = searchRequest_item.getCity()
@@ -139,7 +144,8 @@ class SearchRequestsConsumer(Thread):
             #
             # Django create - Insert into DB
             #
-            searchRequestObj = SearchRequest.objects.create( continent_id=continent_id,
+            searchRequestObj = SearchRequest.objects.create( coorelation_id=coorelation_id,
+                                                             continent_id=continent_id,
                                                              country_code=country_code,
                                                              city=city,
                                                              familyInterest=familyInterest,

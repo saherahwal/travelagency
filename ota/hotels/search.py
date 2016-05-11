@@ -4,6 +4,7 @@ from hotels.models import *
 from address.globals import *
 from core.utils import *
 from hotels.requestManager import *
+import uuid
 
 MAX_SURPRISE_RES = 100
 
@@ -205,7 +206,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
     #
     # Enqueue search requests
     #
-    QueueRequestsManager.EnqueueSearchRequest( cont_id, country_code, city, interest_map, surprise_me )
+    QueueRequestsManager.EnqueueSearchRequest( uuid.uuid4(), cont_id, country_code, city, interest_map, surprise_me )
 
     return (finalRes, trimmed_query)
 
