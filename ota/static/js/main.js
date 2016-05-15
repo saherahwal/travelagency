@@ -109,5 +109,5 @@ $(document).ready(function(){
 		//
 		$("#id_adults").val(1);
 		$("#id_rooms").val(1);
-		$("#id_children").val(1);
+		$("#id_children").val(0);
 });
