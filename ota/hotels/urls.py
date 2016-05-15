@@ -11,5 +11,6 @@ urlpatterns = [
 
   
     url('^search/$', search),
+    url('^book/$', bookNow),
          
 ]

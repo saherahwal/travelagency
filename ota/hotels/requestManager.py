@@ -46,12 +46,12 @@ class SearchRequestWrapper:
 
 class BookNowRequestWrapper:
     
-    def __init__( self, searchRequest_id, hotel_id ):
-        self.searchRequest_id = searchRequest_id
+    def __init__( self, coorelation_id, hotel_id ):
+        self.coorelation_id = coorelation_id
         self.hotel_id = hotel_id 
 
-    def getSearchRequestId(self):
-        return self.searchRequest_id
+    def getCoorelationId( self ):
+        return self.coorelation_id
 
     def getHotelId(self):
         return self.hotel_id
@@ -88,8 +88,8 @@ class QueueRequestsManager(object):
         searchRequestsQueue.put( item )
 
     @staticmethod
-    def EnqueueBookNowRequest( searchRequest_id, hotel_id ):
-        item = BookNowRequestWrapper( searchRequest_id, hotel_id )
+    def EnqueueBookNowRequest( coorelation_id, hotel_id ):
+        item = BookNowRequestWrapper( coorelation_id, hotel_id )
         bookNowRequestQueue.put( item )    
    
 #
@@ -186,23 +186,22 @@ class BookNowRequestsConsumer(Thread):
             #
             # Fetch data
             #
-            searchRequest_id = bookNowRequest_item.getSearchRequestId()
+            coorelation_id = bookNowRequest_item.getCoorelationId()
             hotel_id = bookNowRequest_item.getHotelId()
 
             try:
                 
-                hotelObj = Hotel.objects.get(  id = hotel_id )
-                searchReqObj = SearchRequest.objects.get( id = searchRequest_id )
+                hotelObj = Hotel.objects.get(  id = hotel_id )               
 
                 #
                 # Django create - insert into DB
                 #
-                bookNowReqObj = BookNowRequest.objects.create( hotel=hotelObj, searchRequest=searchReqObj )
+                bookNowReqObj = BookNowRequest.objects.create( hotel=hotelObj, coorelation_id=coorelation_id )
 
             except ObjectDoesNotExist:
                 print "Either Hotel or Search Request doesn't exist"
                 print "Hotel Id", hotel_id
-                print "Search Request Id", searchRequest_id
+                print "Coorelation Id", coorelation_id
 
             #
             # signal task done

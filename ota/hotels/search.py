@@ -4,7 +4,6 @@ from hotels.models import *
 from address.globals import *
 from core.utils import *
 from hotels.requestManager import *
-import uuid
 
 MAX_SURPRISE_RES = 100
 
@@ -29,7 +28,7 @@ queueMgr = QueueRequestsManager()
 print "Created the queue manager"
 
 
-def hotel_search( query, interests_bitmap, surprise_me, stars ):
+def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
     """
         query: destination query
         interests_bitmap: map of interests chosen ( e.g {wellness: True, shopping: False , ...etc })
@@ -206,7 +205,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars ):
     #
     # Enqueue search requests
     #
-    QueueRequestsManager.EnqueueSearchRequest( uuid.uuid4(), cont_id, country_code, city, interest_map, surprise_me )
+    QueueRequestsManager.EnqueueSearchRequest( session_guid, cont_id, country_code, city, interest_map, surprise_me )
 
     return (finalRes, trimmed_query)
 

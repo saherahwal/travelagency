@@ -1,15 +1,22 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
 from hotels import forms as hotelForms
 from address.globals import *
 from core.utils import *
 from hotels.search import hotel_search
+from hotels.requestManager import *
 import json
 import logging
+import uuid
+
 
 MAX_PAGES_PER_PAGE = 8
 
 def search(request):
+    """
+        Search request from main page
+    """
 
     #
     # non-binding
@@ -81,6 +88,11 @@ def search(request):
             # stars search ( hotel class - at least )
             #
             stars = request.GET.get('stars')
+            
+            #
+            # Get session_guid from request
+            #
+            session_guid = request.GET.get('session_guid')
 
             #
             # Generate saved query for pagination
@@ -124,6 +136,14 @@ def search(request):
                 saved_query += "children=" + str(children) + "&"
                 req_children =  str(children)
 
+            #
+            # add Session GUID to saved query string (generate new one if None)
+            #
+            if session_guid == None:
+                session_guid = uuid.uuid4()
+                
+            saved_query += "session_guid=" + str(session_guid) + "&"         
+                           
             saved_query = saved_query[:-1] # remove trailing &
 
             
@@ -187,7 +207,8 @@ def search(request):
             (hotels_list, query_dest_trimmed) = hotel_search( destination,
                                                               interest_dict,
                                                               surpriseme,
-                                                              stars )
+                                                              stars,
+                                                              session_guid )
             
             paginator = Paginator(hotels_list, 18) # Show 18 hotels per page
 
@@ -234,8 +255,11 @@ def search(request):
             except:
                 pageCurrent = 1
 
+            #
+            # when no stars is specified (set to 0)
+            #
             if stars == None:
-                stars = 0
+                stars = 0                 
             
             return render(request,
                       "search_results.html",
@@ -256,6 +280,7 @@ def search(request):
                        'query_dest_trimmed': query_dest_trimmed,
                        'page': pageCurrent,
                        'stars': stars,
+                       'session_guid': session_guid,
                        WELLNESS: wellness,
                        SHOPPING: shopping,
                        ROMANCE : romance,
@@ -282,4 +307,58 @@ def search(request):
         # return error on Non-GET/ Non-POST request
         #
         return None
+
+
+def bookNow( request ):
+    """
+        Trigerred on Book Now click in main page
+        Keeps track of these requests for statistical purposed.
+        Receives AJAX request
+    """
+
+    if request.is_ajax():
+
+        coorelation_id = request.POST.get('book_session_guid')
+        hotel_id_str = request.POST.get('book_hotel_id')
+
+        if hotel_id_str != None and coorelation_id != None:
+
+            print type(hotel_id_str)
+            print type(coorelation_id)
+
+            #
+            # convert hotel_id str to int
+            #
+            try:
+                hotel_id = int( hotel_id_str )
+                print "hotel_id", hotel_id
+            except ValueError as ve:
+                print "ValueError", ve
+
+            #
+            # convert UUID str to UUID
+            #
+            try:
+                coorelation_id = uuid.UUID(coorelation_id)
+                print "coorelation_id", coorelation_id
+            except ValueError as ve:
+                print "ValueError badly formed hexadecimal.", ve
+
+            #
+            # Enqueue bookNow requests for addition
+            #
+            QueueRequestsManager.EnqueueBookNowRequest( coorelation_id, hotel_id )            
+           
+        else:
+            print "hotel ID or session GUID is NULL"
+            print "hotel_id_str", hotel_id_str
+            print "coorelation_id", coorelation_id
+            
+
+    else:
+        print "The request is non-ajax. No operation was done."
+
+    return HttpResponse(json.dumps([]) ,content_type="application/json")
+    
+    
            

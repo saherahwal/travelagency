@@ -6,8 +6,9 @@ from address.models import Country
 from hotels.models import Hotel
 from address.globals import *
 
-
+#
 # views below
+#
 
 def countries(request):
     countries = []

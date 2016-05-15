@@ -4,13 +4,13 @@ from hotels import forms as hotelForms
 def homepage(request):
 
     #
-    # non-binding
+    # non-binding Hotel Search Form
     #
     hotelSearchForm = hotelForms.HotelSearchForm()
-
+   
     return render(request,
                   "index.html",
-                  {'hotelSearchForm': hotelSearchForm})
+                  {'hotelSearchForm': hotelSearchForm })
 
 def hotels(request):    
     return render( request , "hotels.html", {})

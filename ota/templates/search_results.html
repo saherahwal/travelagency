@@ -157,12 +157,12 @@
 							<p id="saved_surpriseme">{{surpriseme}}</p>
 						</div>
 						
-						<div class="deals clearfix">
+						<div class="deals clearfix" id="resultsSection">
 
 							{% for hotel in hotels %}
 								<!--deal-->
-								<article class="one-fourth">
-									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title=""><img src="{{hotel.hotel.photo_url}}" alt="" width="270" height="152" /></a></figure>
+								<article class="one-fourth">									
+									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="" data-hotel-id="{{hotel.hotel.id}}" ><img src="{{hotel.hotel.photo_url}}" alt="" width="270" height="152"/></a></figure>
 									<div class="details">
 										<h1>{{hotel.hotel.name}}
 											<span class="stars">
@@ -178,9 +178,9 @@
 										<!-- <span class="rating"> 8 /10</span>										
 										<span class="price">Price per room per night from  <em>$ 50</em> </span> -->
 										<div class="description">
-											<p>{{hotel.hotel.desc_en}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}"> More info</a></p>
+											<p>{{hotel.hotel.desc_en}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" data-hotel-id="{{hotel.hotel.id}}"> More info</a></p>
 										</div>
-										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="Book now" class="gradient-button">Book now</a>
+										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="Book now" class="gradient-button" data-hotel-id="{{hotel.hotel.id}}">Book now</a>
 									</div>
 								</article>
 								<!--//deal-->
@@ -228,7 +228,8 @@
 	
 	{% block tailscripts %}
 	<script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function() {	
+
 		$('dt').each(function() {
 			var tis = $(this), state = false, answer = tis.next('dd').hide().css('height','auto').slideUp();
 			tis.click(function() {
@@ -337,6 +338,10 @@
 				redirect_query += "&surpriseme=on";
 				{% endif %}
 
+				{% if session_guid %}
+				redirect_query += "&session_guid={{session_guid}}";
+				{% endif %}
+
 				console.log( redirect_query );
 				window.location = redirect_query;
 
@@ -344,11 +349,36 @@
 
 		});
 
-		//for( var i = 0; i < hotel_themes.length; ++i ){
+		//
+		// these are all links getting to booking.com hotels
+		//
+		hotel_link_results = $("#resultsSection article a");
 
-		//}
+		$.each( hotel_link_results, function(index, value) {
 
+			// <a> html tag
+			var aTag = value;	
+			
+			aTag.onclick =  function() {
+				var hotel_id_attr = aTag.getAttribute("data-hotel-id");
+				var session_guid = "{{session_guid}}";
+				console.log(hotel_id_attr);
+				console.log(session_guid);
 
+				// make ajax request to server with (hotel_id, coorelation id)
+				$.ajax({
+				  type: "POST",
+				  url: "/hotels/book/",
+				  datatype: "json",
+				  data: { book_hotel_id: hotel_id_attr , 
+				  		  book_session_guid: session_guid,
+				  		  csrfmiddlewaretoken:'{{csrf_token}}' }
+				}).done(function( msg ) {
+				    alert( "Data Saved: " + msg );
+				});
+			};
+
+		});
 	});
 	
 	$(window).load(function () {
