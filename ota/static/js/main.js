@@ -102,5 +102,12 @@ $(document).ready(function(){
 			} else {
 				$("#id_destination").attr('disabled', false);
 			}			
-		});				
+		});		
+
+		//
+		// set default values for adults/rooms/children
+		//
+		$("#id_adults").val(1);
+		$("#id_rooms").val(1);
+		$("#id_children").val(1);
 });
