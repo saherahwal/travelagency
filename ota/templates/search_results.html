@@ -374,11 +374,12 @@
 				  		  book_session_guid: session_guid,
 				  		  csrfmiddlewaretoken:'{{csrf_token}}' }
 				}).done(function( msg ) {
-				    alert( "Data Saved: " + msg );
+				    // do nothing				    
 				});
 			};
 
 		});
+		
 	});
 	
 	$(window).load(function () {
