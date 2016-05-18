@@ -135,7 +135,8 @@ class HotelTokenizer(Tokenizer):
                                      tk_line[20], tk_line[21], tk_line[22], tk_line[23], tk_line[24],
                                      tk_line[25], tk_line[26], tk_line[27], tk_line[28], tk_line[29],
                                      tk_line[30], tk_line[31], tk_line[32], tk_line[33], tk_line[34],
-                                     tk_line[35], tk_line[36], tk_line[37])                
+                                     tk_line[35], tk_line[36], tk_line[37])
+
                 yield hotelObj                                          
                
 class RegionTokenizer(Tokenizer):

@@ -76,14 +76,26 @@ def do_region_fill( regionTok, cc_to_country ):
             print "Country not found:", cc
 
 def write_score_files( hotelTokenizer, genMarker, scoresFolder ):
-    print "starting HotelScore data tokenuzation -----"
+    """
+        Write scores in file batches s.t each file is acted upon by thread concurrently for DB insert
+    """
+    
+    print "starting HotelScore data tokenuzation ----- "
 
-    maxFileCapacity = 20000
-
+    #
+    # set max capacity per file and starting index
+    #
+    maxFileCapacity = 10000
     indexStart = 0
+    
     scoresFile = scoresFolder + "/scoresfile_" + str(indexStart) + ".txt"
-    f = open( scoresFile, 'w')    
+    f = open( scoresFile, 'w')
+    f_noscores = open( scoresFolder + "/noscores.txt", 'w')
+    
     numHotels = 0
+    totalHotelsProcessed = 0
+    hotelsWithNoScores = 0
+    
     for hotel in hotelTokenizer.gen_hotel_objs():
 
         # scores
@@ -95,6 +107,11 @@ def write_score_files( hotelTokenizer, genMarker, scoresFolder ):
         
         f.write( lineOfText )
         numHotels += 1
+        totalHotelsProcessed+=1
+
+        if genMarker.isNoScoreAssigned():
+            hotelsWithNoScores += 1
+            f_noscores.write( lineOfText )
 
         if numHotels > maxFileCapacity:
             indexStart += 1
@@ -102,7 +119,11 @@ def write_score_files( hotelTokenizer, genMarker, scoresFolder ):
             f.close()
             numHotels = 0
             f = open( scoresFile, 'w')
-        
+
+    f_noscores.close()
+
+    print "Total hotels processed", totalHotelsProcessed
+    print "Hotels with no scores", hotelsWithNoScores        
 
 if __name__== "__main__":
 
@@ -171,7 +192,7 @@ if __name__== "__main__":
     do_region_fill( regionTok, cc_to_country )    
 
     # write scores in file chunks
-    #write_score_files( hotelTok, genMarker, scores_write_path )     
+    write_score_files( hotelTok, genMarker, scores_write_path )     
     
     # make list of threads to run (1 per file)
 ##    threads = []

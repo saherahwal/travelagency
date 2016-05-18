@@ -35,8 +35,7 @@ class Interest:
 
     def __init__(self, name, seasons):
         self.name = name
-        self.seasons = seasons
-   
+        self.seasons = seasons   
 
 class CountryObj:
     
