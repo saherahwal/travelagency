@@ -1,4 +1,5 @@
 from utils import LandmarkObj, CityObj, HotelObj, AirportObj, RegionObj, HotelScoreObj
+import io
 
 class DbConnection(object):
     """
@@ -22,12 +23,12 @@ class Tokenizer(object):
 
     def gen_lines( self, filename ):
         lineNum = 0
-        with open( filename, 'r') as f:
+        with io.open( filename, 'r', encoding='utf-8' ) as f:
             for line in f:
                 if (lineNum == 0 and self.skip_first_line):
                     lineNum+=1
                     continue
-                lineNum+=1
+                lineNum+=1                                
                 yield line
 
     def tokenize( self, line ):

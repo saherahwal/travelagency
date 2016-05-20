@@ -39,7 +39,7 @@ class HotelScoresDBWriteThread(Thread):
     def run( self ):
         print "STARTED thread", self.threadId
 
-        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB)
+        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB, charset='utf8')
         cursor = con.cursor()
         cursor.execute("START TRANSACTION;")
         cursor.execute("BEGIN;")
@@ -101,7 +101,7 @@ class HotelModuleDBWriteNativeThread(Thread):
 
         print "STARTED thread", self.threadId
 
-        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB)
+        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB, charset='utf8')
         cursor = con.cursor()
         cursor.execute("START TRANSACTION;")
         cursor.execute("BEGIN;")
@@ -178,7 +178,8 @@ class HotelModuleDBWriteNativeThread(Thread):
                     
             except Exception as e:
                 print query
-                print 'Exception error is : %s' % e               
+                print 'Exception error is : %s' % e
+                break
                 
         cursor.execute("COMMIT;")
         print "ENDED thread", self.threadId
