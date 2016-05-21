@@ -72,7 +72,9 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         #
         # trim query from leading/trailing spaces
         #
-        trimmed_query = query.strip()    
+        trimmed_query = query.strip()
+
+    print "trimmed_query:", trimmed_query
     
     #
     # check query status ( continent / country / city ... etc )
@@ -197,6 +199,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
     #
     total_str = construct_totalscore_columns( interests_bitmap )
     finalRes = scoreResults.extra( select = { 'total': total_str }, order_by=('-total',))
+    
 
     # filter stars if not None
     if stars != None:

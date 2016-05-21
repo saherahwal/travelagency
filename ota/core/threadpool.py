@@ -56,9 +56,9 @@ class HotelScoresDBWriteThread(Thread):
             scores = hotelScore.getScoresDict()
 
             # get hotel - in case already added
-            selectQuery = "SELECT name,id FROM " + HOTELS_TABLE + " WHERE hotel_booking_id='%s'" % hotel_booking_id
+            selectQuery = "SELECT name,id FROM " + HOTELS_TABLE + " WHERE hotel_booking_id=%s;" 
 
-            cursor.execute( selectQuery )
+            cursor.execute( selectQuery, (hotel_booking_id,) )
             row = cursor.fetchone()            
                         
             if row != None:
@@ -66,13 +66,22 @@ class HotelScoresDBWriteThread(Thread):
                 hotel_id = row[1]
                 
                 queryAdd = "INSERT INTO " + DB + "." + HOTELS_SCORES_TABLE + "(created, modified, hotel_id, familyScore, adventureScore, beachSunScore," \
-                           " casinosScore, historyCultureScore, clubbingScore, romanceScore, shoppingScore, skiingScore, wellnessScore) VALUES ( NOW(), NOW(), '%s','%s','%s',"\
-                           " '%s','%s','%s','%s','%s','%s','%s','%s') " % ( hotel_id, scores[ FAMILY ], scores[ ADVENTURE ], scores[ BEACH_AND_SUN ],
-                                                                         scores[ CASINOS ], scores[ HISTORY_CULTURE ], scores[ CLUBBING ],
-                                                                         scores[ ROMANCE ], scores[ SHOPPING ], scores[ SKIING ], scores[ WELLNESS ])               
+                           " casinosScore, historyCultureScore, clubbingScore, romanceScore, shoppingScore, skiingScore, wellnessScore) VALUES ( NOW(), NOW(), %s, %s, %s,"\
+                           " %s, %s, %s, %s, %s, %s, %s, %s);"             
                 
                 try:          
-                    cursor.execute(queryAdd)
+                    cursor.execute(queryAdd, ( hotel_id,
+                                               (scores[ FAMILY ]),
+                                               (scores[ ADVENTURE ]),
+                                               (scores[ BEACH_AND_SUN ]),
+                                               (scores[ CASINOS ]),
+                                               (scores[ HISTORY_CULTURE ]),
+                                               (scores[ CLUBBING ]),
+                                               (scores[ ROMANCE ]),
+                                               (scores[ SHOPPING ]),
+                                               (scores[ SKIING ]),
+                                               (scores[ WELLNESS ]) ) )
+                    
                     numHotelsScores += 1                
 
                     if numHotelsScores > hotelScoreCapacity:
@@ -116,58 +125,63 @@ class HotelModuleDBWriteNativeThread(Thread):
             maxrate = hotel.maxrate
             minrate = hotel.minrate
             preferred = hotel.preferred
+            nr_rooms =  hotel.nr_rooms
             if hotel.maxrate == "":
                 maxrate = SPECIAL_INVALID_RATE
             if hotel.minrate == "":
                 minrate = SPECIAL_INVALID_RATE
             if hotel.preferred == "":
                 preferred = SPECIAL_INVALID_RATE
+            if hotel.nr_rooms == "":
+                nr_rooms = SPECIAL_INVALID_RATE
+            
             
             query = "INSERT INTO " + DB + "." + HOTELS_TABLE + "(created, modified, hotel_booking_id, name, address, state_zip, city, country_cc1, ufi, hotel_class, currency_code, minrate, maxrate, " \
                     "preferred, nr_rooms, longitude, latitude, public_ranking, hotel_url, photo_url, desc_en, desc_fr, desc_es, desc_de, desc_nl, desc_it, desc_pt, desc_ja," \
-                    "desc_zh, desc_pl, desc_ru, desc_sv, desc_ar, desc_el, desc_no, city_unique, city_preferred, continent_id, review_score, review_nr) VALUES ( NOW(), NOW(), '%s','%s','%s',"\
-                    " '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s', '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s' ,'%s','%s','%s','%s','%s','%s','%s','%s', '%s', "\
-                    " '%s','%s'); " % ( hotel.hotel_booking_id,
-                                     hotel.name.replace("\'","*"),       
-                                     hotel.address.replace("\'","*"),
-                                     hotel.state_zip,
-                                     hotel.city.replace("\'","*"),
-                                     hotel.country_cc1,
-                                     hotel.ufi,
-                                     hotel.hotel_class,
-                                     hotel.currency_code,
-                                     minrate,
-                                     maxrate,
-                                     preferred,
-                                     hotel.nr_rooms,
-                                     hotel.longitude,
-                                     hotel.latitude,
-                                     hotel.public_ranking,
-                                     hotel.hotel_url,
-                                     hotel.photo_url,
-                                     hotel.desc_en.replace("\'","*"),
-                                     hotel.desc_fr.replace("\'","*"),
-                                     hotel.desc_es.replace("\'","*"),
-                                     hotel.desc_de.replace("\'","*"),
-                                     hotel.desc_nl.replace("\'","*"),
-                                     hotel.desc_it.replace("\'","*"),
-                                     hotel.desc_pt.replace("\'","*"),
-                                     hotel.desc_ja.replace("\'","*"),
-                                     hotel.desc_zh.replace("\'","*"),
-                                     hotel.desc_pl.replace("\'","*"),
-                                     hotel.desc_ru.replace("\'","*"),
-                                     hotel.desc_sv.replace("\'","*"),
-                                     hotel.desc_ar.replace("\'","*"),
-                                     hotel.desc_el.replace("\'","*"),
-                                     hotel.desc_no.replace("\'","*"),
-                                     hotel.city_unique.replace("\'","*"),
-                                     hotel.city_preferred.replace("\'","*"),
-                                     hotel.continent_id,
-                                     hotel.review_score,
-                                     hotel.review_nr )
+                    "desc_zh, desc_pl, desc_ru, desc_sv, desc_ar, desc_el, desc_no, city_unique, city_preferred, continent_id, review_score, review_nr) VALUES ( NOW(), NOW(), %s, %s, %s,"\
+                    " %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "\
+                    " %s, %s); " 
 
             try:          
-                cursor.execute(query)
+                cursor.execute(query,(hotel.hotel_booking_id,
+                                      hotel.name,       
+                                      hotel.address,
+                                      hotel.state_zip,
+                                      hotel.city,
+                                      hotel.country_cc1,
+                                      hotel.ufi,
+                                      hotel.hotel_class,
+                                      hotel.currency_code,
+                                      minrate,
+                                      maxrate,
+                                      preferred,
+                                      nr_rooms,
+                                      hotel.longitude,
+                                      hotel.latitude,
+                                      hotel.public_ranking,
+                                      hotel.hotel_url,
+                                      hotel.photo_url,
+                                      hotel.desc_en,
+                                      hotel.desc_fr,
+                                      hotel.desc_es,
+                                      hotel.desc_de,
+                                      hotel.desc_nl,
+                                      hotel.desc_it,
+                                      hotel.desc_pt,
+                                      hotel.desc_ja,
+                                      hotel.desc_zh,
+                                      hotel.desc_pl,
+                                      hotel.desc_ru,
+                                      hotel.desc_sv,
+                                      hotel.desc_ar,
+                                      hotel.desc_el,
+                                      hotel.desc_no,
+                                      hotel.city_unique,
+                                      hotel.city_preferred,
+                                      hotel.continent_id,
+                                      hotel.review_score,
+                                      hotel.review_nr ))
+                
                 numHotels += 1                
 
                 if numHotels > hotelCapacity:
@@ -178,8 +192,10 @@ class HotelModuleDBWriteNativeThread(Thread):
                     
             except Exception as e:
                 print query
-                print 'Exception error is : %s' % e
-                break
+                print "hotel_bk_id", hotel.hotel_booking_id
+                print "hotel.name", hotel.name
+                print "city", hotel.city
+                print 'Exception error is : %s' % e                
                 
         cursor.execute("COMMIT;")
         print "ENDED thread", self.threadId
