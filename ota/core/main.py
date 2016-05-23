@@ -160,9 +160,7 @@ if __name__== "__main__":
     # make list of hotel tokenizers for parallelism
     hotelTokList = [ HotelTokenizer(delimiter, [f], skip_first_line) for f in hotel_files ]
     hotelScoresTokList = [ HotelScoresTokenizer( COMMA, [f], False)  for f in hotelscores_files ]
-
-    print "hotelScoresTokList", hotelScoresTokList
-
+    
     #initialize markers
     wellnessInterestsMarker = WellnessInterestsMarker( None )
     skiingInterestsMarker = SkiingInterestsMarker( None )
@@ -192,7 +190,7 @@ if __name__== "__main__":
     do_region_fill( regionTok, cc_to_country )    
 
     # write scores in file chunks
-    write_score_files( hotelTok, genMarker, scores_write_path )     
+##    write_score_files( hotelTok, genMarker, scores_write_path )
     
     # make list of threads to run (1 per file)
 ##    threads = []
@@ -209,20 +207,21 @@ if __name__== "__main__":
 ##    for thread in threads:
 ##        thread.join()
 
-##    scoreWriteThreads = []
-##    idx = 0
-##    for hScoreTok in hotelScoresTokList:
-##        scoreWriteThreads.append(  HotelScoresDBWriteThread(idx, hScoreTok ) )
-##        idx += 1
-##
-##    
-##    #start all threads in parallel
-##    for thread in scoreWriteThreads:
-##        thread.start()
-##
-##    # wait for all to complete before return
-##    for thread in scoreWriteThreads:
-##        thread.join()
+    scoreWriteThreads = []
+    idx = 0
+    for hScoreTok in hotelScoresTokList:
+        scoreWriteThreads.append(  HotelScoresDBWriteThread(idx, hScoreTok ) )
+        idx += 1
+
+    #scoreWriteThreads[0].run()
+    
+    #start all threads in parallel
+    for thread in scoreWriteThreads:
+        thread.start()
+
+    # wait for all to complete before return
+    for thread in scoreWriteThreads:
+        thread.join()
 
         
         
