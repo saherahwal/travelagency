@@ -26,9 +26,9 @@ $(document).ready(function(){
 		// variable/constant defines
 		//
 		
-		var MAX_SEARCH_RESULTS = 20;
+		var MAX_SEARCH_RESULTS = 25;
 		var DELAY_SEARCH_MS = 600;
-		var MIN_LENGTH_SEARCH = 3;
+		var MIN_LENGTH_SEARCH = 2;
 		
 		var continents = ["Europe", "South America", "North America", "Australia", "Africa", "Asia"];
 		var continentsObj = { "Europe":6,

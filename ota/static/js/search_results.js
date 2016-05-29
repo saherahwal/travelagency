@@ -20,10 +20,6 @@ $(document).ready(function(){
 					xhr.setRequestHeader("X-CSRFToken", csrftoken);
 				}
 			}
-		});
-		
-		
-			
-		
+		});	
 		
 });

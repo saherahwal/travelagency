@@ -239,7 +239,11 @@
 			});
 		});
 		
-		$('.view-type li:first-child').addClass('active');		
+		//
+		// set default view type
+		//
+		$('.view-type li:nth-child(2)').addClass('active');	
+		$('.three-fourth article').attr("class", "full-width");
 		
 		$('#star').raty({
 			{% if stars %}
