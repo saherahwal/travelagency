@@ -85,7 +85,7 @@ def write_score_files( hotelTokenizer, genMarker, scoresFolder ):
     #
     # set max capacity per file and starting index
     #
-    maxFileCapacity = 10000
+    maxFileCapacity = 12500
     indexStart = 0
     
     scoresFile = scoresFolder + "/scoresfile_" + str(indexStart) + ".txt"
@@ -189,10 +189,19 @@ if __name__== "__main__":
     do_airport_fill( airportTok, cc_to_country ) 
     do_region_fill( regionTok, cc_to_country )    
 
-    # write scores in file chunks
-##    write_score_files( hotelTok, genMarker, scores_write_path )
+    #
+    # write scores in file chunks on file system
+    #
     
-    # make list of threads to run (1 per file)
+##    write_score_files( hotelTok, genMarker, scores_write_path )
+##    
+
+#
+# Below code writes hotel data to database
+#
+
+##    print " Starting hotels input to DB " 
+##
 ##    threads = []
 ##    idx = 0
 ##    for hTok in hotelTokList:
@@ -206,6 +215,13 @@ if __name__== "__main__":
 ##    # wait for all threads to complete
 ##    for thread in threads:
 ##        thread.join()
+
+
+#
+# Below code writes scores to database
+#
+
+    print " Starting scores input to DB " 
 
     scoreWriteThreads = []
     idx = 0

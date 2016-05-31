@@ -304,7 +304,7 @@ def search(request):
     else:
         
         #
-        # return error on Non-GET/ Non-POST request
+        # return error on Non-GET / Non-POST request
         #
         return None
 

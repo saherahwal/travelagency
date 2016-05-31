@@ -17,7 +17,7 @@ USER = 'root'
 PWD = 'svn123123'
 DB = 'mytravelsdb'
 HOTELS_TABLE = "hotels_hotel"
-HOTELS_SCORES_TABLE = "hotels_scores"
+HOTELS_SCORES_TABLE = "hotels_score"
 
 SPECIAL_INVALID_RATE = -1
 

@@ -85,15 +85,15 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # Continent case ( e.g Search = "Europe" )
         #
         cont_id = continents_to_id[trimmed_query]
-        scoreResults = Scores.objects.filter( hotel__continent_id=cont_id )
+        scoreResults = Score.objects.filter( hotel__continent_id=cont_id )
 
     elif trimmed_query in name_to_cc:
-
+               
         #
         # Country case ( e.g Search = "Jordan" )
         #
         country_cc = name_to_cc[ trimmed_query ]
-        scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc )
+        scoreResults = Score.objects.filter( hotel__country_cc1=country_cc )
         country_code = country_cc
         
     elif trimmed_query in us_states_set:
@@ -102,8 +102,8 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # State case in US
         #
         state = trimmed_query
-        scoreResults = Scores.objects.filter( hotel__country_cc1='us',
-                                              hotel__city__contains = '(' + state + ')' )
+        scoreResults = Score.objects.filter( hotel__country_cc1='us',
+                                             hotel__city__contains = '(' + state + ')' )
 
         #
         # for now, use city field for state in request queue
@@ -117,7 +117,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # 2. City, Country
         # 3. State, United States
         #
-
+       
         query_no_paren = None
         par_min = None
         
@@ -149,7 +149,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
             #
             # For this case: just search for city only
             #
-            scoreResults = Scores.objects.filter( hotel__city__contains = parse_comma_trim[0] )
+            scoreResults = Score.objects.filter( hotel__city__contains = parse_comma_trim[0] )
             city = parse_comma_trim[0]            
              
         else:
@@ -170,12 +170,12 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
                 country_code = country_cc                
 
                 if par_min == None:
-                    scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc,
-                                                          hotel__city__contains = first_term )                    
+                    scoreResults = Score.objects.filter( hotel__country_cc1=country_cc,
+                                                         hotel__city__contains = first_term )                    
                 else:
-                    scoreResults = Scores.objects.filter( hotel__country_cc1=country_cc,
-                                                          hotel__city__contains = par_min,
-                                                          hotel__city_preferred__contains = first_term )                    
+                    scoreResults = Score.objects.filter( hotel__country_cc1=country_cc,
+                                                         hotel__city__contains = par_min,
+                                                         hotel__city_preferred__contains = first_term )                    
             else:
 
                 print "Could not find", last_term, "in countries"
@@ -185,13 +185,13 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
                     #
                     # For this case: just search for city only
                     #
-                    scoreResults = Scores.objects.filter( hotel__city__contains = first_term )
+                    scoreResults = Score.objects.filter( hotel__city__contains = first_term )
                 else:
 
                     #
                     # Search with paranthesis inclusion and city term
                     #
-                    scoreResults = Scores.objects.filter( hotel__city__contains = first_term,
+                    scoreResults = Score.objects.filter( hotel__city__contains = first_term,
                                                           hotel__city_preferred__contains = par_min )
 
     #
@@ -243,7 +243,7 @@ def surpriseme_query( interests_map ):
     # extra total column for score ordering ( order by DESC )
     #
     total_str = construct_totalscore_columns( interests_map )
-    result = Scores.objects.extra( select = { 'total': total_str }, order_by=('-total',))[:MAX_SURPRISE_RES]
+    result = Score.objects.extra( select = { 'total': total_str }, order_by=('-total',))[:MAX_SURPRISE_RES]
 
     random_res_picked = random.choice( result )
 

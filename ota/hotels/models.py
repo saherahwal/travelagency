@@ -63,7 +63,7 @@ class Hotel(TimeStampedModel):
     review_score = models.SmallIntegerField()
     review_nr = models.SmallIntegerField()
 
-class Scores(TimeStampedModel):
+class Score(TimeStampedModel):
 
     # foreign keys
     hotel = models.ForeignKey(Hotel, related_name="hotel")
@@ -116,3 +116,28 @@ class BookNowRequest( TimeStampedModel ):
 
     # coorelation ID ( to coorelate booking now requests with searches )
     coorelation_id = UUIDField()
+
+class TopInterestLocation( TimeStampedModel ):
+    """
+        This table keeps track of hotel top locations and interests
+        to be shown on first page for quick search offers
+    """
+
+    # interests applicable
+    familyInterest = models.BooleanField()
+    adventureInterest = models.BooleanField()
+    beachSunInterest = models.BooleanField()
+    casinosInterest = models.BooleanField()
+    historyCultureInterest = models.BooleanField()
+    clubbingInterest = models.BooleanField()
+    romanceInterest = models.BooleanField()
+    shoppingInterest = models.BooleanField()
+    skiingInterest = models.BooleanField()
+    wellnessInterest = models.BooleanField()
+
+    # query string
+    querystring = models.CharField( max_length = 500 )
+
+    # description
+    description = models.CharField( max_length = 500 )
+    

@@ -212,46 +212,52 @@
 		<div class="wrap clearfix">
 			<!--latest offers-->
 			<section class="offers clearfix full">
-				<h1>Explore our latest offers</h1>
+				<h1>Explore top locations for your interests</h1>
+				
+				{% for topInterest in topInterestsLocations %} 
+					<!--column-->
+					 {% if forloop.last %}
+					 <article class="one-fourth last">
+					 {% else %}
+					 <article class="one-fourth">
+					 {% endif %}
+						<figure><a href="/hotels/search/{{topInterest.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg" alt="" width="270" height="152" /></a></figure>
+						<div class="details">
+							<h4>{{topInterest.description}}</h4>
+							<a href="/hotels/search/{{topInterest.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+						</div>
+					 </article>
+					 <!--//column-->
+				{% endfor %}
 				
 				<!--column-->
-				<article class="one-fourth">
-					<figure><a href="#" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg" alt="" width="270" height="152" /></a></figure>
-					<div class="details">
-						<h4>Winter beach escapes 30% off</h4>
-						<a href="#" title="Explore our deals" class="gradient-button">Explore our deals</a>
-					</div>
-				</article>
-				<!--//column-->
-				
-				<!--column-->
-				<article class="one-fourth">
+				<!-- <article class="one-fourth">
 					<figure><a href="#" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg" alt="" width="270" height="152" /></a></figure>
 					<div class="details">
 						<h4>Spend New Year‘s Eve in Paris</h4>
 						<a href="#" title="More info" class="gradient-button">More info</a>
 					</div>
-				</article>
+				</article> -->
 				<!--//column-->
 				
 				<!--column-->
-				<article class="one-fourth">
+				<!-- <article class="one-fourth">
 					<figure><a href="#" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg" alt="" width="270" height="152" /></a></figure>
 					<div class="details">
 						<h4>Skiing weekends in the Alpes</h4>
 						<a href="#" title="Explore our deals" class="gradient-button">Explore our deals</a>
 					</div>
-				</article>
+				</article> -->
 				<!--//column-->
 				
 				<!--column-->
-				<article class="one-fourth last">
+				 <!-- <article class="one-fourth last">
 					<figure><a href="#" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg" alt="" width="270" height="152" /></a></figure>
 					<div class="details">
 						<h4>Our weekly top offer: Thailand</h4>
 						<a href="#" title="More info" class="gradient-button">More info</a>
 					</div>
-				</article>
+				</article> -->
 				<!--//column-->
 			</section>
 			<!--//latest offers-->

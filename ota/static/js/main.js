@@ -46,8 +46,14 @@ $(document).ready(function(){
 		'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island','South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 
 		'West Virginia', 'Wisconsin', 'Wyoming'];
 		
+		var canada_prov = ['Ontario', 'Quebec', 'Nova Scotia', 'New Brunswick', 'Manitoba', 'British Columbia', 'Price Edward Island', 'Saskatchewan', 'Alberta', 'Newfoundland and Labrador'];
+		
 		for ( var i = 0; i < us_states.length; i++ ){
 			us_states[i] = us_states[i] + ", United States";
+		}
+		
+		for ( var i = 0; i < canada_prov.length; i++ ){
+			canada_prov[i] = canada_prov[i] + ", Canada";
 		}
 							
 		var getDestinations = function() {
@@ -73,7 +79,7 @@ $(document).ready(function(){
 						  						  
 						  $("#id_destination").autocomplete({
 							    maxResults: MAX_SEARCH_RESULTS,
-								src: countries.concat( continents ).concat(us_states).concat(cities),
+								src: countries.concat( continents ).concat(us_states).concat(canada_prov).concat(cities),
 								source: function(request, response) {
 											var results = $.ui.autocomplete.filter(this.options.src, request.term);
 											response(results.slice(0, this.options.maxResults));
