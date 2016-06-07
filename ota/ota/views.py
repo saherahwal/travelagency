@@ -25,6 +25,17 @@ def homepage(request):
                    'checkInDate': checkInDate,
                    'checkOutDate': checkOutDate})
 
+def topinterests(request):
+
+    #
+    # retrieve top interest locations
+    #
+    topInterestLocs = getTopInterestHotels( 12 )
+
+    # TODO: fix me
+    return None
+    
+
 def hotels(request):    
     return render( request , "hotels.html", {})
 

@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+<title> Online Travel Agency - Blog</title>
+{% endblock %}
+
+{% block body %}
+	<!--main-->
+	<div class="main" role="main">		
+		<div class="wrap clearfix">
+			<!--main content-->
+			<div class="content clearfix">
+				<!--breadcrumbs-->
+				<nav role="navigation" class="breadcrumbs clearfix">
+					<!--crumbs-->
+					<ul class="crumbs">
+						<li><a href="#" title="Home">Home</a></li> 
+						<li>Blog</li>                                       
+					</ul>
+					<!--//crumbs-->
+				</nav>
+				<!--//breadcrumbs-->
+				
+				<!--three-fourth content-->
+					<section class="three-fourth">
+
+						{% for blog in blogs %}
+						<!--post-->
+						<article class="static-content post">
+							<header class="entry-header">
+								<h1><a href="#">{{ blog.title }}</a></h1>
+								<p class="entry-meta">
+									<span class="date">Date Created: {{blog.created}}</span> 
+									<span class="author">By: {{blog.blog_by}}</span> 
+									<span class="tags">Tags:
+										{% for tag in blog.tags.all %}
+											{% if forloop.last %}
+											<a rel="category tag" title="View all posts in {{tag}}" href="#">{{tag}}</a>
+											{% else %}
+											<a rel="category tag" title="View all posts in {{tag}}" href="#">{{tag}}</a>, 
+											{% endif %}											
+										{% endfor %}										
+									</span>
+									<!-- TODO implement comments later -->
+									<!-- <span class="comments"><a href="#">4 Comments</a></span> -->
+								</p>
+							</header>
+							{% if blog.img %}
+							<div class="entry-featured"><a href="#"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /></figure></a></div>
+							{% endif %}
+							{% if blog.embed_video_url %}
+							<div class="entry-featured">
+								<div class="video-wrapper">
+									<div class="video-container">
+										<iframe width="816" height="350" src="{{ blog.embed_video_url }}" frameborder="0" allowfullscreen></iframe>
+									</div>
+								</div>
+							</div>
+							{% endif %}
+							<div class="entry-content">
+								<p>{{blog.short_desc}}</p>
+								<a href="/blog/?id={{blog.id}}" class="gradient-button">Continue reading</a>
+							</div>
+						</article>
+						<!--//post-->
+						{% endfor %}		
+						
+						<!--bottom navigation-->
+						<div class="bottom-nav">
+							<!--back up button-->
+							<a href="#" class="scroll-to-top" title="Back up">Back up</a> 
+							<!--//back up button-->
+							
+							<!--pager-->
+							<!-- <div class="pager">
+								<span><a href="#">First page</a></span>
+								<span><a href="#">&lt;</a></span>
+								<span class="current">1</span>
+								<span><a href="#">2</a></span>
+								<span><a href="#">3</a></span>
+								<span><a href="#">4</a></span>
+								<span><a href="#">5</a></span>
+								<span><a href="#">6</a></span>
+								<span><a href="#">7</a></span>
+								<span><a href="#">8</a></span>
+								<span><a href="#">&gt;</a></span>
+								<span><a href="#">Last page</a></span>
+							</div> -->
+							<!--//pager-->
+						</div>
+						<!--//bottom navigation-->
+					</section>
+				<!--//three-fourth content-->
+				
+				<!--sidebar-->
+				<aside class="right-sidebar">
+
+					<!--Need Help Booking?-->
+					<article class="default clearfix">
+						<h2>Need Help Booking?</h2>
+						<p>Call our customer services team on the number below to speak to one of our advisors who will help you with all of your holiday needs.</p>
+						<p class="number">1- 555 - 555 - 555</p>
+					</article>
+					<!--//Need Help Booking?-->
+					
+					<!--Why Book with us?-->
+					<article class="default clearfix">
+						<h2>Why Book with us?</h2>
+						<h3>Low rates</h3>
+						<p>Get the best rates, or get a refund.<br />No booking fees. Save money!</p>
+						<h3>Largest Selection</h3>
+						<p>140,000+ hotels worldwide<br />130+ airlines<br />Over 3 million guest reviews</p>
+						<h3>We’re Always Here</h3>
+						<p>Call or email us, anytime<br />Get 24-hour support before, during, and after your trip</p>
+					</article>
+					<!--//Why Book with us?-->
+					
+					<!--Blog search-->
+					<article class="default clearfix">
+						<h2>Search</h2>
+						<p>Lorem ipsum dolor sit amet</p>
+						<div class="f-item">
+							<input type="search" id="blogsearch" name="blogsearch" placeholder="Search the blog" />
+						</div>
+						<div class="f-item">
+							<input type="submit" id="blogsearchsubmit" name="blogsearchsubmit" value="Search" class="gradient-button" />
+						</div>
+					</article>
+					<!--//Blog search-->
+					
+					<!--Blog archives-->
+					<article class="default clearfix">
+						<h2>Archive</h2>
+						<ul>
+							<li><a href="#">December 2013</a></li>
+							<li><a href="#">November 2013</a></li>
+							<li><a href="#">October 2013</a></li>
+							<li><a href="#">September 2013</a></li>
+							<li><a href="#">August 2013</a></li>
+						</ul>
+					</article>
+					<!--//Blog archives-->
+					
+					<!--Deal of the day-->
+					<article class="default clearfix">
+						<h2>Deal of the day</h2>
+						<div class="deal-of-the-day">
+							<a href="hotel.html">
+								<figure><img src="{{STAIC_URL}}images/slider/img.jpg" alt="" width="230" height="130" /></figure>
+								<h3>Plaza Resort Hotel &amp; SPA
+									<span class="stars">
+										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
+									</span>
+								</h3>
+								<p>From <span class="price">$ 100 <small>/ per night</small></span></p>
+								<span class="rating"> 8 /10</span>
+							</a>
+						</div>
+					</article>
+					<!--//Deal of the day-->
+				</aside>
+				<!--//sidebar-->
+			</div>
+			<!--//main content-->
+		</div>
+	</div>
+	<!--//main-->
+{% endblock %}	
+
+{% block tailscripts %} 	
+	<script>selectnav('nav'); </script>
+{% endblock %}

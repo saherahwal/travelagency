@@ -133,7 +133,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         if query_no_paren != None:
 
             #
-            # split comma and trip on non-parenthesized input
+            # split comma and strip on non-parenthesized input
             #
             parse_comma_trim = [ e.strip() for e in query_no_paren.split(",")]
         else:

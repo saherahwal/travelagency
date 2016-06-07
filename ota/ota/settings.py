@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'ota',
     'hotels',
     'address',
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,4 +117,7 @@ TEMPLATE_DIRS = (
        os.path.join(BASE_DIR, "templates"),
 )
 
-
+# Media Root - uploaded images
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")
+print "Media_Root", MEDIA_ROOT
