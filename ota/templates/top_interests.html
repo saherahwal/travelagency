@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+<title> Online Travel Agency - Top Destinattions</title>
+{% endblock %}
+	
+{% block body %}
+	
+	<!--main-->
+	<div class="main" role="main">		
+		<div class="wrap clearfix">
+			<!--main content-->
+			<div class="content clearfix">
+				<!--breadcrumbs-->
+				<nav role="navigation" class="breadcrumbs clearfix">
+					<!--crumbs-->
+					<ul class="crumbs">
+						<li><a href="#" title="Home">Home</a></li> 
+						<li>Hot deals</li>                                       
+					</ul>
+					<!--//crumbs-->
+				</nav>
+				<!--//breadcrumbs-->
+				<section class="full">
+					<h1>Top Romance Hotels</h1>
+					<div class="deals clearfix">
+
+						{% for topRomanceElt in topRes_romance %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topRomanceElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topRomanceElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topRomanceElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topRomanceElt.full_desc}}<a href="/topinterests/?id={{topRomanceElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topRomanceElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}				
+					
+					</div>
+					
+					<div class="separator"></div>
+
+					<h1>Top Shopping Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topShoppingElt in topRes_shopping %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topShoppingElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topShoppingElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topShoppingElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topShoppingElt.full_desc}}<a href="/topinterests/?id={{topShoppingElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topShoppingElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Wellness Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topWellnessElt in topRes_wellness %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topWellnessElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topWellnessElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topWellnessElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topWellnessElt.full_desc}}<a href="/topinterests/?id={{topWellnessElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topWellnessElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Nightlife Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topNightlifeElt in topRes_clubbing %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topNightlifeElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topNightlifeElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topNightlifeElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topNightlifeElt.full_desc}}<a href="/topinterests/?id={{topNightlifeElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topNightlifeElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Casino Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topCasinoElt in topRes_casinos %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topCasinoElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topCasinoElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topCasinoElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topCasinoElt.full_desc}}<a href="/topinterests/?id={{topCasinoElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topCasinoElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Adventure Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topAdvElt in topRes_adventure %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topAdvElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topAdvElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topAdvElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topAdvElt.full_desc}}<a href="/topinterests/?id={{topAdvElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topAdvElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Beach and Sun Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topBeachAndSunElt in topRes_beachAndSun %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topBeachAndSunElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topBeachAndSunElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topBeachAndSunElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topBeachAndSunElt.full_desc}}<a href="/topinterests/?id={{topBeachAndSunElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topBeachAndSunElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Family Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topFamilyElt in topRes_family %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topFamilyElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topFamilyElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topFamilyElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topFamilyElt.full_desc}}<a href="/topinterests/?id={{topFamilyElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topFamilyElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top Skiing Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topSkiingElt in topRes_skiing %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topSkiingElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topSkiingElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topSkiingElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topSkiingElt.full_desc}}<a href="/topinterests/?id={{topSkiingElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topSkiingElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+
+					<div class="separator"></div>
+
+					<h1>Top History And Culture Locations</h1>
+					<div class="deals clearfix">
+
+						{% for topHistElt in topRes_historyAndCulture %} 
+							<!--deal-->
+							{% if forloop.last %}
+							<article class="one-fourth promo last">
+							{% else %}
+							<article class="one-fourth promo">
+							{% endif %}	
+								{% if topHistElt.img %}
+								<figure><a href="hotel.html" title=""><img src="{{MEDIA_URL}}{{topHistElt.img}}" width="270" height="152" /></a></figure>
+								{% else %}
+								<figure><a href="hotel.html" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg"  width="270" height="152" /></a></figure>
+								{% endif %}	
+								<div class="details">
+									<h1>{{topHistElt.short_desc}} 								
+									</h1>								
+									<div class="description">
+										<p>{{topHistElt.full_desc}}<a href="/topinterests/?id={{topHistElt.id}}">More info</a></p>
+									</div>
+									<a href="/hotels/search/{{topHistElt.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
+								</div>
+							</article>
+							<!--//deal-->
+						{% endfor %}
+					</div>
+				</section>
+				<!--//top destinations-->
+			</div>
+			<!--//main content-->
+		</div>
+	</div>
+	<!--//main-->
+{% endblock %}	
+
+{% block tailscripts %} 	
+	<script>selectnav('nav'); </script>
+{% endblock %}

@@ -2,6 +2,8 @@ from django.db import models
 from common.models import TimeStampedModel
 from uuidfield import UUIDField
 
+UPLOAD_TO_INTEREST_IMG = 'topinterests/images/'
+
 class Hotel(TimeStampedModel):
     
     # booking.com hotel ID
@@ -135,9 +137,21 @@ class TopInterestLocation( TimeStampedModel ):
     skiingInterest = models.BooleanField()
     wellnessInterest = models.BooleanField()
 
+    # image field
+    img = models.ImageField( upload_to = UPLOAD_TO_INTEREST_IMG, blank=True )
+
+    # HTML body
+    topinterests_body = models.TextField()
+
     # query string
     querystring = models.CharField( max_length = 500 )
 
-    # description
-    description = models.CharField( max_length = 500 )
+    # short description
+    short_desc = models.CharField( max_length = 200 )
+
+    # full desc
+    full_desc = models.TextField()
+
+    #def __unicode__(self):
+    #    return '%s' % self.short_desc
     

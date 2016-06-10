@@ -4,9 +4,6 @@ from hotels.models import *
 #
 # model admin definitions
 #
-class TopInterestLocationAdmin(admin.ModelAdmin):
-    list_display = ('description', 'querystring' )
-
 class ScoreAdmin(admin.ModelAdmin):
     model = Score
 
@@ -42,4 +39,4 @@ class HotelAdmin(admin.ModelAdmin):
 
 admin.site.register(Hotel, HotelAdmin)
 admin.site.register(Score, ScoreAdmin)
-admin.site.register(TopInterestLocation, TopInterestLocationAdmin)
+admin.site.register(TopInterestLocation)
