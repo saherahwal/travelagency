@@ -147,11 +147,11 @@ class TopInterestLocation( TimeStampedModel ):
     querystring = models.CharField( max_length = 500 )
 
     # short description
-    short_desc = models.CharField( max_length = 200 )
+    short_desc = models.CharField( max_length = 200, blank=False )
 
     # full desc
     full_desc = models.TextField()
 
-    #def __unicode__(self):
-    #    return '%s' % self.short_desc
+    def __unicode__(self):
+        return '%s' % self.short_desc + "-" + self.querystring
     

@@ -48,6 +48,8 @@
 							</header>
 							{% if blog.img %}
 							<div class="entry-featured"><a href="#"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /></figure></a></div>
+							{% else %}
+							<div class="entry-featured"><a href="#"><figure><img src="{{STATIC_URL}}images/slider/img.jpg" alt="" /></figure></a></div>
 							{% endif %}
 							{% if blog.embed_video_url %}
 							<div class="entry-featured">
@@ -147,13 +149,13 @@
 						<h2>Deal of the day</h2>
 						<div class="deal-of-the-day">
 							<a href="hotel.html">
-								<figure><img src="{{STAIC_URL}}images/slider/img.jpg" alt="" width="230" height="130" /></figure>
+								<figure><img src="{{STATIC_URL}}images/slider/img.jpg" alt="" width="230" height="130" /></figure>
 								<h3>Plaza Resort Hotel &amp; SPA
 									<span class="stars">
-										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
-										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
-										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
-										<img src="{{STAIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STATIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STATIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STATIC_URL}}images/ico/star.png" alt="" />
+										<img src="{{STATIC_URL}}images/ico/star.png" alt="" />
 									</span>
 								</h3>
 								<p>From <span class="price">$ 100 <small>/ per night</small></span></p>

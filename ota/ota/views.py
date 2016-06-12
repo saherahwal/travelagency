@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.core.mail import send_mail, BadHeaderError
 from hotels import forms as hotelForms
+from ota import forms as otaForms
 from hotels.models import TopInterestLocation
 from random import Random
 from datetime import datetime, timedelta
@@ -13,9 +15,9 @@ def homepage(request):
     hotelSearchForm = hotelForms.HotelSearchForm()
 
     #
-    # get top interest destination searches - random 4
+    # get top interest destination searches - random 12
     #
-    topInterestLocs = getTopInterestHotels( 4 )
+    topInterestLocs = getTopInterestHotels( 12 )
 
     (checkInDate, checkOutDate) = getCheckInCheckOut()
    
@@ -97,7 +99,49 @@ def topinterests(request):
             # show 404 not found page
             #
             print "Exception thrown while get TopInterest Obj", e
-    
+
+def contact(request):
+
+    #
+    # non-binding Contact-Us Form
+    #
+    contactUsForm = otaForms.ContactUsForm()
+
+    return render( request,
+                  "contact.html",
+                  {'contactUsForm': contactUsForm})
+
+def send_email(request):
+     
+    #
+    # bind the data
+    #
+    contactUsForm = otaForms.ContactUsForm( request.POST )
+
+    #
+    # check form validity
+    #
+    if contactUsForm.is_valid():
+        name = contactUsForm.cleaned_data['name']
+        email = contactUsForm.cleaned_data['email']
+        message = contactUsForm.cleaned_data['message']
+
+        #
+        # TODO: send email logic implementation
+        #
+
+        return render(request,
+                     "contact.html",
+                     {'contactUsForm': contactUsForm})
+
+    else:
+        #
+        # case where contact-us form is not valid
+        #
+
+        return render(request,
+                      "contact.html",
+                      {'contactUsForm': contactUsForm})
 
 def hotels(request):    
     return render( request , "hotels.html", {})

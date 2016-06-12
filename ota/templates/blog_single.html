@@ -47,6 +47,8 @@
 							</header>
 							{% if blog.img %}
 							<div class="entry-featured"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /><a href="{{MEDIA_URL}}{{blog.img}}" class="image-overlay" rel="prettyPhoto[gallery1]"></a></figure></div>
+							{% else %}
+							<div class="entry-featured"><figure><img src="{{STATIC_URL}}images/slider/img.jpg" alt="" /><a href="{{MEDIA_URL}}{{blog.img}}" class="image-overlay" rel="prettyPhoto[gallery1]"></a></figure></div>
 							{% endif %}
 							<div class="entry-content">
 								{{blog.blog_body | safe }}

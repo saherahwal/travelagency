@@ -144,13 +144,13 @@ $(document).ready(function () {
 
 jQuery(document).ready(function(){
 	
-	$('#contactform').submit(function(){
+	/*$('#contactform').submit(function(){
 		var action = $(this).attr('action');
 		$("#message").show(400,function() {
 		$('#message').hide();
 		
  		$('#submit')
-			.after('<img src="images/ajax-loader.gif" class="loader" />')
+			.after('<img src="../static/images/ajax-loader.gif" class="loader" />')
 			.attr('disabled','disabled');
 		
 		$.post(action, { 
@@ -174,5 +174,5 @@ jQuery(document).ready(function(){
 		});
 		
 		return false; 
-	});
+	});*/
 });

@@ -53,7 +53,7 @@ def search(request):
         hotelSearchForm = hotelForms.HotelSearchForm( request.GET )
 
         #
-        # check form validity of Form (this is the initial search
+        # check form validity of Form 
         #
         if hotelSearchForm.is_valid():
             wellness = hotelSearchForm.cleaned_data['wellness']

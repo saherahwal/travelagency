@@ -19,7 +19,11 @@ urlpatterns = [
 
     url('^address/', include('address.urls')),
     url('^blog/', include('blog.urls')),                     # blog
-    url('^topinterests/', topinterests),                     # topinterests
+
+    url('^topinterests/', topinterests),           # topinterests
+    url('^contact/$', contact),                     # contact
+    url('^contact/send_email/$', send_email),                     # contact
+ 
  
     url(r'^admin/', include(admin.site.urls)),
      
