@@ -1,3 +1,7 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
 from hotels import forms as hotelForms
@@ -6,6 +10,10 @@ from hotels.models import TopInterestLocation
 from random import Random
 from datetime import datetime, timedelta
 from core.utils import *
+
+USER_VALID_AUTHENTICATED = "User is valid, active and authenticated"
+USER_VALID_ACCOUNT_DISABLED = "Password valid, but account disabled"
+AUTHENTICATION_FAIL = "Neither username nor email authentication worked. Password and/or username invalid"
 
 def homepage(request):
 
@@ -143,22 +151,141 @@ def send_email(request):
                       "contact.html",
                       {'contactUsForm': contactUsForm})
 
-def hotels(request):    
-    return render( request , "hotels.html", {})
-
 def blog(request):    
     return render( request , "blog.html", {})
 
-def activities(request):    
-    return render( request , "activities.html", {})
+def signin(request):
 
-def results(request):    
-    return render( request , "results.html", {})
+    if request.method == 'GET':
 
+        #
+        # Create un-bound empty form
+        #
+        loginForm = otaForms.LoginForm()
+
+        return render( request,
+                      "login.html",
+                      { 'loginForm':loginForm })
+
+    elif request.method == 'POST':
+
+        #
+        # init error list
+        #
+        loginErrors = []
+
+        #
+        # create form instance to process form data
+        #
+        loginForm = otaForms.LoginForm( request.POST )
+
+        #
+        # check whether form is valid
+        #
+        if loginForm.is_valid():
+            username = loginForm.cleaned_data['username']
+            password = loginForm.cleaned_data['password']
+
+            #
+            # authenticate using email or username
+            #
+            (user, msg) = otaAuthenticate(username, password)
+
+            if user is not None:
+
+                #
+                # non-binding Hotel Search Form
+                #
+                hotelSearchForm = hotelForms.HotelSearchForm()
+
+                #
+                # get top interest destination searches - random 12
+                #
+                topInterestLocs = getTopInterestHotels( 12 )
+
+                (checkInDate, checkOutDate) = getCheckInCheckOut()
+
+                #
+                # login the authenticated user
+                #
+                login(request, user)
+   
+                return render(request,
+                              "index.html",
+                              {'hotelSearchForm': hotelSearchForm,
+                               'topInterestsLocations': topInterestLocs,
+                               'checkInDate': checkInDate,
+                               'checkOutDate': checkOutDate})
+            else:
+                loginErrors.append( msg )
+                return render( request, "login.html", { 'loginForm': loginForm,
+                                                        'loginErrors': loginErrors })
+        else:
+            return render( request, "login.html", { 'loginForm': loginForm,
+                                                    'loginErrors': loginErrors })
+    else:
+
+        #
+        # Create un-bound empty form
+        #
+        loginForm = otaForms.LoginForm()
+
+        return render( request,
+                      "login.html",
+                      { 'loginForm':loginForm })
+
+@login_required(login_url='/login/')
+def signout(request):
+    #
+    # logout the user from session
+    #
+    logout(request)
+
+    #
+    # Create new unbound Login Form
+    #
+    loginForm = otaForms.LoginForm()
+    
+    return render( request,
+                   "login.html",
+                   { 'loginForm':loginForm })
 
 #
 # helper methods defined below
 #
+
+#
+# authentication helper methods
+#
+
+def authenticate_username(username, password):
+    return authenticate(username=username, password=password)
+
+def authenticate_email(email, password):
+    try:
+        user = User.objects.get(email__iexact=email)
+        if user.check_password(password):
+            # need to call authenticate before login - django docs
+            return authenticate(username=user.username, password=password)            
+        return None
+    except ObjectDoesNotExist:
+        return None
+
+def otaAuthenticate( username, password ):
+    user = authenticate_username(username, password)
+    user_email = authenticate_email(username, password)
+    if user is not None:        
+        if user.is_active:
+            return (user, USER_VALID_AUTHENTICATED)
+        else:
+            return (None, USER_VALID_ACCOUNT_DISABLED)
+    elif user_email is not None:
+        if user_email.is_active:
+            return (user_email, USER_VALID_AUTHENTICATED)
+        else:
+            return (None, USER_VALID_ACCOUNT_DISABLED)
+    else:
+        return (None, AUTHENTICATION_FAIL)
 
 def getCheckInCheckOut():
     """
@@ -222,7 +349,14 @@ def getTopInterestHotels( numToReturn,
         # retrieve all top destination locations
         #
     
-        topIntResults = TopInterestLocation.objects.all()
+        topIntResults = TopInterestLocation.objects.filter( public = True )
+
+        #
+        # Admin user gets all top interests
+        #
+        if request.user != None:
+            if  request.user.is_superuser:
+                topIntResults = TopInterestLocation.objects.all( )
 
     else:
 
@@ -244,8 +378,26 @@ def getTopInterestHotels( numToReturn,
                                                             romanceInterest = interest_dict[ROMANCE],
                                                             shoppingInterest = interest_dict[SHOPPING],
                                                             skiingInterest = interest_dict[SKIING],
-                                                            wellnessInterest = interest_dict[WELLNESS]
+                                                            wellnessInterest = interest_dict[WELLNESS],
+                                                            public = True
                                                             )
+
+        #
+        # Admin user gets all top interests 
+        #
+        if request.user != None:
+            if  request.user.is_superuser:
+                topIntResults = TopInterestLocation.objects.filter( familyInterest = interest_dict[FAMILY],
+                                                                    adventureInterest = interest_dict[ADVENTURE],
+                                                                    beachSunInterest = interest_dict[BEACH_AND_SUN],
+                                                                    casinosInterest = interest_dict[CASINOS],
+                                                                    historyCultureInterest = interest_dict[HISTORY_CULTURE],
+                                                                    clubbingInterest = interest_dict[CLUBBING],
+                                                                    romanceInterest = interest_dict[ROMANCE],
+                                                                    shoppingInterest = interest_dict[SHOPPING],
+                                                                    skiingInterest = interest_dict[SKIING],
+                                                                    wellnessInterest = interest_dict[WELLNESS],
+                                                                    )
     #
     # shuffle the result
     #

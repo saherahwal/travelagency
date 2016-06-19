@@ -152,6 +152,9 @@ class TopInterestLocation( TimeStampedModel ):
     # full desc
     full_desc = models.TextField()
 
+    # indicates the interest is public (not only visible to admins)
+    public = models.BooleanField()
+
     def __unicode__(self):
         return '%s' % self.short_desc + "-" + self.querystring
     

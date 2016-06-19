@@ -12,11 +12,18 @@ def main(request):
     blog_id = request.GET.get('id')
 
     if blog_id == None:
+
+        #
+        # retrieve all blogs that are public
+        #
+        blogs = Blog.objects.filter( public = True )
         
         #
-        # retrieve all blogs
+        # Admin user gets all blogs
         #
-        blogs = Blog.objects.all()        
+        if request.user != None:
+            if  request.user.is_superuser:
+                blogs = Blog.objects.all( )
 
         return render(request,
                       "blog.html",
@@ -25,9 +32,21 @@ def main(request):
     else:
 
         try:
-            
-            blog = Blog.objects.get( id = blog_id )
 
+            #
+            # Admin user gets his blog
+            #
+            if request.user != None:
+                if  request.user.is_superuser:
+
+                    blog = Blog.objects.get( id = blog_id )
+
+                    return render(request,
+                                  "blog_single.html",
+                                  { 'blog' : blog  } )
+
+            
+            blog = Blog.objects.get( id = blog_id, public = True )
             return render(request,
                           "blog_single.html",
                           { 'blog' : blog  } )
@@ -38,7 +57,11 @@ def main(request):
             # TODO:
             # show 404 not found page
             #
-            print "blog with id", blog_id, "doesn't exist"
+            print "blog with id", blog_id, "doesn't exist or is not public"
+
+            return render(request,
+                          "blog_single.html",
+                          { '':'' } )
 
         except Exception as e:
 

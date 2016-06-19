@@ -52,8 +52,8 @@ class Blog(TimeStampedModel):
     # video youtube link - embed (includes iframe)
     embed_video_url = models.CharField( max_length = VIDEO_URL_SZ,  blank=True )
 
-    # visibility to admin only
-    admin_visible_only = models.BooleanField()
+    # indicates whether the public should see this blog ( Admins can see it private)
+    public = models.BooleanField()
 
     def __unicode__(self):
         return '%s' % self.title

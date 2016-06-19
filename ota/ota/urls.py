@@ -13,9 +13,6 @@ urlpatterns = [
 
     url('^$', homepage),                      # home page
     url('^hotels/', include('hotels.urls')), # generic hotels page
-    
-    url('^activities$', activities),          # activities
-    url('^results$', results),
 
     url('^address/', include('address.urls')),
     url('^blog/', include('blog.urls')),                     # blog
@@ -23,8 +20,10 @@ urlpatterns = [
     url('^topinterests/', topinterests),           # topinterests
     url('^contact/$', contact),                     # contact
     url('^contact/send_email/$', send_email),                     # contact
- 
- 
+
+    url('^login/$', signin ), # login
+    url('^logout/$', signout ), # logout
+  
     url(r'^admin/', include(admin.site.urls)),
      
 ] + static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )

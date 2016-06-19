@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+<title> Online Travel Agency - Login </title>
+{% endblock %}
+
+{% block morestyles %}
+{% endblock %}
+
+{% block body %}	
+		
+	<!--main-->
+	<div class="main" role="main">		
+		<div class="wrap clearfix">
+			<!--main content-->
+			<div class="content clearfix">
+				<!--breadcrumbs-->
+				<nav role="navigation" class="breadcrumbs clearfix">
+					<!--crumbs-->
+					<ul class="crumbs">
+						<li><a href="#" title="Home">Home</a></li> 
+						<li>Login</li>                                       
+					</ul>
+					<!--//crumbs-->
+				</nav>
+				<!--//breadcrumbs-->
+
+				<form action="/login/" autocomplete="on" method="POST">{% csrf_token %}
+					<h1>Log in</h1>
+					  {% if loginErrors %}
+					  	<div class="alert alert-danger err">
+						<ul>
+							{% for error in loginErrors %}
+							<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+						</div>
+					 {% endif %}								
+					 <p>									
+                        <label for="{{loginForm.username.id_for_label}}" class="uname" data-icon="u" > Your email or username </label>
+						{{ loginForm.username }}						
+						{% if loginForm.username.errors %}
+							<div class="alert alert-danger err">									
+								<ul>
+									{% for error in loginForm.username.errors %}
+										<li>{{ error }}</li>
+									{% endfor %}
+								</ul>
+							</div>  
+						{% endif %}	
+                    </p>
+					<p>									
+                        <label for="{{loginForm.password.id_for_label}}" class="youpasswd" data-icon="p"> Password </label>
+                        {{ loginForm.password }}
+                        {% if loginForm.password.errors %}
+							<div class="alert alert-danger err">									
+								<ul>
+									{% for error in loginForm.password.errors %}
+										<li>{{ error }}</li>
+									{% endfor %}
+								</ul>
+							</div>  
+						{% endif %}							
+                    </p>					
+					<p class="login button"> 
+                        <input type="submit" class="gradient-button" value="Login" /> 
+					</p>                    
+				</form>
+			</div>
+			<!--//main content-->
+		</div>
+	</div>
+	<!--//main-->
+
+{% endblock %}
+	
+{% block tailscripts %} 	
+	<script>selectnav('nav'); </script>
+{% endblock %}
