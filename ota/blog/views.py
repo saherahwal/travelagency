@@ -59,9 +59,9 @@ def main(request):
             #
             print "blog with id", blog_id, "doesn't exist or is not public"
 
-            return render(request,
-                          "blog_single.html",
-                          { '':'' } )
+            return render( request,
+                           'error.html',
+                           { })
 
         except Exception as e:
 
@@ -70,7 +70,7 @@ def main(request):
             # show 404 not found page
             #
             print "Exception thrown while get blog", e
-        
-        
-        
-    
+            return render( request,
+                           'error.html',
+                           { })
+

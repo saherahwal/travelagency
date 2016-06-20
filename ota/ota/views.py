@@ -17,15 +17,25 @@ AUTHENTICATION_FAIL = "Neither username nor email authentication worked. Passwor
 
 def homepage(request):
 
+    isAdminRequest = False;
+
     #
     # non-binding Hotel Search Form
     #
     hotelSearchForm = hotelForms.HotelSearchForm()
+    
+    #
+    # Admin user gets all top interests
+    #
+    if request.user != None:
+        if  request.user.is_superuser:
+            isAdminRequest = True
 
     #
     # get top interest destination searches - random 12
     #
-    topInterestLocs = getTopInterestHotels( 12 )
+    topInterestLocs = getTopInterestHotels( 12, 
+                                           isAdminRequest = isAdminRequest )
 
     (checkInDate, checkOutDate) = getCheckInCheckOut()
    
@@ -43,21 +53,29 @@ def topinterests(request):
     #
     topinterest_id = request.GET.get('id')
 
+    isAdminRequest = False;
+    #
+    # Admin user gets all top interests
+    #
+    if request.user != None:
+        if  request.user.is_superuser:
+            isAdminRequest = True
+
     if topinterest_id == None:
 
         #
         # retrieve top interest locations
         #
-        topRes_wellness = getTopInterestHotels( 4, True, [WELLNESS] )
-        topRes_adventure = getTopInterestHotels( 4, True, [ADVENTURE] )
-        topRes_skiing = getTopInterestHotels( 4, True, [SKIING] )
-        topRes_beachAndSun = getTopInterestHotels( 4, True, [BEACH_AND_SUN] )
-        topRes_shopping = getTopInterestHotels( 4, True, [SHOPPING] )
-        topRes_family = getTopInterestHotels( 4, True, [FAMILY] )
-        topRes_clubbing = getTopInterestHotels( 4, True, [CLUBBING] )
-        topRes_casinos = getTopInterestHotels( 4, True, [CASINOS] )
-        topRes_historyAndCulture = getTopInterestHotels( 4, True, [HISTORY_CULTURE] )
-        topRes_romance = getTopInterestHotels( 4, True, [ROMANCE] )
+        topRes_wellness = getTopInterestHotels( 4, True, [WELLNESS], isAdminRequest )
+        topRes_adventure = getTopInterestHotels( 4, True, [ADVENTURE] , isAdminRequest)
+        topRes_skiing = getTopInterestHotels( 4, True, [SKIING] , isAdminRequest)
+        topRes_beachAndSun = getTopInterestHotels( 4, True, [BEACH_AND_SUN] , isAdminRequest)
+        topRes_shopping = getTopInterestHotels( 4, True, [SHOPPING], isAdminRequest )
+        topRes_family = getTopInterestHotels( 4, True, [FAMILY], isAdminRequest)
+        topRes_clubbing = getTopInterestHotels( 4, True, [CLUBBING], isAdminRequest )
+        topRes_casinos = getTopInterestHotels( 4, True, [CASINOS] , isAdminRequest)
+        topRes_historyAndCulture = getTopInterestHotels( 4, True, [HISTORY_CULTURE] , isAdminRequest)
+        topRes_romance = getTopInterestHotels( 4, True, [ROMANCE], isAdminRequest)
     
         #
         # retreive check-in / check-out date
@@ -86,11 +104,22 @@ def topinterests(request):
         #
 
         try:
-            topintObj = TopInterestLocation.objects.get( id = topinterest_id )
+            
+            #
+            # Admin user gets his request
+            #
+            if isAdminRequest:
 
+                topintObj = TopInterestLocation.objects.get( id = topinterest_id )
+
+                return render( request,
+                              'top_interest_single.html',
+                              {'topInterestSel' : topintObj })
+            
+            topintObj = TopInterestLocation.objects.get( id = topinterest_id, public = True )
             return render( request,
-                          'top_interest_single.html',
-                          {'topInterestSel' : topintObj })
+                           'top_interest_single.html',
+                           {'topInterestSel' : topintObj })
         
         except ObjectDoesNotExist:
 
@@ -99,6 +128,9 @@ def topinterests(request):
             # show 404 not found page
             #
             print "top_interest with id", topinterest_id, "doesn't exist"
+            return render( request,
+                           'error.html',
+                           { })
 
         except Exception as e:
 
@@ -107,6 +139,9 @@ def topinterests(request):
             # show 404 not found page
             #
             print "Exception thrown while get TopInterest Obj", e
+            return render( request,
+                           'error.html',
+                           { })
 
 def contact(request):
 
@@ -331,7 +366,8 @@ def getCheckInCheckOut():
 
 def getTopInterestHotels( numToReturn,
                           considerInterestMap = False,
-                          interest_list = [] ):
+                          interest_list = [],
+                          isAdminRequest = False ):
     """
         Returns a random list of top interest hotel/interst searches
         with maximum numToReturn elements
@@ -346,17 +382,16 @@ def getTopInterestHotels( numToReturn,
     if not considerInterestMap:
         
         #
-        # retrieve all top destination locations
+        # retrieve all top destination locations (public only)
         #
     
         topIntResults = TopInterestLocation.objects.filter( public = True )
-
+                
         #
         # Admin user gets all top interests
         #
-        if request.user != None:
-            if  request.user.is_superuser:
-                topIntResults = TopInterestLocation.objects.all( )
+        if isAdminRequest:
+            topIntResults = TopInterestLocation.objects.all( )
 
     else:
 
@@ -385,19 +420,18 @@ def getTopInterestHotels( numToReturn,
         #
         # Admin user gets all top interests 
         #
-        if request.user != None:
-            if  request.user.is_superuser:
-                topIntResults = TopInterestLocation.objects.filter( familyInterest = interest_dict[FAMILY],
-                                                                    adventureInterest = interest_dict[ADVENTURE],
-                                                                    beachSunInterest = interest_dict[BEACH_AND_SUN],
-                                                                    casinosInterest = interest_dict[CASINOS],
-                                                                    historyCultureInterest = interest_dict[HISTORY_CULTURE],
-                                                                    clubbingInterest = interest_dict[CLUBBING],
-                                                                    romanceInterest = interest_dict[ROMANCE],
-                                                                    shoppingInterest = interest_dict[SHOPPING],
-                                                                    skiingInterest = interest_dict[SKIING],
-                                                                    wellnessInterest = interest_dict[WELLNESS],
-                                                                    )
+        if isAdminRequest:
+            topIntResults = TopInterestLocation.objects.filter( familyInterest = interest_dict[FAMILY],
+                                                                adventureInterest = interest_dict[ADVENTURE],
+                                                                beachSunInterest = interest_dict[BEACH_AND_SUN],
+                                                                casinosInterest = interest_dict[CASINOS],
+                                                                historyCultureInterest = interest_dict[HISTORY_CULTURE],
+                                                                clubbingInterest = interest_dict[CLUBBING],
+                                                                romanceInterest = interest_dict[ROMANCE],
+                                                                shoppingInterest = interest_dict[SHOPPING],
+                                                                skiingInterest = interest_dict[SKIING],
+                                                                wellnessInterest = interest_dict[WELLNESS],
+                                                                )
     #
     # shuffle the result
     #
