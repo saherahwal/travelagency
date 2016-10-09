@@ -69,7 +69,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fca639', end
 .pager .current,
 .pager a:hover	{background:#3EA5BB;}
 
-.scroll-to-top 	{background-image:url(../images/themes/blue/bgr/top-button.png);}
+.scroll-to-top 	{background-image:url(../images/themes/blue/bgr/top-button.png); color:#07254c;}
 
 /*CONTENT*/
 .deals .description a  {color:#3EA5BB;}
