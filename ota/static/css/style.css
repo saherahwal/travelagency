@@ -8,7 +8,7 @@ audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 /*TYPOGRAPHY*/
 h1 {font:normal 2.3em/1.2 'ChunkFiveRegular';color:#061f3f;padding:24px 0 44px;-webkit-text-shadow:0 1px 0 rgba(238, 238, 238, 1);-moz-text-shadow:0 1px 0 rgba(238, 238, 238, 1);text-shadow:0 1px 0 rgba(238, 238, 238, 1);}
 h2 {font:normal 1.8em/1.2 'ChunkFiveRegular';color:#41AFAA;padding:0 0 13px;}
-h3 {font:normal 1.7em 'ChunkFiveRegular';color:#999;padding:0 0 17px;}
+h3 {font:normal 1.7em 'ChunkFiveRegular';color:#999;padding:0 0 17px; color:#083f5a;}
 h4 {font:normal 1.6em 'OpenSansSemibold';letter-spacing:-0.03em;padding:0 0 15px; color:#083f5a;}
 h5 {font:normal 1.5em 'OpenSansBold';letter-spacing:-0.1px;color:#3F3F3F;}
 h6 {font:normal 1.3em 'OpenSansSemibold';color:#333;}
@@ -21,7 +21,7 @@ ul li	  {list-style:none;font-size:1.3em;}
 ol li 	  {list-style:decimal inside;font-size:1.3em;}
 
 img 	{border:none;display:block;}
-a 	{color:#666;outline:none;}
+a 	{color:#07264d;outline:none;}
 
 nav a 	{text-decoration:none;}
 
@@ -659,7 +659,7 @@ aside .default ol li {padding:0 0 4px;}
 /*FOOTER*/
 footer p 			{padding:0 0 2px;}
 footer article li 		{background:url(../images/ico/bullet-green-3x3.jpg) 0 7px no-repeat;padding:0 0 2px 15px;}
-footer li a 		{text-decoration:none;}
+footer li a 		{text-decoration:none;color:#083f5a;}
 footer a 			{-webkit-transition: all 0.1s ease-in 0.1s; -moz-transition: all 0.1s ease-in 0.1s; -o-transition: all 0.1s ease-in 0.1s; -ms-transition: all 0.1s ease-in 0.1s; transition: all 0.1s ease-in 0.1s;}
 footer a:hover	{color:#3f3f3f;}
 
@@ -682,11 +682,11 @@ footer input[type="email"] {box-shadow:inset 0 1px 1px rgba(204, 194, 187, 0.55)
 footer input[type="submit"] {width:70px;padding:0;border-radius:0 15px 15px 0;-moz-border-radius:0 15px 15px 0;-webkit-border-radius:0 15px 15px 0;position:absolute;top:0;right:0;height:31px;}
 
 .bottom 			{width:100%;float:left;border-top:1px solid #E7E6E0;padding:21px 0 0;}
-.copy			{float:left;display:block;color:#858585;}
+.copy			{float:left;display:block;color:#083f5a;}
 .bottom nav 				{float:right;}
 .bottom nav li 			{float:left;border-left:1px solid #E5E5E5;padding:0 0 0 12px;margin:0 0 0 12px;}
 .bottom nav .first 		{border:none;}
-.bottom nav li a 			{color:#858585;}
+.bottom nav li a 			{color:#083f5a;}
 .bottom nav li a:hover		{color:#3f3f3f;}
 
 /*FORM ELEMENTS*/
@@ -728,7 +728,7 @@ label.error	{color:red !important;padding:5px 0 0;}
 
 /*MAIN SEARCH*/
 .main-search 			{margin:-250px auto 45px;position:relative;z-index:999;width: 100%;max-width: 1140px;text-align:left;height:202px;}
-.main-search form 		{position:relative;width:100%;display:inline-block;padding:20px 0 10px;border:1px solid #0a4f70;box-shadow:0 0 3px rgba(0,0,0,0.2);-moz-box-shadow:0 0 3px rgba(0,0,0,0.2);-webkit-box-shadow:0 0 3px rgba(0,0,0,0.2);background: rgb(7,37,75);background: -moz-linear-gradient(top, rgba(7,37,75,1) 0%, rgba(10,79,112,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(7,37,75,1)), color-stop(100%,rgba(10,79,112,1)));background: -webkit-linear-gradient(top, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);background: -o-linear-gradient(top, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);background: -ms-linear-gradient(top, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);background: linear-gradient(to bottom, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#07254b', endColorstr='#0a4f70',GradientType=0 );}
+.main-search form 		{position:relative;width:100%;display:inline-block;padding:20px 0 10px;border:1px solid #072348;box-shadow:0 0 3px rgba(0,0,0,0.2);-moz-box-shadow:0 0 3px rgba(0,0,0,0.2);-webkit-box-shadow:0 0 3px rgba(0,0,0,0.2);background: rgb(7,37,75);background: -moz-linear-gradient(top, rgba(7,37,75,1) 0%, rgba(10,79,112,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(7,37,75,1)), color-stop(100%,rgba(10,79,112,1)));background: -webkit-linear-gradient(top, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);background: -o-linear-gradient(top, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);background: -ms-linear-gradient(top, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);background: linear-gradient(to bottom, rgba(7,37,75,1) 0%,rgba(10,79,112,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#07254b', endColorstr='#0a4f70',GradientType=0 );}
 .main-search h4			{font:normal 1.8em 'OpenSansRegular';letter-spacing:0;color:#ffffff;}
 .main-search h4 span		{font-family:'ChunkFiveRegular';}
 
