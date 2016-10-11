@@ -10,14 +10,7 @@ from utils import *
 import MySQLdb as mdb
 import django
 import datetime
-
-
-HOST = 'localhost'
-USER = 'root'
-PWD = 'svn123123'
-DB = 'mytravelsdb'
-HOTELS_TABLE = "hotels_hotel"
-HOTELS_SCORES_TABLE = "hotels_score"
+from dblist import *
 
 SPECIAL_INVALID_RATE = -1
 
@@ -39,7 +32,7 @@ class HotelScoresDBWriteThread(Thread):
     def run( self ):
         print "STARTED thread", self.threadId
 
-        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB, charset='utf8')
+        con = mdb.connect(host=HOST, port=PORT, user=USER, passwd=PWD, db=DB, charset='utf8')
         cursor = con.cursor()
         cursor.execute("START TRANSACTION;")
         cursor.execute("BEGIN;")
@@ -110,7 +103,7 @@ class HotelModuleDBWriteNativeThread(Thread):
 
         print "STARTED thread", self.threadId
 
-        con = mdb.connect(host=HOST, user=USER, passwd=PWD, db=DB, charset='utf8')
+        con = mdb.connect(host=HOST, port=PORT, user=USER, passwd=PWD, db=DB, charset='utf8')
         cursor = con.cursor()
         cursor.execute("START TRANSACTION;")
         cursor.execute("BEGIN;")
