@@ -157,7 +157,7 @@ class RomanceInterestsMarker(BaseAbstractMarker):
 
     name = ROMANCE
     length1_dict = { 'couples' : 0.8 * MAX_SCORE, 'romantic' : MAX_SCORE, 'romance' : 0.95 * MAX_SCORE, 'honeymooners' : MAX_SCORE,
-                     'spa': 0.7 * MAX_SCORE, 'scenic': 0.8 * MAX_SCORE, 'sunset': 0.9 * MAX_SCORE, 'stunning': 0.9 * MAX_SCORE,
+                     'spa': 0.7 * MAX_SCORE, 'scenic': 0.8 * MAX_SCORE, 'sunset': 0.9 * MAX_SCORE, 'stunning': 0.9 * MAX_SCORE, 'intimate' : 0.8 * MAX_SCORE,
                      'lagoon': 0.85 * MAX_SCORE, 'views': 0.9 * MAX_SCORE, 'panoramic': 0.9 * MAX_SCORE, 'villa': 0.5 * MAX_SCORE }
     length2_dict = { 'scenic park' : 0.8 * MAX_SCORE, 'sea views' : 0.8 * MAX_SCORE, 'sea view' : 0.7 * MAX_SCORE, 'ocean views': 0.8 * MAX_SCORE,
                      'stunning views': 0.9 * MAX_SCORE, 'sunset views': 0.95 * MAX_SCORE, 'spectacular views': 0.95 * MAX_SCORE, 'beautiful views': 0.9 * MAX_SCORE,
@@ -194,11 +194,11 @@ class AdventureInterestsMarker(BaseAbstractMarker):
 
     name = ADVENTURE
     length1_dict = { 'adventure': 0.85 * MAX_SCORE, 'diving': 0.9 * MAX_SCORE, 'rafting': 0.9 * MAX_SCORE, 'canoeing' : 0.9 * MAX_SCORE, 'trekking':0.9 * MAX_SCORE,
-                     'fishing' : 0.9 * MAX_SCORE, 'hiking' : 0.9 * MAX_SCORE, 'parachuting' : MAX_SCORE, 'rappel' : MAX_SCORE, 'caving' : MAX_SCORE,
-                     'snorkeling' : 0.9 * MAX_SCORE, 'cycling' : 0.85 * MAX_SCORE, 'surfing':0.85 * MAX_SCORE, 'snorkelling' : 0.85 * MAX_SCORE,
-                     'biking' : 0.85 * MAX_SCORE, 'skiing' : 0.9 * MAX_SCORE, 'windsurfing' : 0.9 * MAX_SCORE, 'boating' : 0.85 * MAX_SCORE }
-    length2_dict = { 'boat trips': 0.7 * MAX_SCORE, 'adventure sports' : 0.75 * MAX_SCORE , 'whale watching' :0.4 * MAX_SCORE,
-                     'horse riding' : 0.75 * MAX_SCORE, 'outdoor excursions' : 0.8 * MAX_SCORE, 'horseback riding': 0.8 * MAX_SCORE,
+                     'fishing' : 0.9 * MAX_SCORE, 'hiking' : 0.9 * MAX_SCORE, 'parachuting' : MAX_SCORE, 'rappel' : MAX_SCORE, 'caving' : MAX_SCORE, 'kayaking':0.9 * MAX_SCORE,
+                     'snorkeling' : 0.9 * MAX_SCORE, 'cycling' : 0.85 * MAX_SCORE, 'surfing':0.85 * MAX_SCORE, 'snorkelling' : 0.85 * MAX_SCORE, 'canyoning': 0.95 * MAX_SCORE,
+                     'biking' : 0.85 * MAX_SCORE, 'skiing' : 0.9 * MAX_SCORE, 'windsurfing' : 0.9 * MAX_SCORE, 'boating' : 0.85 * MAX_SCORE, 'rappelling' : MAX_SCORE }
+    length2_dict = { 'boat trips': 0.7 * MAX_SCORE, 'adventure sports' : 0.75 * MAX_SCORE , 'whale watching' :0.4 * MAX_SCORE, 'rock climbing': 0.9 * MAX_SCORE,
+                     'horse riding' : 0.75 * MAX_SCORE, 'outdoor excursions' : 0.8 * MAX_SCORE, 'horseback riding': 0.8 * MAX_SCORE, 'whitewater rafting': 0.9 * MAX_SCORE,
                      'shark-cage diving' : MAX_SCORE, 'mountain biking' : 0.9 * MAX_SCORE, 'national park': 0.75 * MAX_SCORE }
 
     def __init__(self, hotels):      
