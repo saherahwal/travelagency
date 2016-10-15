@@ -159,7 +159,7 @@ class SearchRequestsConsumer(Thread):
                                                              skiingInterest=skiingInterest,
                                                              wellnessInterest=wellnessInterest,
                                                              surpriseme=surpriseme )
-            print "object added to db", searchRequestObj
+            print "request added to db", searchRequestObj
             
             #
             # signal task done
