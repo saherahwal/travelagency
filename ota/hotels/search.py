@@ -73,14 +73,12 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # trim query from leading/trailing spaces
         #
         trimmed_query = query.strip()
-
-    print "trimmed_query:", trimmed_query
     
     #
     # check query status ( continent / country / city ... etc )
     #
     if trimmed_query in continents_to_id:
-
+        
         #
         # Continent case ( e.g Search = "Europe" )
         #
@@ -88,7 +86,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         scoreResults = Score.objects.filter( hotel__continent_id=cont_id )
 
     elif trimmed_query in name_to_cc:
-               
+        
         #
         # Country case ( e.g Search = "Jordan" )
         #
@@ -167,15 +165,33 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
             #
             if last_term in name_to_cc:
                 country_cc = name_to_cc[last_term]
-                country_code = country_cc                
-
-                if par_min == None:
+                country_code = country_cc 
+                
+                if country_cc == 'us' and first_term in us_states_set:
+                    #
+                    # check State, US case.
+                    # parentheses are important due to way data is presented
+                    #
+                    scoreResults = Score.objects.filter( hotel__country_cc1='us',
+                                                         hotel__city__contains = '(' + first_term + ')' )
+                elif par_min == None:
+                    #
+                    # Handles City,Country case
+                    #
                     scoreResults = Score.objects.filter( hotel__country_cc1=country_cc,
-                                                         hotel__city__contains = first_term )                    
+                                                         hotel__city__contains = first_term )
                 else:
+                    print "Getting results from last case"
+                    #
+                    # handles all other cases
+                    #                    
+                    # City (State), US case
+                    # City (Non-State) case (e.g Washington (D.C), US)
+                    # City ( Some Province ), Country (e.g Paris (Ontario), Canada
+                    #
                     scoreResults = Score.objects.filter( hotel__country_cc1=country_cc,
-                                                         hotel__city__contains = par_min,
-                                                         hotel__city_preferred__contains = first_term )                    
+                                                         hotel__city__contains = city + " " + par_min )
+                
             else:
 
                 print "Could not find", last_term, "in countries"
