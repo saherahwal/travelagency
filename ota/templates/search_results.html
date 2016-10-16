@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title> Online Travel Agency - Results</title>
+<title> Escanza - Hotel Results</title>
 {% endblock %}
 	
 {% block body %}
@@ -157,7 +157,7 @@
 							{% for hotel in hotels %}
 								<!--deal-->
 								<article class="one-fourth">									
-									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="" data-hotel-id="{{hotel.hotel.id}}" ><img src="{{hotel.hotel.photo_url}}" alt="" width="270" height="152"/></a></figure>
+									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="" data-hotel-id="{{hotel.hotel.id}}" ><img src="{{hotel.hotel.photo_url}}" alt="{{hotel.hotel.name}}" width="270" height="152"/></a></figure>
 									<div class="details">
 										<h1>{{hotel.hotel.name}}
 											<span class="stars">
