@@ -222,7 +222,3 @@ class FamilyInterestsMarker(BaseAbstractMarker):
     def __init__(self, hotels):      
         super( FamilyInterestsMarker, self ).__init__(hotels)                  
 
-    
-            
-        
-        
