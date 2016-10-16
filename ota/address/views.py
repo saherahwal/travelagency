@@ -78,7 +78,8 @@ def cities(request):
         #
         # Get results from global cache
         #
-        results = global_destination_list
+        if request.is_ajax():
+            results = global_destination_list
     
     jsonData = json.dumps(results)
     return HttpResponse(jsonData ,content_type="application/json")
