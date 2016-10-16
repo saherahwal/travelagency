@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
@@ -14,6 +15,10 @@ from core.utils import *
 USER_VALID_AUTHENTICATED = "User is valid, active and authenticated"
 USER_VALID_ACCOUNT_DISABLED = "Password valid, but account disabled"
 AUTHENTICATION_FAIL = "Neither username nor email authentication worked. Password and/or username invalid"
+
+def error_not_found_page_view(request):
+    return render(request,
+                  "error.html", {} )
 
 def homepage(request):
 
@@ -172,6 +177,13 @@ def send_email(request):
         #
         # TODO: send email logic implementation
         #
+        send_mail(
+            '[Feedback:' + email + ']',
+            message,
+            email,
+            ['info@escanza.com'],
+            fail_silently=False,
+        )
 
         return render(request,
                      "contact.html",

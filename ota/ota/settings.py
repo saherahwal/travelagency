@@ -27,7 +27,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'localhost' ]
 
 
 # Application definition
@@ -65,6 +65,12 @@ DB_USER = 'root'
 DB_HOST = '127.0.0.1'
 DB_PORT = '3306'
 DB_PASS = 'svn123123'
+
+#DB_NAME = 'mytravelsdb'
+#DB_USER = 'b42d1da1703a84'
+#DB_HOST = 'us-cdbr-azure-west-b.cleardb.com'
+#DB_PORT = '3306'
+#DB_PASS = '76a3ec8e'
 
 
 # Database
@@ -121,3 +127,12 @@ TEMPLATE_DIRS = (
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")
 print "Media_Root", MEDIA_ROOT
+
+# email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'info@escanza.com'
+EMAIL_HOST_PASSWORD = '!!AnaMsafer123'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL =  EMAIL_HOST_USER

@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 # import views
 from ota.views import *
 
+handler404 = error_not_found_page_view
+
 urlpatterns = [
     # Examples:
     # url(r'^$', 'ota.views.home', name='home'),
