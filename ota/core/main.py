@@ -194,8 +194,7 @@ if __name__== "__main__":
     #
     
 ##    write_score_files( hotelTok, genMarker, scores_write_path )
-##    
-
+    
 #
 # Below code writes hotel data to database
 #
@@ -207,7 +206,7 @@ if __name__== "__main__":
 ##    for hTok in hotelTokList:
 ##        threads.append( HotelModuleDBWriteNativeThread( idx, hTok, genMarker ) )
 ##        idx += 1
-##
+##    
 ##    # start all the threads
 ##    for thread in threads:
 ##        thread.start()
@@ -215,7 +214,6 @@ if __name__== "__main__":
 ##    # wait for all threads to complete
 ##    for thread in threads:
 ##        thread.join()
-
 
 #
 # Below code writes scores to database
@@ -228,8 +226,6 @@ if __name__== "__main__":
     for hScoreTok in hotelScoresTokList:
         scoreWriteThreads.append(  HotelScoresDBWriteThread(idx, hScoreTok ) )
         idx += 1
-
-    #scoreWriteThreads[0].run()
     
     #start all threads in parallel
     for thread in scoreWriteThreads:
@@ -237,7 +233,5 @@ if __name__== "__main__":
 
     # wait for all to complete before return
     for thread in scoreWriteThreads:
-        thread.join()
-
-        
+        thread.join()       
         
