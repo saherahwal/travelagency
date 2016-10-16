@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{eb4317a8-ad80-479c-876d-ec7d35a08925}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+    <UseIISExpress>true</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="activities\admin.py" />
+    <Compile Include="activities\migrations\__init__.py" />
+    <Compile Include="activities\models.py" />
+    <Compile Include="activities\tests.py" />
+    <Compile Include="activities\views.py" />
+    <Compile Include="activities\__init__.py" />
+    <Compile Include="address\admin.py" />
+    <Compile Include="address\globals.py" />
+    <Compile Include="address\migrations\0001_initial.py" />
+    <Compile Include="address\migrations\0002_remove_country_country_name_ar.py" />
+    <Compile Include="address\migrations\__init__.py" />
+    <Compile Include="address\models.py" />
+    <Compile Include="address\tests.py" />
+    <Compile Include="address\urls.py" />
+    <Compile Include="address\views.py" />
+    <Compile Include="address\__init__.py" />
+    <Compile Include="blog\admin.py" />
+    <Compile Include="blog\migrations\0001_initial.py" />
+    <Compile Include="blog\migrations\0002_auto_20160530_2329.py" />
+    <Compile Include="blog\migrations\0003_auto_20160531_0102.py" />
+    <Compile Include="blog\migrations\0004_auto_20160531_0121.py" />
+    <Compile Include="blog\migrations\0005_auto_20160531_0122.py" />
+    <Compile Include="blog\migrations\0006_blog_admin_visible_only.py" />
+    <Compile Include="blog\migrations\0007_auto_20160616_0008.py" />
+    <Compile Include="blog\migrations\__init__.py" />
+    <Compile Include="blog\models.py" />
+    <Compile Include="blog\tests.py" />
+    <Compile Include="blog\urls.py" />
+    <Compile Include="blog\views.py" />
+    <Compile Include="blog\__init__.py" />
+    <Compile Include="common\admin.py" />
+    <Compile Include="common\migrations\__init__.py" />
+    <Compile Include="common\models.py" />
+    <Compile Include="common\tests.py" />
+    <Compile Include="common\views.py" />
+    <Compile Include="common\__init__.py" />
+    <Compile Include="core\dblist.py" />
+    <Compile Include="core\main.py" />
+    <Compile Include="core\marker.py" />
+    <Compile Include="core\threadpool.py" />
+    <Compile Include="core\Tokenizers.py" />
+    <Compile Include="core\utils.py" />
+    <Compile Include="core\__init__.py" />
+    <Compile Include="hotels\admin.py" />
+    <Compile Include="hotels\forms.py" />
+    <Compile Include="hotels\migrations\0001_initial.py" />
+    <Compile Include="hotels\migrations\0002_remove_scores_hotel.py" />
+    <Compile Include="hotels\migrations\0003_scores_hotel.py" />
+    <Compile Include="hotels\migrations\0004_auto_20160321_0029.py" />
+    <Compile Include="hotels\migrations\0005_auto_20160429_2207.py" />
+    <Compile Include="hotels\migrations\0006_auto_20160503_2219.py" />
+    <Compile Include="hotels\migrations\0007_searchrequest_coorelation_id.py" />
+    <Compile Include="hotels\migrations\0008_auto_20160510_2328.py" />
+    <Compile Include="hotels\migrations\0009_auto_20160519_2324.py" />
+    <Compile Include="hotels\migrations\0010_auto_20160519_2343.py" />
+    <Compile Include="hotels\migrations\0011_auto_20160529_1747.py" />
+    <Compile Include="hotels\migrations\0012_auto_20160529_1748.py" />
+    <Compile Include="hotels\migrations\0013_auto_20160529_1751.py" />
+    <Compile Include="hotels\migrations\0014_topinterestlocations.py" />
+    <Compile Include="hotels\migrations\0015_auto_20160529_2324.py" />
+    <Compile Include="hotels\migrations\0016_auto_20160609_2230.py" />
+    <Compile Include="hotels\migrations\0017_auto_20160609_2240.py" />
+    <Compile Include="hotels\migrations\0018_auto_20160611_1743.py" />
+    <Compile Include="hotels\migrations\0019_auto_20160611_1743.py" />
+    <Compile Include="hotels\migrations\0020_topinterestlocation_admin_visible_only.py" />
+    <Compile Include="hotels\migrations\0021_auto_20160616_0021.py" />
+    <Compile Include="hotels\migrations\__init__.py" />
+    <Compile Include="hotels\models.py" />
+    <Compile Include="hotels\requestManager.py" />
+    <Compile Include="hotels\search.py" />
+    <Compile Include="hotels\tests.py" />
+    <Compile Include="hotels\urls.py" />
+    <Compile Include="hotels\views.py" />
+    <Compile Include="hotels\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="ota\forms.py" />
+    <Compile Include="ota\settings.py" />
+    <Compile Include="ota\urls.py" />
+    <Compile Include="ota\views.py" />
+    <Compile Include="ota\wsgi.py" />
+    <Compile Include="ota\__init__.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="static\css\prettyPhoto.css" />
+    <Content Include="static\css\style.css" />
+    <Content Include="static\css\style.css~" />
+    <Content Include="static\css\theme-black.css" />
+    <Content Include="static\css\theme-blue.css" />
+    <Content Include="static\css\theme-orange.css" />
+    <Content Include="static\css\theme-pink.css" />
+    <Content Include="static\css\theme-purple.css" />
+    <Content Include="static\css\theme-strawberry.css" />
+    <Content Include="static\css\theme-yellow.css" />
+    <Content Include="static\fonts\Chunkfive-webfont.svg" />
+    <Content Include="static\fonts\OpenSans-Bold-webfont.svg" />
+    <Content Include="static\fonts\OpenSans-ExtraBold-webfont.svg" />
+    <Content Include="static\fonts\OpenSans-Regular-webfont.svg" />
+    <Content Include="static\fonts\OpenSans-Semibold-webfont.svg" />
+    <Content Include="static\images\ajax-loader.gif" />
+    <Content Include="static\images\backgrounds\bedge_grunge.png" />
+    <Content Include="static\images\backgrounds\dark_wood.png" />
+    <Content Include="static\images\backgrounds\diamond_upholstery.png" />
+    <Content Include="static\images\backgrounds\embossed_paper.png" />
+    <Content Include="static\images\backgrounds\flowertrail.png" />
+    <Content Include="static\images\backgrounds\furley_bg.png" />
+    <Content Include="static\images\backgrounds\gplaypattern.png" />
+    <Content Include="static\images\backgrounds\greyfloral.png" />
+    <Content Include="static\images\backgrounds\hexellence.png" />
+    <Content Include="static\images\backgrounds\honey_im_subtle.png" />
+    <Content Include="static\images\backgrounds\husk.png" />
+    <Content Include="static\images\backgrounds\large_leather.png" />
+    <Content Include="static\images\backgrounds\lil_fiber.png" />
+    <Content Include="static\images\backgrounds\little_triangles.png" />
+    <Content Include="static\images\backgrounds\mirrored_squares.png" />
+    <Content Include="static\images\backgrounds\mochaGrunge.png" />
+    <Content Include="static\images\backgrounds\nistri.png" />
+    <Content Include="static\images\backgrounds\noisy_grid.png" />
+    <Content Include="static\images\backgrounds\polyester_lite.png" />
+    <Content Include="static\images\backgrounds\ravenna.png" />
+    <Content Include="static\images\backgrounds\retina_wood.png" />
+    <Content Include="static\images\backgrounds\shattered.png" />
+    <Content Include="static\images\backgrounds\strange_bullseyes.png" />
+    <Content Include="static\images\backgrounds\tapestry_pattern.png" />
+    <Content Include="static\images\backgrounds\textured_stripes.png" />
+    <Content Include="static\images\backgrounds\tileable_wood_texture.png" />
+    <Content Include="static\images\backgrounds\tiny_grid.png" />
+    <Content Include="static\images\backgrounds\triangles_pattern.png" />
+    <Content Include="static\images\backgrounds\white_tiles.png" />
+    <Content Include="static\images\backgrounds\wild_oliva.png" />
+    <Content Include="static\images\backgrounds\wood_1.png" />
+    <Content Include="static\images\bgr\body.jpg" />
+    <Content Include="static\images\bgr\custom-form-elements-old.png" />
+    <Content Include="static\images\bgr\custom-form-elements.png" />
+    <Content Include="static\images\bgr\inner-nav-active.png" />
+    <Content Include="static\images\bgr\lb-overlay.png" />
+    <Content Include="static\images\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\bgr\map-popup.png" />
+    <Content Include="static\images\bgr\ribbon-long.png" />
+    <Content Include="static\images\bgr\ribbons - Copy.png" />
+    <Content Include="static\images\bgr\ribbons.png" />
+    <Content Include="static\images\bgr\search-button - Copy.png" />
+    <Content Include="static\images\bgr\search-button-old.png" />
+    <Content Include="static\images\bgr\search-button.png" />
+    <Content Include="static\images\bgr\separator.jpg" />
+    <Content Include="static\images\bgr\tag.png" />
+    <Content Include="static\images\bgr\top-button.png" />
+    <Content Include="static\images\bgr\vertical-separator.png" />
+    <Content Include="static\images\favicon.ico" />
+    <Content Include="static\images\ico\arrow-down.png" />
+    <Content Include="static\images\ico\arrow-left.png" />
+    <Content Include="static\images\ico\arrow-right.png" />
+    <Content Include="static\images\ico\bullet-gold-6x6.png" />
+    <Content Include="static\images\ico\bullet-green-3x3.jpg" />
+    <Content Include="static\images\ico\bullet-white-6x6.png" />
+    <Content Include="static\images\ico\calendar.png" />
+    <Content Include="static\images\ico\clock.png" />
+    <Content Include="static\images\ico\comments.png" />
+    <Content Include="static\images\ico\email-green.jpg" />
+    <Content Include="static\images\ico\flight.png" />
+    <Content Include="static\images\ico\hotel.png" />
+    <Content Include="static\images\ico\icons.png" />
+    <Content Include="static\images\ico\magnify.png" />
+    <Content Include="static\images\ico\minus.png" />
+    <Content Include="static\images\ico\mobile-menu.png" />
+    <Content Include="static\images\ico\person.png" />
+    <Content Include="static\images\ico\phone-green.jpg" />
+    <Content Include="static\images\ico\phone.png" />
+    <Content Include="static\images\ico\plus.png" />
+    <Content Include="static\images\ico\rating-gold.png" />
+    <Content Include="static\images\ico\rating.png" />
+    <Content Include="static\images\ico\spinner.png" />
+    <Content Include="static\images\ico\star-rating-off.png" />
+    <Content Include="static\images\ico\star-rating-on.png" />
+    <Content Include="static\images\ico\star.png" />
+    <Content Include="static\images\ico\tags.png" />
+    <Content Include="static\images\ico\ui-slider-handle.png" />
+    <Content Include="static\images\logo\logo_icon_and_text.png" />
+    <Content Include="static\images\logo\logo_icon_flat.png" />
+    <Content Include="static\images\logo\logo_icon_only.png" />
+    <Content Include="static\images\logo\logo_text_only.png" />
+    <Content Include="static\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="static\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="static\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="static\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="static\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="static\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="static\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="static\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="static\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="static\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="static\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="static\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="static\images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="static\images\prettyPhoto\default\loader.gif" />
+    <Content Include="static\images\prettyPhoto\default\sprite.png" />
+    <Content Include="static\images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="static\images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="static\images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="static\images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="static\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="static\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="static\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="static\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="static\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="static\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="static\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="static\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="static\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="static\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="static\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="static\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="static\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="static\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="static\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="static\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="static\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="static\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="static\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="static\images\slider\capilano-suspension-bridge.jpg" />
+    <Content Include="static\images\slider\greece-romance.jpg" />
+    <Content Include="static\images\slider\hawaii-beach.jpg" />
+    <Content Include="static\images\slider\img.jpg" />
+    <Content Include="static\images\slider\Mount-baker-snoqualmie-national-forest.jpg" />
+    <Content Include="static\images\slider\Warm-mineral-spring-northport-fl.jpg" />
+    <Content Include="static\images\slider\warm-springs-oregon.jpg" />
+    <Content Include="static\images\slider\whistler-ski-resort.jpg" />
+    <Content Include="static\images\themes\black\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\black\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\black\bgr\map-popup.png" />
+    <Content Include="static\images\themes\black\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\black\bgr\ribbons.png" />
+    <Content Include="static\images\themes\black\bgr\search-button.png" />
+    <Content Include="static\images\themes\black\bgr\separator.jpg" />
+    <Content Include="static\images\themes\black\bgr\top-button.png" />
+    <Content Include="static\images\themes\black\ico\bullet-black-3x3.jpg" />
+    <Content Include="static\images\themes\black\ico\email-black.jpg" />
+    <Content Include="static\images\themes\black\ico\icons.png" />
+    <Content Include="static\images\themes\black\ico\magnify.png" />
+    <Content Include="static\images\themes\black\ico\phone-black.jpg" />
+    <Content Include="static\images\themes\black\ico\plus.png" />
+    <Content Include="static\images\themes\black\ico\ribbon-long.png" />
+    <Content Include="static\images\themes\black\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\black\txt\logo.png" />
+    <Content Include="static\images\themes\blue\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\blue\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\blue\bgr\map-popup.png" />
+    <Content Include="static\images\themes\blue\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\blue\bgr\ribbons.png" />
+    <Content Include="static\images\themes\blue\bgr\search-button-old.png" />
+    <Content Include="static\images\themes\blue\bgr\search-button.png" />
+    <Content Include="static\images\themes\blue\bgr\separator.jpg" />
+    <Content Include="static\images\themes\blue\bgr\top-button-old.png" />
+    <Content Include="static\images\themes\blue\bgr\top-button.png" />
+    <Content Include="static\images\themes\blue\ico\bullet-blue-3x3.jpg" />
+    <Content Include="static\images\themes\blue\ico\email-blue.jpg" />
+    <Content Include="static\images\themes\blue\ico\icons.png" />
+    <Content Include="static\images\themes\blue\ico\magnify.png" />
+    <Content Include="static\images\themes\blue\ico\phone-blue.jpg" />
+    <Content Include="static\images\themes\blue\ico\plus.png" />
+    <Content Include="static\images\themes\blue\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\blue\txt\logo.png" />
+    <Content Include="static\images\themes\blue\txt\logo_escanza.png" />
+    <Content Include="static\images\themes\blue\txt\logo_icon_and_text.png" />
+    <Content Include="static\images\themes\blue\txt\logo_icon_flat.png" />
+    <Content Include="static\images\themes\blue\txt\logo_icon_only.png" />
+    <Content Include="static\images\themes\blue\txt\logo_text_only.png" />
+    <Content Include="static\images\themes\orange\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\orange\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\orange\bgr\map-popup.png" />
+    <Content Include="static\images\themes\orange\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\orange\bgr\ribbons.png" />
+    <Content Include="static\images\themes\orange\bgr\search-button.png" />
+    <Content Include="static\images\themes\orange\bgr\separator.jpg" />
+    <Content Include="static\images\themes\orange\bgr\top-button.png" />
+    <Content Include="static\images\themes\orange\ico\bullet-orange-3x3.jpg" />
+    <Content Include="static\images\themes\orange\ico\email-orange.jpg" />
+    <Content Include="static\images\themes\orange\ico\icons.png" />
+    <Content Include="static\images\themes\orange\ico\magnify.png" />
+    <Content Include="static\images\themes\orange\ico\phone-orange.jpg" />
+    <Content Include="static\images\themes\orange\ico\plus.png" />
+    <Content Include="static\images\themes\orange\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\orange\txt\logo.png" />
+    <Content Include="static\images\themes\pink\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\pink\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\pink\bgr\map-popup.png" />
+    <Content Include="static\images\themes\pink\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\pink\bgr\ribbons.png" />
+    <Content Include="static\images\themes\pink\bgr\search-button.png" />
+    <Content Include="static\images\themes\pink\bgr\separator.jpg" />
+    <Content Include="static\images\themes\pink\bgr\top-button.png" />
+    <Content Include="static\images\themes\pink\ico\bullet-pink-3x3.jpg" />
+    <Content Include="static\images\themes\pink\ico\email-pink.jpg" />
+    <Content Include="static\images\themes\pink\ico\icons.png" />
+    <Content Include="static\images\themes\pink\ico\magnify.png" />
+    <Content Include="static\images\themes\pink\ico\phone-pink.jpg" />
+    <Content Include="static\images\themes\pink\ico\plus.png" />
+    <Content Include="static\images\themes\pink\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\pink\txt\logo.png" />
+    <Content Include="static\images\themes\purple\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\purple\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\purple\bgr\map-popup.png" />
+    <Content Include="static\images\themes\purple\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\purple\bgr\ribbons.png" />
+    <Content Include="static\images\themes\purple\bgr\search-button.png" />
+    <Content Include="static\images\themes\purple\bgr\separator.jpg" />
+    <Content Include="static\images\themes\purple\bgr\top-button.png" />
+    <Content Include="static\images\themes\purple\ico\bullet-purple-3x3.jpg" />
+    <Content Include="static\images\themes\purple\ico\email-purple.jpg" />
+    <Content Include="static\images\themes\purple\ico\icons.png" />
+    <Content Include="static\images\themes\purple\ico\magnify.png" />
+    <Content Include="static\images\themes\purple\ico\phone-purple.jpg" />
+    <Content Include="static\images\themes\purple\ico\plus.png" />
+    <Content Include="static\images\themes\purple\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\purple\txt\logo.png" />
+    <Content Include="static\images\themes\strawberry\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\strawberry\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\strawberry\bgr\map-popup.png" />
+    <Content Include="static\images\themes\strawberry\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\strawberry\bgr\ribbons.png" />
+    <Content Include="static\images\themes\strawberry\bgr\search-button.png" />
+    <Content Include="static\images\themes\strawberry\bgr\separator.jpg" />
+    <Content Include="static\images\themes\strawberry\bgr\top-button.png" />
+    <Content Include="static\images\themes\strawberry\ico\bullet-strawberry-3x3.jpg" />
+    <Content Include="static\images\themes\strawberry\ico\email-strawberry.jpg" />
+    <Content Include="static\images\themes\strawberry\ico\icons.png" />
+    <Content Include="static\images\themes\strawberry\ico\magnify.png" />
+    <Content Include="static\images\themes\strawberry\ico\phone-strawberry.jpg" />
+    <Content Include="static\images\themes\strawberry\ico\plus.png" />
+    <Content Include="static\images\themes\strawberry\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\strawberry\txt\logo.png" />
+    <Content Include="static\images\themes\yellow\bgr\inner-nav-active.png" />
+    <Content Include="static\images\themes\yellow\bgr\map-popup-hotel.png" />
+    <Content Include="static\images\themes\yellow\bgr\map-popup.png" />
+    <Content Include="static\images\themes\yellow\bgr\ribbon-long.png" />
+    <Content Include="static\images\themes\yellow\bgr\ribbons.png" />
+    <Content Include="static\images\themes\yellow\bgr\search-button.png" />
+    <Content Include="static\images\themes\yellow\bgr\separator.jpg" />
+    <Content Include="static\images\themes\yellow\bgr\top-button.png" />
+    <Content Include="static\images\themes\yellow\ico\bullet-yellow-3x3.jpg" />
+    <Content Include="static\images\themes\yellow\ico\email-yellow.jpg" />
+    <Content Include="static\images\themes\yellow\ico\icons.png" />
+    <Content Include="static\images\themes\yellow\ico\magnify.png" />
+    <Content Include="static\images\themes\yellow\ico\phone-yellow.jpg" />
+    <Content Include="static\images\themes\yellow\ico\plus.png" />
+    <Content Include="static\images\themes\yellow\ico\ui-slider-handle.png" />
+    <Content Include="static\images\themes\yellow\txt\logo.png" />
+    <Content Include="static\images\txt\logo.png" />
+    <Content Include="static\images\uploads\avatar.jpg" />
+    <Content Include="static\images\uploads\img.jpg" />
+    <Content Include="static\js\contact.js" />
+    <Content Include="static\js\infobox.js" />
+    <Content Include="static\js\jquery-ui.js" />
+    <Content Include="static\js\jquery.cookie.js" />
+    <Content Include="static\js\jquery.prettyPhoto.js" />
+    <Content Include="static\js\jquery.raty.min.js" />
+    <Content Include="static\js\jquery.uniform.min.js" />
+    <Content Include="static\js\main.js" />
+    <Content Include="static\js\modernizr.js" />
+    <Content Include="static\js\scripts.js" />
+    <Content Include="static\js\search_results.js" />
+    <Content Include="static\js\selectnav.js" />
+    <Content Include="static\js\sequence.jquery-min.js" />
+    <Content Include="static\js\sequence.js" />
+    <Content Include="templates\activities.html" />
+    <Content Include="templates\base.html" />
+    <Content Include="templates\blog.html" />
+    <Content Include="templates\blog_single.html" />
+    <Content Include="templates\contact.html" />
+    <Content Include="templates\emptyForm.html" />
+    <Content Include="templates\error.html" />
+    <Content Include="templates\hotels.html" />
+    <Content Include="templates\index.html" />
+    <Content Include="templates\login.html" />
+    <Content Include="templates\search_results.html" />
+    <Content Include="templates\top_interests.html" />
+    <Content Include="templates\top_interest_single.html" />
+    <Content Include="uploads\topinterests\images\casinoImg.jpg" />
+    <Content Include="uploads\topinterests\images\vancouver-shops.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="activities" />
+    <Folder Include="activities\migrations" />
+    <Folder Include="address" />
+    <Folder Include="address\migrations" />
+    <Folder Include="blog" />
+    <Folder Include="blog\migrations" />
+    <Folder Include="common" />
+    <Folder Include="common\migrations" />
+    <Folder Include="core" />
+    <Folder Include="hotels" />
+    <Folder Include="hotels\migrations" />
+    <Folder Include="ota" />
+    <Folder Include="static\" />
+    <Folder Include="static\css" />
+    <Folder Include="static\fonts" />
+    <Folder Include="static\images" />
+    <Folder Include="static\images\backgrounds" />
+    <Folder Include="static\images\bgr" />
+    <Folder Include="static\images\ico" />
+    <Folder Include="static\images\logo" />
+    <Folder Include="static\images\prettyPhoto\" />
+    <Folder Include="static\images\prettyPhoto\dark_rounded" />
+    <Folder Include="static\images\prettyPhoto\dark_square" />
+    <Folder Include="static\images\prettyPhoto\default" />
+    <Folder Include="static\images\prettyPhoto\facebook" />
+    <Folder Include="static\images\prettyPhoto\light_rounded" />
+    <Folder Include="static\images\prettyPhoto\light_square" />
+    <Folder Include="static\images\slider" />
+    <Folder Include="static\images\themes\" />
+    <Folder Include="static\images\themes\black\" />
+    <Folder Include="static\images\themes\black\bgr" />
+    <Folder Include="static\images\themes\black\ico" />
+    <Folder Include="static\images\themes\black\txt" />
+    <Folder Include="static\images\themes\blue\" />
+    <Folder Include="static\images\themes\blue\bgr" />
+    <Folder Include="static\images\themes\blue\ico" />
+    <Folder Include="static\images\themes\blue\txt" />
+    <Folder Include="static\images\themes\orange\" />
+    <Folder Include="static\images\themes\orange\bgr" />
+    <Folder Include="static\images\themes\orange\ico" />
+    <Folder Include="static\images\themes\orange\txt" />
+    <Folder Include="static\images\themes\pink\" />
+    <Folder Include="static\images\themes\pink\bgr" />
+    <Folder Include="static\images\themes\pink\ico" />
+    <Folder Include="static\images\themes\pink\txt" />
+    <Folder Include="static\images\themes\purple\" />
+    <Folder Include="static\images\themes\purple\bgr" />
+    <Folder Include="static\images\themes\purple\ico" />
+    <Folder Include="static\images\themes\purple\txt" />
+    <Folder Include="static\images\themes\strawberry\" />
+    <Folder Include="static\images\themes\strawberry\bgr" />
+    <Folder Include="static\images\themes\strawberry\ico" />
+    <Folder Include="static\images\themes\strawberry\txt" />
+    <Folder Include="static\images\themes\yellow\" />
+    <Folder Include="static\images\themes\yellow\bgr" />
+    <Folder Include="static\images\themes\yellow\ico" />
+    <Folder Include="static\images\themes\yellow\txt" />
+    <Folder Include="static\images\txt" />
+    <Folder Include="static\images\uploads" />
+    <Folder Include="static\js" />
+    <Folder Include="templates" />
+    <Folder Include="uploads\" />
+    <Folder Include="uploads\topinterests\" />
+    <Folder Include="uploads\topinterests\images" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59669/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>True</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
