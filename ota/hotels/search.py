@@ -167,7 +167,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
                 country_cc = name_to_cc[last_term]
                 country_code = country_cc 
                 
-                if country_cc == 'us' and first_term in us_states_set:
+                if country_cc == 'us' and first_term in us_states_set and par_min == None:
                     #
                     # check State, US case.
                     # parentheses are important due to way data is presented
