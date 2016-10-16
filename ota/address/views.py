@@ -38,26 +38,47 @@ def cities(request):
     city_hash = {}
     codes_nf = {}
 
-    if request.is_ajax():        
-        city_list = Hotel.objects.values('city', 'country_cc1').distinct()
+    global global_destination_list
 
-    for c in city_list:
-        code = c['country_cc1'].lower()        
-        cityTrim = c['city'].strip()        
-        if cityTrim != "":            
-            if code not in cc_to_name:            
-                codes_nf[code] = True                
+    #
+    # Retrieve City,Country code list from DB only at server start
+    # then cache it in global_destination_list
+    #
+    if len(global_destination_list) == 0:
+        if request.is_ajax():
+            #
+            # NOTE/WARNING: iteration over city_list fails if we don't have (city,country_cc1) index in the DB
+            #
+            city_list = Hotel.objects.values('city', 'country_cc1').distinct()
+    
+        #
+        # NOTE/WARNING: iteration fails if we don't have (city,country_cc1) index in the DB
+        #
+        for c in city_list:
+            code = c['country_cc1'].lower()        
+            cityTrim = c['city'].strip()                
 
-                if cityTrim not in city_hash:
-                    results.append( cityTrim )
-                    city_hash[cityTrim] = True
-            else:               
+            if cityTrim != "":            
+                if code not in cc_to_name:            
+                    codes_nf[code] = True                
+
+                    if cityTrim not in city_hash:
+                        results.append( cityTrim )
+                        city_hash[cityTrim] = True
+                else:               
                 
-                if cityTrim not in city_hash:
-                    results.append( cityTrim + ", " + cc_to_name[code] )
-                    city_hash[cityTrim] = True            
+                    if cityTrim not in city_hash:
+                        results.append( cityTrim + ", " + cc_to_name[code] )
+                        city_hash[cityTrim] = True            
 
-    print "NF:", codes_nf
+        print "NF:", codes_nf
+        global_destination_list = results
+
+    else:
+        #
+        # Get results from global cache
+        #
+        results = global_destination_list
     
     jsonData = json.dumps(results)
     return HttpResponse(jsonData ,content_type="application/json")

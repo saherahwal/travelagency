@@ -38,3 +38,8 @@ cc_to_name = {}
 # name to country_code cache
 #
 name_to_cc = {}
+
+#
+# Global destination list - cache
+#
+global_destination_list = []
