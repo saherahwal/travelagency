@@ -147,7 +147,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
             #
             # For this case: just search for city only
             #
-            scoreResults = Score.objects.filter( hotel__city__contains = parse_comma_trim[0] )
+            scoreResults = Score.objects.filter( hotel__city__icontains = parse_comma_trim[0] )
             city = parse_comma_trim[0]            
              
         else:
