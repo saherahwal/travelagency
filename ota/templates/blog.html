@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title> Escanza - Blog</title>
+<title> Escanza Blog Posts</title>
 {% endblock %}
 
 {% block body %}
@@ -47,9 +47,7 @@
 								</p>
 							</header>
 							{% if blog.img %}
-							<div class="entry-featured"><a href="#"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /></figure></a></div>
-							{% else %}
-							<div class="entry-featured"><a href="#"><figure><img src="{{STATIC_URL}}images/slider/img.jpg" alt="" /></figure></a></div>
+							<div class="entry-featured"><a href="#"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /></figure></a></div>							
 							{% endif %}
 							{% if blog.embed_video_url %}
 							<div class="entry-featured">
