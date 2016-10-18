@@ -104,6 +104,7 @@ $(document).ready(function(){
 			var checked = $("#id_surpriseme").is(":checked");
 			
 			if (checked == true) {
+			    $("#id_destination").val("");
 				$("#id_destination").attr('disabled', true);
 			} else {
 				$("#id_destination").attr('disabled', false);
