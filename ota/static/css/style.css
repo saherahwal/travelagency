@@ -302,7 +302,7 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .one-fourth .details 		{float:left;display:block;padding:10px 7% 15px;width:86%;}
 .one-fourth .gradient-button	{margin:10px auto 5px;}
 .three-fourth 				{float:left;width:74.5%;margin:0 0 20px 0;}
-.three-fourth .one-fourth 	{width:31.6%;margin:0 2.4% 20px 0;}
+.three-fourth .one-fourth 	{width:31.6%;margin:0 2.4% 20px 0; height:460px;}
 .full						{float:left;display:block;width:100%;margin:20px 0 10px;}
 .one-third.last 			{margin-right:0 !important;}
 
