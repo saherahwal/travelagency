@@ -442,7 +442,7 @@ def getTopInterestHotels( numToReturn,
                                                                 romanceInterest = interest_dict[ROMANCE],
                                                                 shoppingInterest = interest_dict[SHOPPING],
                                                                 skiingInterest = interest_dict[SKIING],
-                                                                wellnessInterest = interest_dict[WELLNESS],
+                                                                wellnessInterest = interest_dict[WELLNESS]
                                                                 )
     #
     # shuffle the result
