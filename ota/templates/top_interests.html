@@ -23,7 +23,8 @@
 				</nav>
 				<!--//breadcrumbs-->
 				<section class="full">
-					<h1>Top Romance Hotels</h1>					
+					{% if topRes_romance %}
+					<h1>Top Romanctic Locations</h1>					
 					<div class="deals clearfix">
 
 						{% for topRomanceElt in topRes_romance %} 
@@ -53,7 +54,9 @@
 					</div>
 					
 					<div class="separator"></div>
+					{% endif %}	
 
+					{% if topRes_shopping %}
 					<h1>Top Shopping Locations</h1>
 					<div class="deals clearfix">
 
@@ -83,7 +86,9 @@
 					</div>
 
 					<div class="separator"></div>
+					{% endif %}	
 
+					{% if topRes_wellness %}
 					<h1>Top Wellness Locations</h1>
 					<div class="deals clearfix">
 
@@ -110,10 +115,12 @@
 							</article>
 							<!--//deal-->
 						{% endfor %}
-					</div>
+					</div>					
 
 					<div class="separator"></div>
+					{% endif %}	
 
+					{% if topRes_clubbing %}
 					<h1>Top Nightlife Locations</h1>
 					<div class="deals clearfix">
 
@@ -143,8 +150,10 @@
 					</div>
 
 					<div class="separator"></div>
+					{% endif %}	
 
-					<h1>Top Casino Locations</h1>
+					{% if topRes_casinos %}
+					<h1>Top Casino Locations</h1>					
 					<div class="deals clearfix">
 
 						{% for topCasinoElt in topRes_casinos %} 
@@ -171,9 +180,10 @@
 							<!--//deal-->
 						{% endfor %}
 					</div>
-
 					<div class="separator"></div>
+					{% endif %}
 
+					{% if topRes_adventure %}
 					<h1>Top Adventure Locations</h1>
 					<div class="deals clearfix">
 
@@ -203,7 +213,9 @@
 					</div>
 
 					<div class="separator"></div>
+					{% endif %}
 
+					{% if topRes_beachAndSun %}
 					<h1>Top Beach and Sun Locations</h1>
 					<div class="deals clearfix">
 
@@ -233,7 +245,9 @@
 					</div>
 
 					<div class="separator"></div>
+					{% endif %}
 
+					{% if topRes_family %}
 					<h1>Top Family Locations</h1>
 					<div class="deals clearfix">
 
@@ -263,7 +277,9 @@
 					</div>
 
 					<div class="separator"></div>
+					{% endif %}	
 
+					{% if topRes_skiing %}
 					<h1>Top Skiing Locations</h1>
 					<div class="deals clearfix">
 
@@ -293,7 +309,9 @@
 					</div>
 
 					<div class="separator"></div>
+					{% endif %}	
 
+					{% if topRes_historyAndCulture %}
 					<h1>Top History And Culture Locations</h1>
 					<div class="deals clearfix">
 
@@ -321,6 +339,7 @@
 							<!--//deal-->
 						{% endfor %}
 					</div>
+					{% endif %}	
 				</section>
 				<!--//top destinations-->
 			</div>
