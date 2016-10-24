@@ -31,7 +31,7 @@
 								<h1>{{topInterestSel.short_desc}}</h1>
 							</header>
 							{% if topInterestSel.img %}
-							<div class="entry-featured"><figure><img src="{{MEDIA_URL}}{{topInterestSel.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /><a href="{{MEDIA_URL}}{{topInterestSel.img}}"></a></figure></div>
+							<div class="entry-featured"><figure><img src="{{MEDIA_URL}}{{topInterestSel.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /><a href="{{MEDIA_URL}}{{topInterestSel.img}}" class="image-overlay" rel="prettyPhoto[gallery1]"></a></figure></div>
 							{% endif %}
 							<div class="entry-content">
 								{{topInterestSel.topinterests_body | safe}}
