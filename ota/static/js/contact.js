@@ -19,7 +19,7 @@ $(document).ready(function () {
             });
 
             var boxText = document.createElement("div");
-            boxText.innerHTML = "<strong>Book Your Travel</strong><br>17756 NE 90th St.,<br>Redmond, WA";
+            boxText.innerHTML = "<strong>Escanza,LLC</strong><br>17756 NE 90th St.,<br>Redmond, WA";
 
             var myOptions = {
                 content: boxText
