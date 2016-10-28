@@ -13,7 +13,7 @@ h4 {font:normal 1.6em 'OpenSansSemibold';letter-spacing:-0.03em;padding:0 0 15px
 h5 {font:normal 1.5em 'OpenSansBold';letter-spacing:-0.1px;color:#3F3F3F;}
 h6 {font:normal 1.3em 'OpenSansSemibold';color:#333;}
 
-p 		{font-size:1.3em;padding:0 0 20px;}
+p 		{font-size:1.5em;padding:0 0 20px;}
 strong 		{font-family:'OpenSansSemibold';font-weight:normal;}
 strong.dark	{font-family:'OpenSansBold';color:#3F3F3F;}
 
@@ -299,7 +299,8 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .main .one-half 				{background:#fff;webkit-box-shadow:0 0 2px rgba(0,0,0,0.1);-moz-box-shadow:0 0 2px rgba(0,0,0,0.1);box-shadow:0 0 2px rgba(0,0,0,0.1);}
 .one-fourth.last 			{margin-right:0 !important;}
 .one-half.last 				{margin-right:0 !important;}
-.one-fourth .details 		{float:left;display:block;padding:10px 7% 15px;width:86%;}
+.one-fourth .details 		{float:left;display:block;padding:10px 7% 15px;width:86%;height:28em;}
+.one-fourth .frontPageInterests		{float:left;display:block;padding:10px 7% 15px;width:86%;height:13em;}
 .one-fourth .gradient-button	{margin:10px auto 5px;}
 .three-fourth 				{float:left;width:74.5%;margin:0 0 20px 0;}
 .three-fourth .one-fourth 	{width:31.6%;margin:0 2.4% 20px 0; height:460px;}
@@ -576,7 +577,7 @@ aside .default ol li {padding:0 0 4px;}
 /*DEAL OF THE DAY*/
 .deal-of-the-day a 			{text-decoration:none;}
 .deal-of-the-day figure		{margin:0 0 15px;}
-.deal-of-the-day h3			{color:#AB9A8F;}
+.deal-of-the-day h3			{color:#0a4f70;}
 .deal-of-the-day p 			{float:left;width:175px;}
 .deal-of-the-day .price		{font-family: 'OpenSansBold';color:#3f3f3f;padding-left:5px;}
 .deal-of-the-day .price small	{font:normal 12px 'OpenSansRegular';color:#999;}
