@@ -27,7 +27,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost' ]
+ALLOWED_HOSTS = [ 'localhost', 'http://escanza.azurewebsites.net/' ]
 
 
 # Application definition
@@ -60,17 +60,17 @@ ROOT_URLCONF = 'ota.urls'
 
 WSGI_APPLICATION = 'ota.wsgi.application'
 
-DB_NAME = 'mytravelsdb'
-DB_USER = 'root'
-DB_HOST = '127.0.0.1'
-DB_PORT = '3306'
-DB_PASS = 'svn123123'
-
 #DB_NAME = 'mytravelsdb'
-#DB_USER = 'b42d1da1703a84'
-#DB_HOST = 'us-cdbr-azure-west-b.cleardb.com'
+#DB_USER = 'root'
+#DB_HOST = '127.0.0.1'
 #DB_PORT = '3306'
-#DB_PASS = '76a3ec8e'
+#DB_PASS = 'svn123123'
+
+DB_NAME = 'mytravelsdb'
+DB_USER = 'b42d1da1703a84'
+DB_HOST = 'us-cdbr-azure-west-b.cleardb.com'
+DB_PORT = '3306'
+DB_PASS = '76a3ec8e'
 
 
 # Database
