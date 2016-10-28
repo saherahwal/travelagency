@@ -27,14 +27,7 @@
 						<p>Hotels and Resorts made specifically for you.</p>
 					</div>
 					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/hawaii-beach.jpg" alt="" />
-				</li>
-				<li>
-					<div class="info animate-in">
-						<h2>Swim during the winter in the warm springs!</h2><br />
-						<p>How about North Port, Florida?</p>
-					</div>
-					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/warm-springs-oregon.jpg" alt="" />
-				</li>
+				</li>				
 				<li>
 					<div class="info animate-in">
 						<h2>Visit a national forest!</h2><br />
@@ -246,7 +239,7 @@
 						{% else %}
 						<figure><a href="/hotels/search/{{topInterest.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title=""><img src="{{STATIC_URL}}images/uploads/img.jpg" alt="{{STATIC_URL}}images/uploads/img.jpg" width="270" height="152" /></a></figure>
 						{% endif %}
-						<div class="details">
+						<div class="frontPageInterests">
 							<h4>{{topInterest.short_desc}}</h4>
 							<a href="/hotels/search/{{topInterest.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels!</a>
 						</div>
