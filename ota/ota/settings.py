@@ -23,11 +23,11 @@ print "base_dir", BASE_DIR
 SECRET_KEY = 'ejx0)=+g@zd8noa$(n!l=j(j5)$6_s79yq6fufcep!^%*o-k^7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost', 'http://escanza.azurewebsites.net/' ]
+ALLOWED_HOSTS = [ 'localhost', 'escanza.azurewebsites.net' ]
 
 
 # Application definition
