@@ -11,3 +11,5 @@ C:\Users\Saher\Projects\travelagency\ota\bin\Microsoft.PythonTools.AzureSetup.ex
 C:\Users\Saher\Projects\travelagency\ota\bin\wfastcgi.py
 C:\Users\Saher\Projects\travelagency\ota\obj\Debug\web.config
 C:\Users\Saher\Projects\travelagency\ota\obj\Debug\web.debug.config
+C:\Users\Saher\Projects\travelagency\ota\obj\Debug\deployment-updated-orig-prefix.txt
+C:\Users\Saher\Projects\travelagency\ota\ptvs_virtualenv_proxy.py

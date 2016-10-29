@@ -1,0 +1,9 @@
+C:\Users\Saher\Projects\travelagency\ota\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\Saher\Projects\travelagency\ota\bin\AzureSetup.cfg
+C:\Users\Saher\Projects\travelagency\ota\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\Users\Saher\Projects\travelagency\ota\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\Users\Saher\Projects\travelagency\ota\bin\wfastcgi.py
+C:\Users\Saher\Projects\travelagency\ota\obj\Release\web.config
+C:\Users\Saher\Projects\travelagency\ota\obj\Release\web.debug.config
+C:\Users\Saher\Projects\travelagency\ota\obj\Release\deployment-updated-orig-prefix.txt
+C:\Users\Saher\Projects\travelagency\ota\ptvs_virtualenv_proxy.py
