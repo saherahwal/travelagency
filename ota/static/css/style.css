@@ -299,13 +299,18 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .main .one-half 				{background:#fff;webkit-box-shadow:0 0 2px rgba(0,0,0,0.1);-moz-box-shadow:0 0 2px rgba(0,0,0,0.1);box-shadow:0 0 2px rgba(0,0,0,0.1);}
 .one-fourth.last 			{margin-right:0 !important;}
 .one-half.last 				{margin-right:0 !important;}
-.one-fourth .details 		{float:left;display:block;padding:10px 7% 15px;width:86%;height:28em;}
+.one-fourth .details 		{float:left;display:block;padding:10px 7% 15px;width:86%;}
 .one-fourth .frontPageInterests		{text-align: center; float:left;display:block;padding:10px 7% 15px;width:86%;height:13em;}
 .one-fourth .gradient-button	{margin:10px auto 5px;}
 .three-fourth 				{float:left;width:74.5%;margin:0 0 20px 0;}
 .three-fourth .one-fourth 	{width:31.6%;margin:0 2.4% 20px 0; height:460px;}
 .full						{float:left;display:block;width:100%;margin:20px 0 10px;}
 .one-third.last 			{margin-right:0 !important;}
+
+.hotelresults .one-fourth h1 { min-height: 2.5em }
+.hotelresults .one-fourth .address {min-height: 3em}
+.hotelresults .one-fourth .description      { min-height: 22em }
+.hotelresults .one-fourth        { min-height: 55em } 
 
 .separator		{background:url(../images/bgr/separator.jpg) 0 100% repeat-x;margin:40px 0 20px;width:100%;display:inline-block;height:2px;}
 

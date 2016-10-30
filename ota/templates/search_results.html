@@ -152,7 +152,7 @@
 							<p id="saved_surpriseme">{{surpriseme}}</p>
 						</div>
 						
-						<div class="deals clearfix" id="resultsSection">
+						<div class="deals hotelresults clearfix" id="resultsSection">
 
 							{% for hotel in hotels %}
 								<!--deal-->
@@ -168,12 +168,12 @@
 												{% endwith %}												
 											</span>
 										</h1>
-										<span class="address">{{hotel.hotel.city}}  •  <a href="#">Show on map</a></span>
+										<span class="address">{{hotel.hotel.city}}<a href="#" style="color: #fff">  •  Show on map</a></span>
 										<span class="rating">{{hotel.total}}</span>
 										<!-- <span class="rating"> 8 /10</span>										
 										<span class="price">Price per room per night from  <em>$ 50</em> </span> -->
 										<div class="description">
-											<p>{{hotel.hotel.desc_en|truncatechars:200}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" data-hotel-id="{{hotel.hotel.id}}"> More info</a></p>
+											<p>{{hotel.hotel.desc_en|truncatechars:220}}<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" data-hotel-id="{{hotel.hotel.id}}"> More info</a></p>
 										</div>
 										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="Book now" class="gradient-button" data-hotel-id="{{hotel.hotel.id}}">Book now</a>
 									</div>
