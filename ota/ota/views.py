@@ -20,6 +20,11 @@ def error_not_found_page_view(request):
     return render(request,
                   "error.html", {} )
 
+def privacypolicy(request):
+  return render( request,
+                 "privacyPolicy.html",
+                 {})
+
 def homepage(request):
 
     isAdminRequest = False;

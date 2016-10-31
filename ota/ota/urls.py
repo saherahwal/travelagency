@@ -23,6 +23,8 @@ urlpatterns = [
     url('^contact/$', contact),                     # contact
     url('^contact/send_email/$', send_email),                     # contact
 
+    url('^privacyPolicy/$', privacypolicy),    # privacy policy
+
     url('^login/$', signin ), # login
     url('^logout/$', signout ), # logout
   
