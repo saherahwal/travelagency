@@ -9,6 +9,7 @@ from hotels.requestManager import *
 import json
 import logging
 import uuid
+import datetime
 
 
 MAX_PAGES_PER_PAGE = 8
@@ -79,10 +80,17 @@ def search(request):
 
             #
             # Difference between CheckIn and CheckOut date
+            # Check the checkIn date is not in the past
             #
             delta_time = checkOutDate - checkInDate
+            today = datetime.datetime.now().date()
+
             if  delta_time.days < 0:
                 dateErrors.append( "CheckOut date can't be before CheckIn date!" )
+            
+            delta_checkin_today = (checkInDate - today);
+            if ( delta_checkin_today.days < 0 ) :
+                dateErrors.append( "CheckIn date must be in the future." )
 
             #
             # stars search ( hotel class - at least )
