@@ -307,7 +307,7 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .full						{float:left;display:block;width:100%;margin:20px 0 10px;}
 .one-third.last 			{margin-right:0 !important;}
 
-.hotelresults .one-fourth h1 { min-height: 2.5em }
+.hotelresults .one-fourth h1 { min-height: 2.5em, max-height:2.5em; }
 .hotelresults .one-fourth .address {min-height: 3em}
 .hotelresults .one-fourth .description      { min-height: 22em }
 .hotelresults .one-fourth        { min-height: 55em } 
