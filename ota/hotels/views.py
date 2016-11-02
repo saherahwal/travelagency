@@ -3,14 +3,15 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from hotels import forms as hotelForms
 from address.globals import *
+from ota.views import getTopInterestHotels
 from core.utils import *
 from hotels.search import hotel_search
 from hotels.requestManager import *
+from hotels.globals import *
 import json
 import logging
 import uuid
 import datetime
-
 
 MAX_PAGES_PER_PAGE = 8
 
@@ -45,6 +46,28 @@ def search(request):
     # dummy start/rating list
     #
     dummy_star_rating = range(5)
+
+    #
+    # we only need to retrieve these top interests once
+    #
+    global global_topInterestLocs
+    if len(global_topInterestLocs) == 0:
+        #
+        # Admin user gets all top interests
+        #
+        if request.user != None:
+            if  request.user.is_superuser:
+                isAdminRequest = True
+        #
+        # top interest locations - in case of form error
+        #
+        global_topInterestLocs = getTopInterestHotels( 12, 
+                                                       isAdminRequest = isAdminRequest )
+
+    #
+    # Set topInterestLocs for rendering - error only (no hotel results)
+    #
+    topInterestLocs = global_topInterestLocs
 
     if request.method == 'GET':
 
@@ -193,6 +216,7 @@ def search(request):
                 return render(request,
                       "index.html",
                       {'hotelSearchForm': hotelSearchForm,
+                       'topInterestsLocations': topInterestLocs,
                        'destErrors': destErrors})
 
             if len(interestsErrors) != 0:
@@ -200,6 +224,7 @@ def search(request):
                 return render(request,
                       "index.html",
                       {'hotelSearchForm': hotelSearchForm,
+                       'topInterestsLocations': topInterestLocs,
                        'interestsErrors': interestsErrors})
 
             if len(dateErrors) != 0:
@@ -207,6 +232,7 @@ def search(request):
                  return render(request,
                       "index.html",
                       {'hotelSearchForm': hotelSearchForm,
+                       'topInterestsLocations': topInterestLocs,
                        'dateErrors': dateErrors})
             
             #
@@ -304,10 +330,11 @@ def search(request):
             #
             # case where hotel search form is not valid
             #
-                                    
+
             return render(request,
                       "index.html",
-                      {'hotelSearchForm': hotelSearchForm})            
+                      {'hotelSearchForm': hotelSearchForm,
+                       'topInterestsLocations': topInterestLocs})            
    
     else:
         
