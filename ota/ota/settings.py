@@ -25,9 +25,9 @@ SECRET_KEY = 'ejx0)=+g@zd8noa$(n!l=j(j5)$6_s79yq6fufcep!^%*o-k^7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = [ 'localhost', 'http://escanza.azurewebsites.net/' ]
+ALLOWED_HOSTS = [ 'localhost', 'escanzavm.westus2.cloudapp.azure.com', '52.183.26.212' ]
 
 
 # Application definition
@@ -128,11 +128,8 @@ MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")
 print "Media_Root", MEDIA_ROOT
 
-# email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'info@escanza.com'
-EMAIL_HOST_PASSWORD = '!!AnaMsafer123'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-SERVER_EMAIL =  EMAIL_HOST_USER
+if DEBUG: 
+   STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+else:
+   STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+

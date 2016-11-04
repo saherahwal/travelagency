@@ -29,5 +29,7 @@ urlpatterns = [
     url('^logout/$', signout ), # logout
   
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': settings.DEBUG}),
      
 ] + static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
