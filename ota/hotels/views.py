@@ -52,6 +52,8 @@ def search(request):
     #
     global global_topInterestLocs
     if len(global_topInterestLocs) == 0:
+
+        isAdminRequest = False
         #
         # Admin user gets all top interests
         #
