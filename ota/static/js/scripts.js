@@ -111,6 +111,12 @@ $(document).ready(function () {
 		$('.view-type li').removeClass("active");
 		$(this).addClass("active");
 	});
+
+	// HIDE GRID VIEW in small width devices
+	if (window.screen['availWidth'] < 1279) {
+		//$('.grid-view')[0].style.display = 'none'
+		$('.grid-view')[0].style.visibility = 'hidden'
+	}
 	
 	//LOGIN & REGISTER LIGHTBOX
 	$('.close').click(function() {
