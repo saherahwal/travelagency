@@ -100,10 +100,16 @@ $(document).ready(function () {
 	$('.view-type li:nth-child(2)').addClass('active');
 		
 	$('.grid-view').click(function() {
-		$('.three-fourth article').attr("class", "one-fourth");
-		$('.three-fourth article:nth-child(3n)').addClass("last");
-		$('.view-type li').removeClass("active");
-		$(this).addClass("active");
+
+		if (window.screen['availWidth'] >= 1279) {
+			$('.three-fourth article').attr("class", "one-fourth");
+			$('.three-fourth article:nth-child(3n)').addClass("last");
+			$('.view-type li').removeClass("active");
+			$(this).addClass("active");
+		} else {
+			$('.grid-view')[0].style.visibility = 'hidden';
+		}
+
 	});
 	
 	$('.list-view').click(function() {
@@ -111,6 +117,12 @@ $(document).ready(function () {
 		$('.view-type li').removeClass("active");
 		$(this).addClass("active");
 	});
+
+	// HIDE GRID VIEW in small width devices
+	if (window.screen['availWidth'] < 1279) {
+		//$('.grid-view')[0].style.display = 'none'
+		$('.grid-view')[0].style.visibility = 'hidden';
+	}
 	
 	//LOGIN & REGISTER LIGHTBOX
 	$('.close').click(function() {
