@@ -1004,6 +1004,8 @@ img {max-width:100%;}
 .wrap 		{width:96%;margin:0 2%;}
 .main-search {width:96%;}
 #sequence .animate-in .info {margin-left:-48%;}
+
+.main-nav li {padding:7px 55px 15px 0px;}
 }
 
 
@@ -1013,7 +1015,7 @@ img {max-width:100%;}
 
 .slider {margin-top:100px;height:500px;}
 
-.main-nav li {padding-right:7px;}
+.main-nav li {padding:7px 55px 15px 0px;}
 
 .sort li 	{width:85px;}
 
