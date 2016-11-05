@@ -1047,7 +1047,7 @@ img {max-width:100%;}
 .deal-of-the-day p  {padding:0;}
 .deal-of-the-day .rating {padding:0 0 15px 15px;}
 
-.boxes .one-fourth {min-height:180px;}
+.boxes .one-fourth {min-height:30em;}
 .boxes .one-third  {width:94.8%;margin-right:0 !important;padding:15px 2.6%;}
 
 .tab-content .deals .full-width .price 				{border-left:none;width:26%;padding:0;}
