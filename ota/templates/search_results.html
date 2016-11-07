@@ -158,7 +158,8 @@
 								<article class="one-fourth">									
 									<figure><a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="" data-hotel-id="{{hotel.hotel.id}}" ><img src="{{hotel.hotel.photo_url}}" alt="{{hotel.hotel.name}}" width="270" height="152"/></a></figure>
 									<div class="details">
-										<h1>{{hotel.hotel.name|truncatechars:35}}
+										<a target="_blank" href="{{hotel.hotel.hotel_url}}?aid={{aid}};checkin={{checkin}};checkout={{checkout}};no_rooms={{no_rooms}};req_adults={{req_adults}};req_children={{req_children}}" title="" data-hotel-id="{{hotel.hotel.id}}" >
+										<h1>{{hotel.hotel.name|truncatechars:35}}											
 											<span class="stars">
 											    {% with stars=hotel.hotel.hotel_class|floatformat:"-1" %}
 												{% for i in dummy_star_rating|slice:stars %}
@@ -167,6 +168,7 @@
 												{% endwith %}												
 											</span>
 										</h1>
+										</a>
 										<span class="address">{{hotel.hotel.city}}<a href="#" style="color: #fff">  •  Show on map</a></span>
 										<span class="rating">{{hotel.total}}</span>
 										<!-- <span class="rating"> 8 /10</span>										
