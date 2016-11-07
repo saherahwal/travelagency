@@ -1171,7 +1171,7 @@ aside article 		{padding:14px 3% 20px;width:94%;}
 .testimonials	{padding:17px 3% 20px;width:94%;}
 .default 		{padding:14px 3% 5px;width:94%;}
 
-.full .one-fourth 	{width:48.8%;}
+.full .one-fourth 	{width:45%; margin-left: 2%}
 .full .deals .one-fourth:nth-child(2n+1) {margin:0 2% 20px 0;}
 .full .deals .one-fourth:nth-child(2n) {margin:0;}
 .destinations .ribbon	{width:116%;margin:20px 0 0 -8%;}
