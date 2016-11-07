@@ -63,6 +63,14 @@ def topinterests(request):
     #
     topinterest_id = request.GET.get('id')
 
+    #
+    # retreive check-in / check-out date
+    #
+    (checkInDate, checkOutDate) = getCheckInCheckOut()
+    
+    #
+    # Initialize isAdminRequest to False
+    #
     isAdminRequest = False;
     #
     # Admin user gets all top interests
@@ -86,11 +94,6 @@ def topinterests(request):
         topRes_casinos = getTopInterestHotels( 4, True, [CASINOS] , isAdminRequest)
         topRes_historyAndCulture = getTopInterestHotels( 4, True, [HISTORY_CULTURE] , isAdminRequest)
         topRes_romance = getTopInterestHotels( 4, True, [ROMANCE], isAdminRequest)
-    
-        #
-        # retreive check-in / check-out date
-        #
-        (checkInDate, checkOutDate) = getCheckInCheckOut()
 
         return render(request,
                       "top_interests.html",
@@ -124,12 +127,16 @@ def topinterests(request):
 
                 return render( request,
                               'top_interest_single.html',
-                              {'topInterestSel' : topintObj })
+                              {'topInterestSel' : topintObj,
+                              'checkInDate': checkInDate,
+                              'checkOutDate': checkOutDate })
             
             topintObj = TopInterestLocation.objects.get( id = topinterest_id, public = True )
             return render( request,
                            'top_interest_single.html',
-                           {'topInterestSel' : topintObj })
+                           {'topInterestSel' : topintObj,
+                            'checkInDate': checkInDate,
+                            'checkOutDate': checkOutDate })
         
         except ObjectDoesNotExist:
 
