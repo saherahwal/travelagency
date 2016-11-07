@@ -119,7 +119,7 @@ $(document).ready(function () {
 	});
 
 	// HIDE GRID VIEW in small width devices
-	if (window.screen['availWidth'] < 1279) {
+	if (window.screen['availWidth'] < 1279 && $('.grid-view').length > 0) {
 		//$('.grid-view')[0].style.display = 'none'
 		$('.grid-view')[0].style.visibility = 'hidden';
 	}
