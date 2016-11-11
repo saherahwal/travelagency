@@ -16,14 +16,14 @@ def main(request):
         #
         # retrieve all blogs that are public
         #
-        blogs = Blog.objects.filter( public = True )
+        blogs = Blog.objects.filter( public = True ).extra( order_by=('-created',))
         
         #
         # Admin user gets all blogs
         #
         if request.user != None:
             if  request.user.is_superuser:
-                blogs = Blog.objects.all( )
+                blogs = Blog.objects.all( ).extra( order_by=('-created',))
 
         return render(request,
                       "blog.html",
