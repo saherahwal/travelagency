@@ -20,10 +20,15 @@ def error_not_found_page_view(request):
     return render(request,
                   "error.html", {} )
 
+def aboutus(request):
+    return render( request,
+                  "aboutus.html",
+                  {})
+
 def privacypolicy(request):
-  return render( request,
-                 "privacyPolicy.html",
-                 {})
+    return render( request,
+                  "privacyPolicy.html",
+                  {})
 
 def homepage(request):
 

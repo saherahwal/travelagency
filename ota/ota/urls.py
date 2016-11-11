@@ -24,6 +24,7 @@ urlpatterns = [
     url('^contact/send_email/$', send_email),                     # contact
 
     url('^privacyPolicy/$', privacypolicy),    # privacy policy
+    url('^aboutUs/$', aboutus),    # privacy policy
 
     url('^login/$', signin ), # login
     url('^logout/$', signout ), # logout
