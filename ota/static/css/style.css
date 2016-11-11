@@ -373,7 +373,7 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .deals .full-width .details				{float:left;width:64%;padding:15px 2% 0 0;}
 .deals .full-width  h1					{width:auto;max-width:74%;}
 .deals .full-width  .address				{width:auto;max-width:60%;clear:left;padding:0 25px 0 0;}
-.deals .full-width  .rating				{width:35px;float:left; visibility: hidden}
+.deals .full-width  .rating				{width:35px;float:left;}
 .deals .full-width  .description			{width:74.5%;border-bottom:none;border-top:1px solid #ccc;margin:11px 0 0;padding:9px 0 0;}
 .deals .full-width .stars 				{float:none;padding-left:20px;display:inline-block;}
 .deals .full-width .price				{text-align:center;float:left;width:100px;border-top:none;border-bottom:none;border-left:1px solid #ccc;padding:0 0 0 20px;margin:0;position:absolute;top:20px;right:20px;height:112px;}
@@ -558,7 +558,7 @@ aside .default ol li {padding:0 0 4px;}
 .hotel-details  h1			{font-size:2em;color:#666;padding:0 0 3px;-webkit-text-shadow:none;-moz-text-shadow:none;text-shadow:none;}
 .stars img					{display:inline;float:right;margin:3px 0 0;white-space:nowrap;max-width:12px;}
 .address					{font-size:1.3em;color:#999;}
-.rating						{background:url(../images/ico/rating.png) 0 2px no-repeat;padding:0 0 0 15px;font-size:1.3em;color:#3F3F3F;float:right;}
+.rating						{background:url(../images/ico/rating.png) 0 2px no-repeat;padding:0 0 0 15px;font-size:1.3em;color:#3F3F3F;float:right;visibility: hidden;}
 .hotel-details .description	{border-top:1px solid #DFDCD1;padding:15px 0 0;margin:15px 0 0;display:inline-block;}
 .tags						{border-top:1px solid #DFDCD1;padding:18px 0 0;margin:0 0 -5px;}
 .tags ul 						{position:relative;width:104%;overflow:hidden;}
