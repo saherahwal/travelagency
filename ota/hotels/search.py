@@ -4,6 +4,7 @@ from hotels.models import *
 from address.globals import *
 from core.utils import *
 from hotels.requestManager import *
+from core.marker import MIN_SCORE
 
 MAX_SURPRISE_RES = 100
 
@@ -57,7 +58,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
     surpriseme = surprise_me
 
     # scores
-    scoreResults = None
+    scoreResults = filter_scoreresults_no_min( interest_map )
 
     #
     # Trim the query before figuring out its' category (city, continent, country...etc)
@@ -67,7 +68,8 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         #
         # if surpriseMe is true - ignore query and retrieve new one
         #
-        trimmed_query = surpriseme_query( interests_bitmap ).strip()
+        (trimmed_query, scoreResults) = surpriseme_query( interests_bitmap, scoreResults )
+        trimmed_query = trimmed_query.strip()
     else:
         #
         # trim query from leading/trailing spaces
@@ -83,7 +85,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # Continent case ( e.g Search = "Europe" )
         #
         cont_id = continents_to_id[trimmed_query]
-        scoreResults = Score.objects.filter( hotel__continent_id=cont_id )
+        scoreResults = scoreResults.filter( hotel__continent_id=cont_id )
 
     elif trimmed_query in name_to_cc:
         
@@ -91,7 +93,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # Country case ( e.g Search = "Jordan" )
         #
         country_cc = name_to_cc[ trimmed_query ]
-        scoreResults = Score.objects.filter( hotel__country_cc1=country_cc )
+        scoreResults = scoreResults.filter( hotel__country_cc1=country_cc )
         country_code = country_cc
         
     elif trimmed_query in us_states_set:
@@ -100,7 +102,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
         # State case in US
         #
         state = trimmed_query
-        scoreResults = Score.objects.filter( hotel__country_cc1='us',
+        scoreResults = scoreResults.filter( hotel__country_cc1='us',
                                              hotel__city__contains = '(' + state + ')' )
 
         #
@@ -147,7 +149,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
             #
             # For this case: just search for city only
             #
-            scoreResults = Score.objects.filter( hotel__city__icontains = parse_comma_trim[0] )
+            scoreResults = scoreResults.filter( hotel__city__icontains = parse_comma_trim[0] )
             city = parse_comma_trim[0]            
              
         else:
@@ -172,13 +174,13 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
                     # check State, US case.
                     # parentheses are important due to way data is presented
                     #
-                    scoreResults = Score.objects.filter( hotel__country_cc1='us',
+                    scoreResults = scoreResults.filter( hotel__country_cc1='us',
                                                          hotel__city__contains = '(' + first_term + ')' )
                 elif par_min == None:
                     #
                     # Handles City,Country case
                     #
-                    scoreResults = Score.objects.filter( hotel__country_cc1=country_cc,
+                    scoreResults = scoreResults.filter( hotel__country_cc1=country_cc,
                                                          hotel__city__contains = first_term )
                 else:
                     print "Getting results from last case"
@@ -189,7 +191,7 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
                     # City (Non-State) case (e.g Washington (D.C), US)
                     # City ( Some Province ), Country (e.g Paris (Ontario), Canada
                     #
-                    scoreResults = Score.objects.filter( hotel__country_cc1=country_cc,
+                    scoreResults = scoreResults.filter( hotel__country_cc1=country_cc,
                                                          hotel__city__contains = city + " " + par_min )
                 
             else:
@@ -201,13 +203,13 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
                     #
                     # For this case: just search for city only
                     #
-                    scoreResults = Score.objects.filter( hotel__city__contains = first_term )
+                    scoreResults = scoreResults.filter( hotel__city__contains = first_term )
                 else:
 
                     #
                     # Search with paranthesis inclusion and city term
                     #
-                    scoreResults = Score.objects.filter( hotel__city__contains = first_term,
+                    scoreResults = scoreResults.filter( hotel__city__contains = first_term,
                                                           hotel__city_preferred__contains = par_min )
 
     #
@@ -231,6 +233,22 @@ def hotel_search( query, interests_bitmap, surprise_me, stars, session_guid ):
 #
 # Helper functions
 #
+def filter_scoreresults_no_min( interests_map ):
+    """
+        returns scoreResults filtered such that the interests chosen do not have the absolute MIN_SCORE
+    """
+    scoreResults = None
+    for elt in score_column_names.keys():
+
+        scoreInterestColumn = score_column_names[elt]
+        
+        if interests_map[elt] == True:
+            if scoreResults == None:
+                scoreResults  = Score.objects.extra( where = [scoreInterestColumn  + ' >  %s'], params = [MIN_SCORE])
+            else:
+                scoreResults = scoreResults.extra( where = [scoreInterestColumn  + ' >  %s'], params = [MIN_SCORE])
+    return scoreResults
+
 def construct_totalscore_columns( interests_map ):
     """
         Given interest_map ( interest:True ), return string for total score based on database columns for SQL query
@@ -250,19 +268,52 @@ def construct_totalscore_columns( interests_map ):
     
     return s_total
 
-def surpriseme_query( interests_map ):
+def surpriseme_query( interests_map, scoreResults ):
     """
-        Return query for surprise me feature given interests_map
+        Return query for surprise me feature given interests_map,
+        and the filterd scoreRestuts for chosen interest where absolute values
+        are not minimum
+
+        This method assumes interest_map has at least one true input and that one
+        True input should definitely have a result set of more than one element.
+
+        Input:
+            ScoreRestults: if not None, already filtered result
     """
 
+    if (scoreResults == None):
+        #
+        # scores filtering
+        #
+        scoreResults = filter_scoreresults_no_min( interests_map )
+
+    #
+    # For no result case, overwrite an interest (ignore) and try again
+    #
+    if (len(scoreResults) == 0):
+        for elt in interests_map.keys():
+            if interests_map[elt] == True:
+                interests_map[elt] = False
+                print "elt punched out:", elt
+                
+                #
+                # evalutate again by relaxing the restriction
+                #
+                scoreResults = filter_scoreresults_no_min( interests_map )
+                
+                #
+                # check that the length is not zero
+                #
+                if len(scoreResults) != 0:
+                    break
     #
     # extra total column for score ordering ( order by DESC )
     #
     total_str = construct_totalscore_columns( interests_map )
-    result = Score.objects.extra( select = { 'total': total_str }, order_by=('-total',))[:MAX_SURPRISE_RES]
+    result = scoreResults.extra( select = { 'total': total_str }, order_by=('-total',))[:MAX_SURPRISE_RES]
 
     random_res_picked = random.choice( result )
 
     cc = random_res_picked.hotel.country_cc1
 
-    return cc_to_name[cc]
+    return (cc_to_name[cc], scoreResults)
