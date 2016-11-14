@@ -3,7 +3,7 @@ $(document).ready(function () {
 	var spinner = $('.spinner input').spinner({ min: 0 });
 	
 	$('.datepicker-wrap input').datepicker({
-		showOn: 'button',
+		showOn: 'both',
 		buttonImage: '/static/images/ico/calendar.png',
 		buttonImageOnly: true
 	});
