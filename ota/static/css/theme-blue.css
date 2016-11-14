@@ -154,3 +154,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5bb5c8', end
 .locations .one-fourth  .ribbon:focus,
 .locations .one-fourth  .ribbon:hover {background:#5BB5C8;}
 }
+
+@media screen and (max-width: 480px) {
+	.logo		{background:url(../images/themes/blue/txt/logo_escanza-smallmobile.png) 0 15px no-repeat;width:100%;height:102px;display:inline-block;}
+}
