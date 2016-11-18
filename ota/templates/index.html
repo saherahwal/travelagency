@@ -15,36 +15,36 @@
 			<ul class="sequence-canvas">
 				<li>
 					<div class="info animate-in">
-						<h2>Last-Minute Winter Escapes</h2><br />
-						<p>A Unique Opportunity to Realize Your Dreams!</p>
+						<h2>Find new places to do what you love</h2><br />
+						<p>Without hours of scanning through travel sites.</p>
 					</div>
 					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/whistler-ski-resort.jpg" alt="" />
 				</li>
 				<li>
 					<div class="info animate-in">
-						<h2>Find hotels and resorts...</h2><br />
-						<p>that feel like they were made for you.</p>
+						<h2>Do what you like,</h2><br />
+						<p>In dream destinations you’ll love!</p>
 					</div>
 					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/hawaii-beach.jpg" alt="" />
 				</li>				
 				<li>
 					<div class="info animate-in">
-						<h2>Visit a National Forest!</h2><br />
-						<p>Stunning Views Away from City Distractions</p>
+						<h2>Not sure where you want to go?</h2><br />
+						<p>Click Surprise Me to discover new destinations.</p>
 					</div>
 					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/Mount-baker-snoqualmie-national-forest.jpg" alt="" />
 				</li>
 				<li>
 					<div class="info animate-in">
-						<h2>Attempt a Rain Forest Adventure!</h2><br />
-						<p>Enjoy the Evergreen Forests.</p>
+						<h2>Discover hotels and resorts</h2><br />
+						<p>That feel like they were made for you</p>
 					</div>
 					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/capilano-suspension-bridge.jpg" alt="" />
 				</li>
 				<li>
 					<div class="info animate-in">
-						<h2>Take Romantic Trip to Greece!</h2><br />
-						<p>Plan The Ideal Honeymoon.</p>
+						<h2>Planning a honeymoon, company retreat or family adventure?</h2><br />
+						<p>Find the perfect accommodations, based on what you enjoy.</p>
 					</div>
 					<img class="main-image animate-in" src="{{STATIC_URL}}images/slider/greece-romance.jpg" alt="" />
 				</li>
@@ -225,7 +225,7 @@
 			<!--top travel interest destinations-->
 			<section class="frontpageoffers offers clearfix full">
 				</br>				
-				<h1>Explore Top Locations for Your Interests</h1>
+				<h1>Need Inspiration? Discover Our Top Locations by Interest</h1>
 				
 				{% for topInterest in topInterestsLocations %} 
 					<!--column-->
@@ -241,6 +241,7 @@
 						{% endif %}
 						<div class="frontPageInterests">
 							<h4>{{topInterest.short_desc}}</h4>
+							<h5><a href="/topinterests/?id={{topInterest.id}}">Learn More</a></h5> <br>							
 							<a href="/hotels/search/{{topInterest.querystring}}&checkInDate={{checkInDate}}&checkOutDate={{checkOutDate}}" title="Explore our deals" class="gradient-button">Check Top Hotels</a>
 						</div>
 					 </article>
@@ -253,8 +254,8 @@
 			<section class="dealoffers boxes clearfix full">
 				<h1>Special Deals and Offers</h1>
 				<article class="one-third">
-					<h2>Visit Crete this Autumn Break!</h2>
-					<p>Spend your evenings at the Old Venetian Harbor known for its beautiful architecture.</p>
+					<h2>Weekend Getaway in Crete</h2>
+					<p>Take in the beautiful architecture of Old Venetian Harbor.</p>
 					<ins class="bookingaff" data-aid="1186843" data-height="400" data-width="300" data-prod="dfl2" data-target_aid="912463" data-dest_id="811" data-dest_type="region">
 					    <!-- Anything inside will go away once widget is loaded. -->
 					    <a href="//www.booking.com?aid=912463">Booking.com</a>
@@ -271,8 +272,8 @@
 				</article>		
 
 				<article class="one-third">
-					<h2>Deals in Anchorage, Alaska</h2>
-					<p>Skim across the snow with snowmobiles in Alaska. Snowmobiling season is now!</p>
+					<h2>Escape to Alaska</h2>
+					<p>Snowmobile through the wilds of Alaska and encounter epic views!</p>
 					<ins class="bookingaff" data-aid="1186844" data-height="400" data-width="300" data-prod="dfl2" data-target_aid="912463" data-dest_id="20004981" data-dest_type="city">
 					    <!-- Anything inside will go away once widget is loaded. -->
 					    <a href="//www.booking.com?aid=912463">Booking.com</a>
@@ -289,8 +290,8 @@
 				</article>
 
 				<article class="one-third last">
-					<h2>Visit Zion National Park!</h2>	
-					<p>Try The Narrows trail in Utah, an incredebily adventurous hike by 12 campgrounds.</p>
+					<h2>Hike Through Zion National Park</h2>	
+					<p>Experience the world famous hike through The Narrows.</p>
 					<ins class="bookingaff" data-aid="1187054" data-height="400" data-width="300" data-prod="dfl2" data-target_aid="912463" data-dest_id="6504" data-dest_type="region">
 					    <!-- Anything inside will go away once widget is loaded. -->
 					    <a href="//www.booking.com?aid=912463">Booking.com</a>
