@@ -341,7 +341,7 @@ header .ribbon 		{float:right;position:absolute;top:-1px;right:-2px;z-index:2;ba
 .promo .gradient-button 			{background: rgb(253,194,96);background: -moz-linear-gradient(top, rgba(253,194,96,1) 0%, rgba(252,166,57,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(253,194,96,1)), color-stop(100%,rgba(252,166,57,1)));background: -webkit-linear-gradient(top, rgba(253,194,96,1) 0%,rgba(252,166,57,1) 100%);background: -o-linear-gradient(top, rgba(253,194,96,1) 0%,rgba(252,166,57,1) 100%);background: -ms-linear-gradient(top, rgba(253,194,96,1) 0%,rgba(252,166,57,1) 100%);background: linear-gradient(to bottom, rgba(253,194,96,1) 0%,rgba(252,166,57,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdc260', endColorstr='#fca639',GradientType=0 );}
 .promo .gradient-button:hover 	{background: rgb(252,166,57);background: -moz-linear-gradient(top, rgba(252,166,57,1) 0%, rgba(253,194,96,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,166,57,1)), color-stop(100%,rgba(253,194,96,1)));background: -webkit-linear-gradient(top, rgba(252,166,57,1) 0%,rgba(253,194,96,1) 100%);background: -o-linear-gradient(top, rgba(252,166,57,1) 0%,rgba(253,194,96,1) 100%);background: -ms-linear-gradient(top, rgba(252,166,57,1) 0%,rgba(253,194,96,1) 100%);background: linear-gradient(to bottom, rgba(252,166,57,1) 0%,rgba(253,194,96,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fca639', endColorstr='#fdc260',GradientType=0 );}
 
-.boxes .one-fourth 	{padding:15px 1.6%;width:20.3%;background: rgb(255,255,255);background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(242,242,242,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(242,242,242,1)));background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );}
+.boxes .one-fourth 	{height:21.5em;padding:15px 1.6%;width:20.3%;background: rgb(255,255,255);background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(242,242,242,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(242,242,242,1)));background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );}
 .boxes h2			{border-bottom:1px solid #E6E6E6;-webkit-box-shadow:0 1px 0 rgba(255,255,255,1);-moz-box-shadow:0 1px 0 rgba(255,255,255,1);box-shadow:0 1px 0 rgba(255,255,255,1);width:100%;margin:0 0 14px;}
 .boxes .one-third	{padding:15px 1.6%;width:27.5%;background: rgb(255,255,255);background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(242,242,242,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(242,242,242,1)));background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );}
 
@@ -1049,7 +1049,7 @@ img {max-width:100%;}
 .deal-of-the-day p  {padding:0;}
 .deal-of-the-day .rating {padding:0 0 15px 15px;}
 
-.boxes .one-fourth {min-height:30em;}
+.boxes .one-fourth {height:23.5em;}
 .boxes .one-third  {width:94.8%;margin-right:0 !important;padding:15px 2.6%;}
 
 .tab-content .deals .full-width .price 				{border-left:none;width:26%;padding:0;}
@@ -1122,7 +1122,7 @@ footer .copy {padding:0 0 20px;width:100%;text-align:center;}
 aside article	{padding:14px 10% 20px;width:80%;}
 .default 	{padding: 14px 10% 5px;width: 80%;}
 
-.boxes .one-fourth {min-height:auto;}
+.boxes .one-fourth {height:auto !important;}
 .boxes .one-third  {width:94.8%;margin-right:0 !important;padding:15px 2.6%;}
 
 .bookings .b-info 	{width:63%;}
