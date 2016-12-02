@@ -46,7 +46,7 @@
 								</p>
 							</header>
 							{% if blog.img %}
-							<div class="entry-featured"><a href="#"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /></figure></a></div>							
+							<div class="entry-featured"><a href="/blog/?id={{blog.id}}"><figure><img src="{{MEDIA_URL}}{{blog.img}}" alt="{{STATIC_URL}}images/slider/img.jpg" /></figure></a></div>							
 							{% endif %}
 							{% if blog.embed_video_url %}
 							<div class="entry-featured">
