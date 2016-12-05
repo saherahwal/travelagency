@@ -16,6 +16,22 @@
 
     {% block morestyles %} {% endblock %}
 
+    <!-- Facebook Pixel Code -->
+	<script>
+		!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+		n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+		document,'script','https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '668942456620727');
+		fbq('track', 'PageView');
+	</script>
+	<noscript>
+		<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=668942456620727&ev=PageView&noscript=1"	/>
+	</noscript>
+	<!-- DO NOT MODIFY -->
+	<!-- End Facebook Pixel Code -->
+
 </head>
 
 <body>
@@ -23,7 +39,7 @@
 	<header>
 		<div class="wrap clearfix">
 			<!--logo-->
-			<h1 class="logo"><a href="/" title="Escanza Travels - Home Page"><img src="{{STATIC_URL}}images/themes/blue/txt/logo_escanza.png" alt="Escanza" /></a></h1>
+			<h1 class="logo"><a href="/" title="escanza.com: discover new places to do what you enjoy"><img src="{{STATIC_URL}}images/themes/blue/txt/logo_escanza.png" alt="Escanza" /></a></h1>
 			<!--//logo-->
 				
 			<!--ribbon-->
