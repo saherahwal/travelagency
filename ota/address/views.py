@@ -23,6 +23,7 @@ def countries(request):
     if request.is_ajax():
         if global_countries == []:
             countries = Country.objects.all()
+            global_countries = countries
         else:
             countries = global_countries
 
@@ -46,6 +47,7 @@ def countries(request):
 def cities(request):
     city_list = []
     results = []
+    countries = []
 
     global_lock.acquire(True)
 
@@ -53,6 +55,24 @@ def cities(request):
     codes_nf = {}
 
     global global_destination_list
+    global global_countries
+
+    if global_countries == []:
+        countries = Country.objects.all()
+        global_countries = countries
+    else:
+        countries = global_countries
+
+    #
+    # Fill up country info in same thread
+    #
+    for country in countries:
+        code = country.country_code.lower()
+        
+        # fill up the global cc --> name cache and the reverse name --> cc
+        if code not in cc_to_name:            
+            cc_to_name[code] = country.country_name
+            name_to_cc[country.country_name] = code
 
     #
     # Retrieve City,Country code list from DB only at server start
@@ -99,5 +119,5 @@ def cities(request):
     global_lock.release()
     return HttpResponse(jsonData ,content_type="application/json")
         
-    
+
     
