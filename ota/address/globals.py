@@ -1,4 +1,5 @@
 from sets import Set
+import threading
 #
 # Globals address-related to be used by the service
 #
@@ -43,3 +44,8 @@ name_to_cc = {}
 # Global destination list - cache
 #
 global_destination_list = []
+
+#
+# Global lock for city / country enumerations
+#
+global_lock = threading.Lock()

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
+import threading
 
 from address.models import Country
 from hotels.models import Hotel
@@ -13,6 +14,9 @@ from address.globals import *
 def countries(request):
     countries = []
     results = []
+
+    global global_lock
+    global_lock.acquire(True)
 
     if request.is_ajax():
         countries = Country.objects.all()        
@@ -29,11 +33,16 @@ def countries(request):
     print "global country cache added with", len(cc_to_name), "countries"
 
     jsonData = json.dumps(results)
+    
+    global_lock.release()
+
     return HttpResponse(jsonData ,content_type="application/json")
 
 def cities(request):
     city_list = []
     results = []
+
+    global_lock.acquire(True)
 
     city_hash = {}
     codes_nf = {}
@@ -82,6 +91,7 @@ def cities(request):
             results = global_destination_list
     
     jsonData = json.dumps(results)
+    global_lock.release()
     return HttpResponse(jsonData ,content_type="application/json")
         
     
