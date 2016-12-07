@@ -49,3 +49,8 @@ global_destination_list = []
 # Global lock for city / country enumerations
 #
 global_lock = threading.Lock()
+
+#
+# Global countries list
+#
+global_countries = []

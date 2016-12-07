@@ -15,11 +15,16 @@ def countries(request):
     countries = []
     results = []
 
+    global global_countries
+
     global global_lock
     global_lock.acquire(True)
 
     if request.is_ajax():
-        countries = Country.objects.all()        
+        if global_countries == []:
+            countries = Country.objects.all()
+        else:
+            countries = global_countries
 
     for country in countries:
         results.append(country.country_name)
