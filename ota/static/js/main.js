@@ -55,8 +55,36 @@ $(document).ready(function(){
 		for ( var i = 0; i < canada_prov.length; i++ ){
 			canada_prov[i] = canada_prov[i] + ", Canada";
 		}
+		
+		//
+		// Forces server to fill city and country data in cache
+		// if not already done
+		//
+		var getCityAndCountryData = function() {
+			var countries = [];
+			var cities = [];
+			
+			$.ajax({
+					url: "/address/allcountries/",
+					datatype: "json",
+					data : { },
+					
+				  }).done( function(data) {
+					  countries = data;
+					  
+					  $.ajax({
+						url: "/address/allcities/",
+						datatype: "json",
+						data : { },
+						
+					  }).done( function(data) {
+						  cities = data;
+					  });
+				  });
+		}
+		
 							
-		var getDestinations = function() {
+		/*var getDestinations = function() {
 			var countries = [];
 			var cities = [];
 			
@@ -95,7 +123,24 @@ $(document).ready(function(){
 		//
 		// call get destinations
 		//
-		getDestinations();
+		getDestinations(); */
+		
+		//
+		// Get country and destination data first
+		//
+		getCityAndCountryData();
+		
+		//
+		// Apply Google-Auto Complete
+		//
+		$("#id_destination").geocomplete({          
+          details: "#destination-details",
+          detailsAttribute: "name"
+        }).bind("geocode:result", function(event, result){
+			console.log( "locality:" + $("#id_locality").val());
+			console.log( "country_short:" + $("#id_country_short").val());
+			console.log( "administrative_area_level_1:" + $("#id_administrative_area_level_1").val());
+		});				
 		
 		//
 		// disable destination field when surprimeMe is checked.

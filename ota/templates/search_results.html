@@ -325,6 +325,7 @@
 				themes_query = getThemeFilter();
 			
 				redirect_query = "/hotels/search/?" + themes_query + "&destination={{destination}}&checkInDate={{checkin}}&checkOutDate={{checkout}}";
+				redirect_query += "&locality={{locality}}&country_short={{country_short}}&administrative_area_level_1={{administrative_area_level_1}}";
 				
 				{% if stars %}
 				redirect_query += "&stars={{stars}}";

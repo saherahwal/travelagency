@@ -7,6 +7,7 @@ from ota.views import getTopInterestHotels
 from core.utils import *
 from hotels.search import hotel_search
 from hotels.requestManager import *
+from hotels.destinationManager import *
 from hotels.globals import *
 import json
 import logging
@@ -91,10 +92,16 @@ def search(request):
             nightlife = hotelSearchForm.cleaned_data['nightlife']
             adventure = hotelSearchForm.cleaned_data['adventure']
             family = hotelSearchForm.cleaned_data['family']
-            historyAndCulture = hotelSearchForm.cleaned_data['historyAndCulture']            
+            historyAndCulture = hotelSearchForm.cleaned_data['historyAndCulture']
            
+            #
+            # destination
+            #
             destination = hotelSearchForm.cleaned_data['destination']
             surpriseme = hotelSearchForm.cleaned_data['surpriseme']
+            locality = hotelSearchForm.cleaned_data['locality']
+            country_short = hotelSearchForm.cleaned_data['country_short']
+            administrative_area_level_1 = hotelSearchForm.cleaned_data['administrative_area_level_1']
             
             checkInDate = hotelSearchForm.cleaned_data['checkInDate']
             checkOutDate = hotelSearchForm.cleaned_data['checkOutDate']
@@ -175,7 +182,18 @@ def search(request):
             if session_guid == None:
                 session_guid = uuid.uuid4()
                 
-            saved_query += "session_guid=" + str(session_guid) + "&"         
+            saved_query += "session_guid=" + str(session_guid) + "&"
+
+            #
+            # Add destination values to saved_query
+            #
+            if locality:
+                saved_query += "locality=" + locality + '&'
+            if administrative_area_level_1:
+                saved_query += "administrative_area_level_1=" + administrative_area_level_1 + '&'
+            if country_short:
+                saved_query += "country_short=" + country_short + '&'
+
                            
             saved_query = saved_query[:-1] # remove trailing &
 
@@ -200,6 +218,9 @@ def search(request):
             if (surpriseme == False and destination == "" ):
                 destErrors.append( "Field required when Surprise Me unchecked." )
 
+            if (not surpriseme and (locality == "" and administrative_area_level_1 == "" and country_short == "")):
+                destErrors.append( "Destination field required when Surprise-Me unchecked." )
+
             #
             # At least one interest should be checked
             #            
@@ -211,7 +232,7 @@ def search(request):
                     break
 
             if not anyInterestChecked:
-                interestsErrors.append( "Please check at least one interest." )            
+                interestsErrors.append( "Please check at least one interest." )
 
             if len(destErrors) != 0:
 
@@ -238,15 +259,24 @@ def search(request):
                        'dateErrors': dateErrors})
             
             #
+            # Create a destination object
+            #
+            destinationObj = None
+            if destination in continents_to_id:
+                destinationObj = DestinationObj( "", "", "", destination )
+            else:
+                destinationObj = DestinationObj( locality, country_short, administrative_area_level_1)
+            
+            #
             # Search now
             #
-            (hotels_list, query_dest_trimmed) = hotel_search( destination,
-                                                              interest_dict,
-                                                              surpriseme,
-                                                              stars,
-                                                              session_guid )
+            (hotels_list, destinationObj) = hotel_search( destinationObj,
+                                                          interest_dict,
+                                                          surpriseme,
+                                                          stars,
+                                                          session_guid )
             
-            paginator = Paginator(hotels_list, 18) # Show 18 hotels per page
+            paginator = Paginator(hotels_list, 10) # Show 10 hotels per page
 
             page = request.GET.get('page')
            
@@ -267,7 +297,7 @@ def search(request):
             #
             if page:
 
-                if int(page) + MAX_PAGES_PER_PAGE <= hotels.paginator.num_pages:                    
+                if int(page) + MAX_PAGES_PER_PAGE <= hotels.paginator.num_pages:
                     endPage = int(page) + MAX_PAGES_PER_PAGE
                     pageRange = range( int(page), endPage)
                     print "endPage", endPage
@@ -295,13 +325,16 @@ def search(request):
             # when no stars is specified (set to 0)
             #
             if stars == None:
-                stars = 0                 
+                stars = 0
             
             return render(request,
                       "search_results.html",
                       {'hotels': hotels,
                        'hotelSearchForm': hotelSearchForm,
                        'destination': destination,
+                       'locality': locality,
+                       'country_short': country_short,
+                       'administrative_area_level_1': administrative_area_level_1,
                        'interest_dict' : json.dumps(interest_dict),
                        'surpriseme': surpriseme,
                        'checkin': checkin_date,
@@ -313,7 +346,7 @@ def search(request):
                        'saved_query': saved_query,
                        'pageRange': pageRange,
                        'aid': BOOKING_AID,
-                       'query_dest_trimmed': query_dest_trimmed,
+                       'query_dest_trimmed': destinationObj.getQueryDestTrimmed(),
                        'page': pageCurrent,
                        'stars': stars,
                        'session_guid': session_guid,
@@ -336,7 +369,7 @@ def search(request):
             return render(request,
                       "index.html",
                       {'hotelSearchForm': hotelSearchForm,
-                       'topInterestsLocations': topInterestLocs})            
+                       'topInterestsLocations': topInterestLocs})
    
     else:
         
@@ -358,15 +391,12 @@ def bookNow( request ):
         coorelation_id = request.POST.get('book_session_guid')
         hotel_id_str = request.POST.get('book_hotel_id')
 
-        if hotel_id_str != None and coorelation_id != None:
-
-            print type(hotel_id_str)
-            print type(coorelation_id)
-
+        if hotel_id_str != None and coorelation_id != None and hotel_id_str != "" and coorelation_id != "":
             #
             # convert hotel_id str to int
             #
             try:
+                print "hotel_id_str", hotel_id_str
                 hotel_id = int( hotel_id_str )
                 print "hotel_id", hotel_id
             except ValueError as ve:
@@ -384,7 +414,7 @@ def bookNow( request ):
             #
             # Enqueue bookNow requests for addition
             #
-            QueueRequestsManager.EnqueueBookNowRequest( coorelation_id, hotel_id )            
+            QueueRequestsManager.EnqueueBookNowRequest( coorelation_id, hotel_id )
            
         else:
             print "hotel ID or session GUID is NULL"

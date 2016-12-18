@@ -754,6 +754,7 @@ label.error	{color:red !important;padding:5px 0 0;}
 #form6 .column	{height:180px;}
 
 .forms	{float:left;width:76.5%;}
+#destination-details                    {display:none;}
 .main-search .f-item 					{float:left;display:block;width:100%;padding:0 0 6px;}
 .main-search .f-item input[type="text"] 	{float:left;display:block;-webkit-box-shadow:0 1px 1px rgba(204, 204, 204, 1) inset, 0 1px 0 rgba(255,255,255,1);-moz-box-shadow:0 1px 1px rgba(204, 204, 204, 1) inset, 0 1px 0 rgba(255,255,255,1);box-shadow:0 1px 1px rgba(204, 204, 204, 1) inset, 0 1px 0 rgba(255,255,255,1); color:#07274f; font-weight: bold; font-size: 14px;}
 .main-search .f-item label 				{font-size:1.3em;padding:0 0 8px;display:inline-block;width:100%;font-family:'OpenSansRegular';white-space:nowrap;color:#ffffff;}

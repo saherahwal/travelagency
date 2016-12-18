@@ -19,9 +19,14 @@ class HotelSearchForm(forms.Form):
 
     # destination
     destination = forms.CharField(required = False,
-                           max_length=MAX_DESTINATION_LENGTH,
-                           widget=forms.TextInput(attrs={'placeholder': 'Continent, Country, or City'}))
+                                  max_length=MAX_DESTINATION_LENGTH,
+                                  widget=forms.TextInput(attrs={'placeholder': 'Continent, Country, or City'}))
     surpriseme = forms.BooleanField( required = False )
+
+    # destination fields - names should match Google API attributes
+    locality = forms.CharField( required = False, max_length=MAX_DESTINATION_LENGTH )  # locality is like a city ( Google API )
+    country_short = forms.CharField( required = False, max_length = 2 ) # country_code
+    administrative_area_level_1 = forms.CharField( required = False, max_length=MAX_DESTINATION_LENGTH ) # State / Province equivalence
 
     # check-in / check-out dates
     checkInDate = forms.DateField( required = True )
