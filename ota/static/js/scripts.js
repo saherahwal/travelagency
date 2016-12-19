@@ -2,10 +2,33 @@ $(document).ready(function () {
 	//UI FORM ELEMENTS
 	var spinner = $('.spinner input').spinner({ min: 0 });
 	
-	$('.datepicker-wrap input').datepicker({
+	$('.datepicker-wrap #id_checkInDate').datepicker({
 		showOn: 'both',
 		buttonImage: '/static/images/ico/calendar.png',
-		buttonImageOnly: true
+		buttonImageOnly: true,
+		numberOfMonths: 1,
+		onSelect: function(date){
+			var selectedDate = new Date(date);
+			var milliseconds_per_day = 60 * 60 * 24 * 1000;
+
+			//
+			// Selected date + day ( at least one night stay )
+			//
+			var startDateForCheckOut = new Date( selectedDate.getTime() +  milliseconds_per_day);
+
+			//
+			// set that new date as minDate for checkout
+			//
+			$("#id_checkOutDate").datepicker( "option", "minDate", startDateForCheckOut );
+
+		}
+	});
+
+	$('.datepicker-wrap #id_checkOutDate').datepicker({
+		showOn: 'both',
+		buttonImage: '/static/images/ico/calendar.png',
+		buttonImageOnly: true,
+		numberOfMonths: 1
 	});
 	
 	$( '#slider' ).slider({
