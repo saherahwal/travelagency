@@ -217,8 +217,13 @@ def search(request):
             #
             if (surpriseme == False and destination == "" ):
                 destErrors.append( "Field required when Surprise Me unchecked." )
+            
+            #
+            # Check if destination is a continent
+            #
+            isDestinationContinent = (destination in continents_to_id)
 
-            if (not surpriseme and (locality == "" and administrative_area_level_1 == "" and country_short == "")):
+            if (not surpriseme and (locality == "" and administrative_area_level_1 == "" and country_short == "") and not isDestinationContinent):
                 destErrors.append( "Destination field required when Surprise-Me unchecked." )
 
             #
