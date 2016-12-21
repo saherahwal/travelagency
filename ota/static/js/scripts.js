@@ -7,6 +7,7 @@ $(document).ready(function () {
 		buttonImage: '/static/images/ico/calendar.png',
 		buttonImageOnly: true,
 		numberOfMonths: 1,
+		minDate: new Date(),
 		onSelect: function(date){
 			var selectedDate = new Date(date);
 			var milliseconds_per_day = 60 * 60 * 24 * 1000;
