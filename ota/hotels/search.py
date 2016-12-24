@@ -189,8 +189,12 @@ def hotel_search( destinationObj, interests_bitmap, surprise_me, stars, session_
     # Add extra column total for summation of relevant scores, order by descending
     # where clause: ( scoreA > min or ScoreB > min ...) to be more inclusive of results
     #    
-    print "s_where_clause:", s_where_clause
-    finalResult = results.extra( select = { 'total': total_str },  where = [s_where_clause], params = [MIN_SCORE] * interest_count, order_by=('-total',))
+    if (interest_count > 0):
+        print "s_where_clause:", s_where_clause
+        finalResult = results.extra( select = { 'total': total_str },  where = [s_where_clause], params = [MIN_SCORE] * interest_count, order_by=('-total',))
+    else:
+        print "no interests chosen"
+        finalResult = results
 
     #
     # filter stars if not None

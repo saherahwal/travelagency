@@ -236,8 +236,8 @@ def search(request):
                     anyInterestChecked = True
                     break
 
-            if not anyInterestChecked:
-                interestsErrors.append( "Please check at least one interest." )
+            if not anyInterestChecked and surpriseme:
+                interestsErrors.append( "Check at least one interest when SurpriseMe is checked." )
 
             if len(destErrors) != 0:
 
