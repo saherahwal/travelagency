@@ -260,60 +260,19 @@
 			<!-- -->
 			<section class="dealoffers boxes clearfix full">
 				<h1>Special Deals and Offers</h1>
-				<article class="one-third">
-					<h2>Weekend Getaway in Crete</h2>
-					<p>Take in the beautiful architecture of Old Venetian Harbor.</p>
-					<ins class="bookingaff" data-aid="1186843" data-height="400" data-width="300" data-prod="dfl2" data-target_aid="912463" data-dest_id="811" data-dest_type="region" data-df_checkin="5" data-df_duration="2">
-					    <!-- Anything inside will go away once widget is loaded. -->
-					    <a href="//www.booking.com?aid=912463">Booking.com</a>
-					</ins>
-					<script type="text/javascript">
-					    (function(d, sc, u) {
-					      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-					      s.type = 'text/javascript';
-					      s.async = true;
-					      s.src = u + '?v=' + (+new Date());
-					      p.parentNode.insertBefore(s,p);
-					      })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-					</script>
-				</article>		
 
-				<article class="one-third">
-					<h2>Escape to Alaska</h2>
-					<p>Snowmobile through the wilds of Alaska and encounter epic views!</p>
-					<ins class="bookingaff" data-aid="1186844" data-height="400" data-width="300" data-prod="dfl2" data-target_aid="912463" data-dest_id="20004981" data-dest_type="city" data-df_checkin="5" data-df_duration="2">
-					    <!-- Anything inside will go away once widget is loaded. -->
-					    <a href="//www.booking.com?aid=912463">Booking.com</a>
-					</ins>
-					<script type="text/javascript">
-					    (function(d, sc, u) {
-					      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-					      s.type = 'text/javascript';
-					      s.async = true;
-					      s.src = u + '?v=' + (+new Date());
-					      p.parentNode.insertBefore(s,p);
-					      })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-					</script>
-				</article>
+				{% for deal in specialDeals %}
 
-				<article class="one-third last">
-					<h2>Hike Through Zion National Park</h2>	
-					<p>Experience the world famous hike through The Narrows.</p>
-					<ins class="bookingaff" data-aid="1187054" data-height="400" data-width="300" data-prod="dfl2" data-target_aid="912463" data-dest_id="6504" data-dest_type="region" data-df_checkin="5" data-df_duration="2">
-					    <!-- Anything inside will go away once widget is loaded. -->
-					    <a href="//www.booking.com?aid=912463">Booking.com</a>
-					</ins>
-					<script type="text/javascript">
-					    (function(d, sc, u) {
-					      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-					      s.type = 'text/javascript';
-					      s.async = true;
-					      s.src = u + '?v=' + (+new Date());
-					      p.parentNode.insertBefore(s,p);
-					      })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-					</script>
-				</article>
-
+					{% if forloop.counter|divisibleby:"3" %}
+					<article class="one-third last">
+					{% else %}
+					<article class="one-third">
+					{% endif %}				
+						<h2>{{deal.getHeader}}</h2>
+						<p>{{deal.getSubheader}}</p>
+						{{deal.getInsScript | safe}}
+					</article>	
+				{% endfor %}			
 
 			</section>			
 						

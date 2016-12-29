@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
 from hotels import forms as hotelForms
 from ota import forms as otaForms
+from ota.dealsManager import *
 from hotels.models import TopInterestLocation
 from random import Random
 from datetime import datetime, timedelta
@@ -50,14 +51,20 @@ def homepage(request):
     # get top interest destination searches - random 12
     #
     topInterestLocs = getTopInterestHotels( 12, 
-                                           isAdminRequest = isAdminRequest )
+                                            isAdminRequest = isAdminRequest )
 
     (checkInDate, checkOutDate) = getCheckInCheckOut()
-   
+
+    #
+    # get top deals
+    #
+    specialDeals = g_specialDealsContainer.returnRandomDeals( 3 )
+    
     return render(request,
                   "index.html",
                   {'hotelSearchForm': hotelSearchForm,
                    'topInterestsLocations': topInterestLocs,
+                   'specialDeals': specialDeals,
                    'checkInDate': checkInDate,
                    'checkOutDate': checkOutDate})
 
